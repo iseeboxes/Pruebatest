@@ -1,72 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
-<!DOCTYPE html>
-<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>DMV & Title Services in West Palm Beach</title>
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
-<!-- OPTIMIZADO: Google Fonts con preconnect y carga diferida -->
- <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800&display=swap">
+<!-- OPTIMIZACIÓN: Preconnect para recursos externos -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800&display=swap" 
+<link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+<!-- OPTIMIZACIÓN: Google Fonts con carga diferida -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" 
       rel="stylesheet" 
       media="print" 
       onload="this.media='all'">
-
-<!-- OPTIMIZADO: Material Icons con carga diferida -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" 
+      rel="stylesheet" 
+      media="print" 
+      onload="this.media='all'">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" 
       rel="stylesheet" 
       media="print" 
       onload="this.media='all'">
-
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" 
       rel="stylesheet" 
       media="print" 
       onload="this.media='all'">
 
-<!-- Inline Critical CSS para contenido visible -->
+<!-- CSS Crítico Inline para render inicial -->
 <style>
-  /* CSS crítico mínimo para render inicial */
+  /* Variables CSS críticas */
   :root {
     --primary-color: #F97316;
     --secondary-color: #111827;
     --background-soft: #FEF7F2;
   }
-  
+
+  /* Estilos mínimos para contenido visible */
   body {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: white;
+    color: #1F2937;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
   }
-  
-  /* Estilos críticos para el hero section */
-  .hero-critical {
-    opacity: 0;
-    animation: fadeIn 0.8s ease-out forwards;
+
+  /* Estilos críticos para header */
+  header {
+    background-color: transparent;
+    transition: all 0.3s ease;
   }
-  
+
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  /* Estilos críticos para hero section */
+  #home {
+    padding-top: 64px;
+    padding-bottom: 96px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(254, 247, 242, 0.8), transparent);
+    z-index: 0;
+  }
+
+  /* Contenedor base */
+  .container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+      padding: 0 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+      padding: 0 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+
+  /* Utilidades críticas */
+  .flex { display: flex; }
+  .hidden { display: none; }
+  .block { display: block; }
+  .relative { position: relative; }
+  .absolute { position: absolute; }
+  .z-10 { z-index: 10; }
+  .z-50 { z-index: 50; }
+  .w-full { width: 100%; }
+  .h-10 { height: 2.5rem; }
+  .w-10 { width: 2.5rem; }
+  .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .font-bold { font-weight: 700; }
+  .text-secondary { color: var(--secondary-color); }
+  .text-primary { color: var(--primary-color); }
+  .bg-primary { background-color: var(--primary-color); }
+  .text-white { color: white; }
+  .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .justify-between { justify-content: space-between; }
+  .items-center { align-items: center; }
+  .space-x-3 > * + * { margin-left: 0.75rem; }
+  .space-x-4 > * + * { margin-left: 1rem; }
+  .rounded-lg { border-radius: 0.5rem; }
+  .hover\:bg-primary-darker:hover { background-color: #EA580C; }
+  .transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; }
+
+  /* Estilos para imágenes críticas */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Animaciones críticas */
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  /* Prevenir FOUC (Flash of Unstyled Content) */
+  .no-fouc {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .fouc-ready {
+    opacity: 1;
+  }
 </style>
 
-<!-- Tailwind se cargará de forma asíncrona desde el body -->
+<!-- JavaScript para carga diferida de recursos no críticos -->
+<script>
+  // Marcar cuando Tailwind esté listo
+  window.tailwindReady = false;
+  
+  // Función para cargar Tailwind de forma asíncrona
+  function loadTailwindCSS() {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,container-queries';
+    script.onload = function() {
+      // Configurar Tailwind después de cargar
+      if (typeof tailwind !== 'undefined') {
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: "var(--primary-color)",
+                "primary-darker": "#EA580C",
+                secondary: "var(--secondary-color)",
+                "background-light": "#ffffff",
+                "background-soft": "var(--background-soft)",
+                "text-dark": "#1F2937",
+                "text-light": "#6B7280"
+              },
+              fontFamily: {
+                sans: ["Roboto", "sans-serif"],
+                display: ["Poppins", "sans-serif"],
+              },
+              borderRadius: {
+                DEFAULT: "0.5rem",
+                lg: "1rem",
+                xl: "1.5rem",
+                "2xl": "2rem",
+              },
+              animation: {
+                'fade-in': 'fadeIn 0.8s ease-out',
+                'slide-up': 'slideUp 0.6s ease-out',
+                'slide-right': 'slideRight 0.6s ease-out',
+                'slide-left': 'slideLeft 0.6s ease-out',
+                'scale-in': 'scaleIn 0.5s ease-out',
+                'float': 'float 3s ease-in-out infinite',
+                'pulse-slow': 'pulse 4s ease-in-out infinite',
+                'bounce-slow': 'bounce 2s infinite',
+                'shake': 'shake 0.5s ease-in-out',
+                'fade-down': 'fadeDown 0.3s ease-out',
+              },
+              keyframes: {
+                fadeIn: {
+                  '0%': { opacity: '0' },
+                  '100%': { opacity: '1' },
+                },
+                slideUp: {
+                  '0%': { transform: 'translateY(30px)', opacity: '0' },
+                  '100%': { transform: 'translateY(0)', opacity: '1' },
+                },
+                slideRight: {
+                  '0%': { transform: 'translateX(-30px)', opacity: '0' },
+                  '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
+                slideLeft: {
+                  '0%': { transform: 'translateX(30px)', opacity: '0' },
+                  '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
+                scaleIn: {
+                  '0%': { transform: 'scale(0.9)', opacity: '0' },
+                  '100%': { transform: 'scale(1)', opacity: '1' },
+                },
+                float: {
+                  '0%, 100%': { transform: 'translateY(0)' },
+                  '50%': { transform: 'translateY(-10px)' },
+                },
+                shake: {
+                  '0%, 100%': { transform: 'translateX(0)' },
+                  '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+                  '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+                },
+                fadeDown: {
+                  '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
+                  '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
+                },
+              },
+              transitionDuration: {
+                '300': '300ms',
+                '500': '500ms',
+                '700': '700ms',
+              },
+            },
+          },
+        };
+        window.tailwindReady = true;
+        
+        // Aplicar estilos Tailwind cuando esté listo
+        document.body.classList.add('fouc-ready');
+      }
+    };
+    document.body.appendChild(script);
+  }
+
+  // Cargar Tailwind después de la carga inicial
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadTailwindCSS);
+  } else {
+    loadTailwindCSS();
+  }
+
+  // Fallback para fuentes si no cargan en 3 segundos
+  setTimeout(function() {
+    const html = document.documentElement;
+    if (!html.classList.contains('fonts-loaded')) {
+      html.classList.add('fonts-fallback');
+    }
+  }, 3000);
+</script>
 </head>
-
-
-<body class="bg-background-light text-text-dark font-sans overflow-x-hidden">
+<body class="no-fouc">
 <div class="w-full bg-background-soft">
 <header class="bg-transparent py-4 transition-all duration-300 z-50 relative">
 <div class="container mx-auto px-4">
 <div class="flex justify-between items-center">
 <div class="flex items-center space-x-3 hover-scale transition-transform duration-300">
-<img alt="Auto Palm beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png"/>
+<img alt="Auto Palm beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png" loading="lazy" decoding="async"/>
 <span class="text-2xl font-bold text-secondary">Auto Palm Beach</span>
 </div>
 
@@ -143,7 +364,7 @@
 <div id="offCanvasMenu" class="off-canvas-menu">
 <div class="off-canvas-header">
 <div class="flex items-center space-x-3">
-<img alt="Auto Palms Beach logo" class="h-8 w-8" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png"/>
+<img alt="Auto Palms Beach logo" class="h-8 w-8" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png" loading="lazy" decoding="async"/>
 <span class="text-xl font-bold text-secondary">Auto Palm Beach</span>
 </div>
 <button id="closeMenuButton" class="close-menu-btn">
@@ -224,7 +445,7 @@ Get Started
 <main>
 <!-- Hero Section -->
 <section id="home" class="relative pt-16 pb-24 overflow-hidden">
-<div class="absolute inset-0 bg-gradient-to-r from-orange-50 to-transparent z-0"></div>
+<div class="hero-bg-gradient"></div>
 <div class="container mx-auto px-4 relative z-10">
 <div class="flex flex-col lg:flex-row items-center gap-12">
 <div class="lg:w-1/2 text-left animate-slide-right hero-content">
@@ -506,7 +727,7 @@ WhatsApp
 <p class="text-text-light" data-i18n="why.feature1.description">We provide clear, personalized advice to avoid common mistakes that delay your paperwork.</p>
 </div>
 </div>
-<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.1s">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transitionall duration-300 group" style="animation-delay: 0.1s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.2s">hourglass_top</span>
 <div>
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature2.title">Time Saving</h4>
@@ -576,7 +797,7 @@ WhatsApp
 <p class="text-text-light mt-1" data-i18n="contact.emailDescription">Send us an email for quick responses</p>
 </div>
 </div>
-<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transitionall duration-300 hover-lift group">
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift group">
 <span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.6s">schedule</span>
 <div>
 <h4 class="font-bold text-secondary text-xl group-hover:text-primary transition-colors" data-i18n="contact.hoursTitle">Opening Hours</h4>
@@ -715,7 +936,7 @@ WhatsApp
 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
 <div>
 <div class="flex items-center space-x-3 mb-4 hover-scale transition-transform duration-300">
-<img alt="Auto Palms Beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png"/>
+<img alt="Auto Palms Beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png" loading="lazy" decoding="async"/>
 <span class="text-2xl font-bold">Auto Palm Beach</span>
 </div>
 <p class="text-sm text-text-light" data-i18n="footer.description">Specialized administrative office for DMV Paperwork and VIN verification in West Palm Beach, South Florida.</p>
@@ -792,6 +1013,407 @@ WhatsApp
   ]
 }
 </script>
+
+<!-- ESTILOS NO CRÍTICOS (se cargarán después) -->
+<style id="non-critical-styles" media="print" onload="this.media='all'">
+    .material-icons {
+      font-size: inherit;
+    }
+    
+    /* Off-canvas menu styles */
+    .off-canvas-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .off-canvas-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .off-canvas-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 85%;
+      max-width: 320px;
+      height: 100vh;
+      background-color: white;
+      z-index: 1000;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+    
+    .off-canvas-menu.active {
+      right: 0;
+    }
+    
+    .off-canvas-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .off-canvas-content {
+      padding: 1.5rem;
+    }
+    
+    .close-menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #6b7280;
+      transition: color 0.2s;
+    }
+    
+    .close-menu-btn:hover {
+      color: #111827;
+    }
+    
+    /* Language selector styles */
+    .language-selector {
+      position: relative;
+      margin-right: 15px;
+    }
+    
+    .language-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      border-radius: 6px;
+      color: #F97316;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .language-button:hover {
+      background: rgba(249, 115, 22, 0.15);
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+    
+    .language-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 5px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-width: 120px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    
+    .language-dropdown.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .language-option:last-child {
+      border-bottom: none;
+    }
+    
+    .language-option:hover {
+      background-color: #fef7f2;
+    }
+    
+    .language-option.active {
+      background-color: #fef7f2;
+      color: #F97316;
+      font-weight: 600;
+    }
+    
+    .language-flag {
+      width: 20px;
+      height: 15px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    /* Animations and effects */
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+    }
+    
+    .hover-shake:hover {
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .text-gradient {
+      background: linear-gradient(45deg, #F97316, #EA580C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* FAQ answer animations */
+    .faq-answer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+    }
+    
+    .faq-answer.open {
+      max-height: 500px;
+      opacity: 1;
+      padding-top: 1rem;
+    }
+    
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+      overflow: hidden;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #F97316;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #EA580C;
+    }
+    
+    /* Hero text fix - RESPONSIVE CORREGIDO */
+    .hero-title {
+      line-height: 1.1;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    /* Fix for Services section text */
+    .services-title {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    /* NAVBAR FIX MODIFICADO: Menú responsive desde 1279px hacia abajo */
+    @media (max-width: 1279px) {
+      /* Ocultar menú de escritorio */
+      .desktop-menu {
+        display: none !important;
+      }
+      
+      /* Mostrar botón hamburguesa */
+      .mobile-menu-button {
+        display: flex !important;
+      }
+      
+      /* Ocultar botón Get Started en navbar para móvil */
+      .desktop-get-started {
+        display: none !important;
+      }
+      
+      /* Hero section adjustments */
+      .mobile-hero-text {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        text-align: center;
+        white-space: normal;
+        display: block;
+        width: 100%;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.8rem;
+        text-align: center;
+        display: block;
+        width: 100%;
+      }
+      .hero-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      
+      /* Language selector para móvil */
+      .desktop-language-selector {
+        display: none !important;
+      }
+      
+      .mobile-language-selector {
+        display: flex !important;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+    }
+    
+    /* Mostrar menú desktop solo a partir de 1280px */
+    @media (min-width: 1280px) {
+      .desktop-menu {
+        display: flex !important;
+      }
+      
+      .mobile-menu-button {
+        display: none !important;
+      }
+      
+      .desktop-get-started {
+        display: inline-block !important;
+      }
+      
+      .desktop-language-selector {
+        display: block !important;
+      }
+      
+      .mobile-language-selector {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .mobile-hero-text {
+        font-size: 2.2rem;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.6rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .mobile-hero-text {
+        font-size: 1.8rem;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.4rem;
+      }
+    }
+    
+    /* Ajuste especial para el texto del hero en iPad Pro y pantallas medianas */
+    @media (min-width: 768px) and (max-width: 1279px) {
+      .hero-title .typewriter-text {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        white-space: normal;
+      }
+      
+      .hero-content {
+        text-align: center;
+      }
+      
+      .hero-buttons {
+        justify-content: center;
+      }
+    }
+    
+    /* Tablet responsive fix (para otros elementos) */
+    @media (min-width: 641px) and (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem !important;
+      }
+      
+      .typewriter-text {
+        white-space: normal;
+        display: block;
+      }
+    }
+    
+    /* CTA banner fix */
+    .cta-section {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    }
+    
+    /* Contact section margin */
+    .contact-section {
+      margin-top: 4rem;
+    }
+    
+    /* Hero image optimization */
+    .hero-image {
+      max-height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    /* About us image optimization */
+    .about-image {
+      max-height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+</style>
 
 <script>
 // Internacionalización - Textos en inglés y español
@@ -1299,7 +1921,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Dynamic text effects - ELIMINADO el código relacionado con typewriter-text
   // Random floating animation delays
   document.querySelectorAll('.floating').forEach((icon, index) => {
     icon.style.animationDelay = `${index * 0.2}s`;
@@ -1341,38 +1962,15 @@ document.addEventListener('DOMContentLoaded', function() {
   mobileLangEs.addEventListener('click', function() {
     updateLanguage('es');
   });
+
+  // Aplicar estilos Tailwind cuando estén listos
+  const checkTailwindReady = setInterval(function() {
+    if (window.tailwindReady) {
+      document.body.classList.add('fouc-ready');
+      clearInterval(checkTailwindReady);
+    }
+  }, 100);
 });
-</script>
-<!-- Justo antes de cerrar </body> -->
-<script>
-  // Cargar Tailwind CSS de forma asíncrona
-  window.addEventListener('load', function() {
-    const tailwindScript = document.createElement('script');
-    tailwindScript.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,container-queries';
-    tailwindScript.onload = function() {
-      // Configurar Tailwind después de cargar
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "var(--primary-color)",
-              "primary-darker": "#EA580C",
-              secondary: "var(--secondary-color)",
-              "background-light": "#ffffff",
-              "background-soft": "var(--background-soft)",
-              "text-dark": "#1F2937",
-              "text-light": "#6B7280"
-            },
-            fontFamily: {
-              sans: ["Roboto", "sans-serif"],
-              display: ["Poppins", "sans-serif"],
-            }
-          }
-        }
-      };
-    };
-    document.body.appendChild(tailwindScript);
-  });
 </script>
 </body>
 </html>
