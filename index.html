@@ -9,6 +9,7 @@
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
 <!-- OPTIMIZADO: Google Fonts con preconnect y carga diferida -->
+ <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800&display=swap">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800&display=swap" 
@@ -1341,6 +1342,37 @@ document.addEventListener('DOMContentLoaded', function() {
     updateLanguage('es');
   });
 });
+</script>
+<!-- Justo antes de cerrar </body> -->
+<script>
+  // Cargar Tailwind CSS de forma asíncrona
+  window.addEventListener('load', function() {
+    const tailwindScript = document.createElement('script');
+    tailwindScript.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,container-queries';
+    tailwindScript.onload = function() {
+      // Configurar Tailwind después de cargar
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "var(--primary-color)",
+              "primary-darker": "#EA580C",
+              secondary: "var(--secondary-color)",
+              "background-light": "#ffffff",
+              "background-soft": "var(--background-soft)",
+              "text-dark": "#1F2937",
+              "text-light": "#6B7280"
+            },
+            fontFamily: {
+              sans: ["Roboto", "sans-serif"],
+              display: ["Poppins", "sans-serif"],
+            }
+          }
+        }
+      };
+    };
+    document.body.appendChild(tailwindScript);
+  });
 </script>
 </body>
 </html>
