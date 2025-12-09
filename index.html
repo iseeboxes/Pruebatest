@@ -1,104 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DMV & Title Services in West Palm Beach</title>
-<link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
-<style type="text/tailwindcss">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>DMV & Title Services in West Palm Beach</title>
+  <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
+  
+  <!-- OPTIMIZACIÓN: Preconexiones -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  
+  <!-- Precarga de fuentes críticas -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- CSS de fuentes con carga asíncrona -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
+  
+  <!-- Estilos críticos inline -->
+  <style>
     :root {
       --primary-color: #F97316;
       --secondary-color: #111827;
       --background-soft: #FEF7F2;
     }
-  </style>
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: "var(--primary-color)",
-            "primary-darker": "#EA580C",
-            secondary: "var(--secondary-color)",
-            "background-light": "#ffffff",
-            "background-soft": "var(--background-soft)",
-            "text-dark": "#1F2937",
-            "text-light": "#6B7280"
-          },
-          fontFamily: {
-            sans: ["Roboto", "sans-serif"],
-            display: ["Poppins", "sans-serif"],
-          },
-          borderRadius: {
-            DEFAULT: "0.5rem",
-            lg: "1rem",
-            xl: "1.5rem",
-            "2xl": "2rem",
-          },
-          animation: {
-            'fade-in': 'fadeIn 0.8s ease-out',
-            'slide-up': 'slideUp 0.6s ease-out',
-            'slide-right': 'slideRight 0.6s ease-out',
-            'slide-left': 'slideLeft 0.6s ease-out',
-            'scale-in': 'scaleIn 0.5s ease-out',
-            'float': 'float 3s ease-in-out infinite',
-            'pulse-slow': 'pulse 4s ease-in-out infinite',
-            'bounce-slow': 'bounce 2s infinite',
-            'shake': 'shake 0.5s ease-in-out',
-            'fade-down': 'fadeDown 0.3s ease-out',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%': { transform: 'translateY(30px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' },
-            },
-            slideRight: {
-              '0%': { transform: 'translateX(-30px)', opacity: '0' },
-              '100%': { transform: 'translateX(0)', opacity: '1' },
-            },
-            slideLeft: {
-              '0%': { transform: 'translateX(30px)', opacity: '0' },
-              '100%': { transform: 'translateX(0)', opacity: '1' },
-            },
-            scaleIn: {
-              '0%': { transform: 'scale(0.9)', opacity: '0' },
-              '100%': { transform: 'scale(1)', opacity: '1' },
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-10px)' },
-            },
-            shake: {
-              '0%, 100%': { transform: 'translateX(0)' },
-              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
-              '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
-            },
-            fadeDown: {
-              '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
-              '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
-            },
-          },
-          transitionDuration: {
-            '300': '300ms',
-            '500': '500ms',
-            '700': '700ms',
-          },
-        },
-      },
-    };
-  </script>
-<style>
+    
+    /* Fallback fonts */
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #1F2937;
+      overflow-x: hidden;
+    }
+    
     .material-icons {
       font-size: inherit;
+    }
+    
+    /* Estilos mínimos para navbar */
+    header {
+      background-color: transparent;
+      transition: all 0.3s ease;
+    }
+    
+    /* Asegurar que las imágenes no desborden */
+    img {
+      max-width: 100%;
+      height: auto;
     }
     
     /* Off-canvas menu styles */
@@ -242,93 +193,15 @@
       overflow: hidden;
     }
     
-    /* Animations and effects */
-    .section-hidden {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    
-    .section-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .hover-lift {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .hover-lift:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    }
-    
-    .hover-scale {
-      transition: transform 0.3s ease;
-    }
-    
-    .hover-scale:hover {
-      transform: scale(1.05);
-    }
-    
-    .hover-glow:hover {
-      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
-    }
-    
-    .hover-shake:hover {
-      animation: shake 0.5s ease-in-out;
-    }
-    
-    .pulse-animation {
-      animation: pulse 2s infinite;
-    }
-    
-    .floating {
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    .text-gradient {
-      background: linear-gradient(45deg, #F97316, #EA580C);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    /* FAQ answer animations */
-    .faq-answer {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-    }
-    
-    .faq-answer.open {
-      max-height: 500px;
-      opacity: 1;
-      padding-top: 1rem;
-    }
-    
-    /* Prevent body scroll when menu is open */
-    body.menu-open {
-      overflow: hidden;
-    }
-    
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: #F97316;
-      border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-      background: #EA580C;
+    /* Sticky header styles */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: white !important;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 100;
     }
     
     /* Hero text fix - RESPONSIVE CORREGIDO */
@@ -494,16 +367,187 @@
       object-fit: cover;
       object-position: center;
     }
+  </style>
+  
+  <!-- Tailwind diferido -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries" defer></script>
+  
+  <style type="text/tailwindcss">
+    :root {
+      --primary-color: #F97316;
+      --secondary-color: #111827;
+      --background-soft: #FEF7F2;
+    }
+  </style>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary-color)",
+            "primary-darker": "#EA580C",
+            secondary: "var(--secondary-color)",
+            "background-light": "#ffffff",
+            "background-soft": "var(--background-soft)",
+            "text-dark": "#1F2937",
+            "text-light": "#6B7280"
+          },
+          fontFamily: {
+            sans: ["Roboto", "sans-serif"],
+            display: ["Poppins", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            "2xl": "2rem",
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'slide-right': 'slideRight 0.6s ease-out',
+            'slide-left': 'slideLeft 0.6s ease-out',
+            'scale-in': 'scaleIn 0.5s ease-out',
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s ease-in-out infinite',
+            'bounce-slow': 'bounce 2s infinite',
+            'shake': 'shake 0.5s ease-in-out',
+            'fade-down': 'fadeDown 0.3s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            slideRight: {
+              '0%': { transform: 'translateX(-30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            slideLeft: {
+              '0%': { transform: 'translateX(30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.9)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shake: {
+              '0%, 100%': { transform: 'translateX(0)' },
+              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+              '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+            },
+            fadeDown: {
+              '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
+              '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
+            },
+          },
+          transitionDuration: {
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+          },
+        },
+      },
+    };
+  </script>
+  
+  <style>
+    /* Animations and effects */
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
     
-    /* Sticky header styles */
-    .sticky-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: white !important;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      z-index: 100;
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+    }
+    
+    .hover-shake:hover {
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .text-gradient {
+      background: linear-gradient(45deg, #F97316, #EA580C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* FAQ answer animations */
+    .faq-answer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+    }
+    
+    .faq-answer.open {
+      max-height: 500px;
+      opacity: 1;
+      padding-top: 1rem;
+    }
+    
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+      overflow: hidden;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #F97316;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #EA580C;
     }
   </style>
 </head>
@@ -960,7 +1004,7 @@ WhatsApp
 <p class="text-text-light" data-i18n="why.feature2.description">Skip the long lines and confusion. We handle the paperwork and logistics, including scheduling.</p>
 </div>
 </div>
-<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.2s">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transitionall duration-300 group" style="animation-delay: 0.2s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.4s">inventory_2</span>
 <div>
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature3.title">All-in-One Service</h4>
