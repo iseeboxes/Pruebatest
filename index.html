@@ -291,36 +291,47 @@
   }
 
   // Optimizar carga de imagen LCP
-  function optimizeLCPImage() {
-    const heroImage = document.querySelector('.hero-image');
-    if (!heroImage) return;
+ // OPTIMIZADO: Evitar reflow forzado en la imagen LCP
+function optimizeLCPImage() {
+  const heroImage = document.querySelector('.hero-image');
+  if (!heroImage) return;
 
+  // Usar requestAnimationFrame para evitar reflow forzado
+  requestAnimationFrame(() => {
     // Si la imagen ya está cargada desde la caché
-    if (heroImage.complete) {
-      heroImage.classList.add('loaded');
+    if (heroImage.complete && heroImage.naturalHeight !== 0) {
+      requestAnimationFrame(() => {
+        heroImage.classList.add('loaded');
+      });
       return;
     }
 
     // Marcar como cargada cuando termine de cargar
-    heroImage.addEventListener('load', function() {
-      this.classList.add('loaded');
-      
-      // Registrar métrica de carga LCP
-      if (window.performance) {
-        const entry = performance.getEntriesByName(this.src)[0];
-        if (entry) {
-          console.log('LCP Image loaded in:', entry.duration.toFixed(2), 'ms');
+    const onLoad = function() {
+      requestAnimationFrame(() => {
+        this.classList.add('loaded');
+        
+        // Registrar métrica de carga LCP
+        if (window.performance) {
+          const entry = performance.getEntriesByName(this.src)[0];
+          if (entry) {
+            console.log('LCP Image loaded in:', entry.duration.toFixed(2), 'ms');
+          }
         }
-      }
-    });
+      });
+    };
 
     // Fallback en caso de error
-    heroImage.addEventListener('error', function() {
+    const onError = function() {
       console.warn('LCP image failed to load:', this.src);
       // Podrías cargar una imagen de respaldo aquí
-    });
-  }
+    };
 
+    // Usar eventos una sola vez
+    heroImage.addEventListener('load', onLoad, { once: true });
+    heroImage.addEventListener('error', onError, { once: true });
+  });
+}
   // Cargar el mapa de forma optimizada
   function loadGoogleMap() {
     if (document.readyState === 'loading') {
