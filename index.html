@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
   
+  <!-- Preload de la imagen LCP (IMPORTANTE) -->
+  <link rel="preload" as="image" href="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp" fetchpriority="high">
+  
   <!-- Estilos críticos inline -->
   <style>
     :root {
@@ -738,10 +741,14 @@ Get Started
 <div class="lg:w-1/2 animate-slide-left">
 <div class="relative w-full max-w-lg mx-auto">
 <div class="absolute -inset-4 bg-gradient-to-r from-primary to-primary-darker rounded-3xl opacity-20 blur-xl"></div>
+<!-- IMAGEN LCP OPTIMIZADA -->
 <img alt="Professional woman seller standing beside an orange car" 
      class="rounded-2xl w-full h-full hero-image object-cover relative z-10 hover-scale transition-transform duration-500" 
-     loading="lazy" 
-     decoding="async" 
+     fetchpriority="high"
+     loading="eager"
+     decoding="sync"
+     width="800"
+     height="600"
      src="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp"/>
 </div>
 </div>
