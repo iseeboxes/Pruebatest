@@ -60,6 +60,11 @@
     overflow-x: hidden;
   }
 
+  .hero-image-container, 
+.hero-image, 
+.map-container {
+  contain: layout style paint; /* ¡IMPORTANTE! Limita el alcance de reflows */
+}
   /* Estilos críticos para imagen LCP */
   .hero-image-container {
     position: relative;
@@ -81,15 +86,17 @@
     animation: loading 1.5s infinite;
   }
   
-  @keyframes loading {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-  
+ @keyframes loading {
+  /* Mantén la animación pero hazla más eficiente */
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
   .hero-image.loaded {
-    background: none;
-    animation: none;
-  }
+  animation: none;
+  opacity: 1;
+  transition: opacity 0.2s ease-out; /* Transición simple */
+}
+
 
   /* Optimización para evitar reflow del mapa */
   .map-container {
@@ -292,99 +299,118 @@
 
   // Optimizar carga de imagen LCP
  // OPTIMIZADO: Evitar reflow forzado en la imagen LCP
+// REEMPLAZA la función optimizeLCPImage() completa con esta versión optimizada:
 function optimizeLCPImage() {
   const heroImage = document.querySelector('.hero-image');
   if (!heroImage) return;
 
-  // Usar requestAnimationFrame para evitar reflow forzado
-  requestAnimationFrame(() => {
-    // Si la imagen ya está cargada desde la caché
-    if (heroImage.complete && heroImage.naturalHeight !== 0) {
-      requestAnimationFrame(() => {
-        heroImage.classList.add('loaded');
-      });
-      return;
+  // Leer propiedades geométricas UNA VEZ al inicio (esto es una lectura)
+  const isAlreadyLoaded = heroImage.complete && heroImage.naturalHeight !== 0;
+  
+  // Configurar manejadores de eventos ANTES de cualquier escritura
+  const handleLoad = () => {
+    // Agrupar TODOS los cambios de estilo juntos
+    heroImage.classList.add('loaded');
+    
+    // Opcional: registrar métricas (pero no leer propiedades geométricas aquí)
+    if (window.performance) {
+      // Leer esta métrica está bien porque no causa reflow
+      const entry = performance.getEntriesByName(heroImage.src)[0];
+      if (entry) {
+        console.log('LCP Image loaded in:', entry.duration.toFixed(2), 'ms');
+      }
     }
+  };
 
-    // Marcar como cargada cuando termine de cargar
-    const onLoad = function() {
-      requestAnimationFrame(() => {
-        this.classList.add('loaded');
-        
-        // Registrar métrica de carga LCP
-        if (window.performance) {
-          const entry = performance.getEntriesByName(this.src)[0];
-          if (entry) {
-            console.log('LCP Image loaded in:', entry.duration.toFixed(2), 'ms');
-          }
-        }
-      });
-    };
+  const handleError = () => {
+    console.warn('LCP image failed to load:', heroImage.src);
+  };
 
-    // Fallback en caso de error
-    const onError = function() {
-      console.warn('LCP image failed to load:', this.src);
-      // Podrías cargar una imagen de respaldo aquí
-    };
-
-    // Usar eventos una sola vez
-    heroImage.addEventListener('load', onLoad, { once: true });
-    heroImage.addEventListener('error', onError, { once: true });
-  });
-}
-  // Cargar el mapa de forma optimizada
-  function loadGoogleMap() {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initMap);
-    } else {
-      setTimeout(initMap, 300); // Retraso para priorizar LCP
-    }
+  // Configurar eventos UNA VEZ
+  if (!isAlreadyLoaded) {
+    heroImage.addEventListener('load', handleLoad, { once: true });
+    heroImage.addEventListener('error', handleError, { once: true });
+  } else {
+    // Si ya está cargada, aplicar cambios INMEDIATAMENTE
+    handleLoad();
   }
+}
 
-  function initMap() {
-    const mapContainer = document.getElementById('googleMapContainer');
-    if (!mapContainer) return;
+// Cargar el mapa de forma optimizada
+  function loadGoogleMap() {
+  // Retrasar la carga del mapa para no interferir con LCP
+  setTimeout(() => {
+    initMap();
+  }, 1000); // 1 segundo después, no 300ms
+}
 
-    const iframe = document.createElement('iframe');
-    iframe.id = 'googleMapIframe';
-    iframe.className = 'map-iframe';
-    iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.031562328511!2d-80.06889522347666!3d26.664590776642093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8d5ce77f5c6f7%3A0x17cba6d534d7a7a4!2s2393%20S%20Congress%20Ave%20%23200%2C%20West%20Palm%20Beach%2C%20FL%2033406!5e0!3m2!1sen!2sus!4v1711569123456!5m2!1sen!2sus';
-    iframe.width = "100%";
-    iframe.height = "100%";
-    iframe.style.border = "0";
-    iframe.allowFullscreen = "";
-    iframe.loading = "lazy";
-    iframe.referrerPolicy = "no-referrer-when-downgrade";
-    iframe.title = "Auto Palm Beach Location Map";
 
-    mapContainer.appendChild(iframe);
+ function initMap() {
+  const mapContainer = document.getElementById('googleMapContainer');
+  if (!mapContainer) return;
 
-    iframe.onload = function() {
-      requestAnimationFrame(function() {
-        iframe.classList.add('loaded');
-        
-        setTimeout(function() {
-          const placeholder = document.querySelector('.map-placeholder');
-          if (placeholder) {
-            placeholder.style.display = 'none';
-          }
-        }, 500);
-      });
-    };
+  // Preparar todo el iframe ANTES de insertarlo en el DOM
+  const iframe = document.createElement('iframe');
+  iframe.id = 'googleMapIframe';
+  iframe.className = 'map-iframe';
+  iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.031562328511!2d-80.06889522347666!3d26.664590776642093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8d5ce77f5c6f7%3A0x17cba6d534d7a7a4!2s2393%20S%20Congress%20Ave%20%23200%2C%20West%20Palm%20Beach%2C%20FL%2033406!5e0!3m2!1sen!2sus!4v1711569123456!5m2!1sen!2sus';
+  iframe.width = "100%";
+  iframe.height = "100%";
+  iframe.style.border = "0";
+  iframe.allowFullscreen = "";
+  iframe.loading = "lazy";
+  iframe.referrerPolicy = "no-referrer-when-downgrade";
+  iframe.title = "Auto Palm Beach Location Map";
 
-    iframe.onerror = function() {
-      console.warn('Google Maps failed to load');
+  // Configurar manejadores ANTES de insertar
+  iframe.onload = function() {
+    // Cambios de estilo agrupados
+    this.classList.add('loaded');
+    
+    setTimeout(() => {
       const placeholder = document.querySelector('.map-placeholder');
       if (placeholder) {
-        placeholder.innerHTML = 'Mapa no disponible. Dirección: 2393 South Congress Ave STE 200, West Palm Beach, FL 33406';
-        placeholder.style.animation = 'none';
-        placeholder.style.background = '#f3f4f6';
+        placeholder.style.display = 'none';
       }
-    };
-  }
+    }, 500);
+  };
 
+  iframe.onerror = function() {
+    console.warn('Google Maps failed to load');
+    const placeholder = document.querySelector('.map-placeholder');
+    if (placeholder) {
+      placeholder.innerHTML = 'Mapa no disponible. Dirección: 2393 South Congress Ave STE 200, West Palm Beach, FL 33406';
+      placeholder.style.animation = 'none';
+      placeholder.style.background = '#f3f4f6';
+    }
+  };
+
+  // FINALMENTE insertar en el DOM (una sola operación de escritura)
+  mapContainer.appendChild(iframe);
+}
   // Inicializar optimizaciones
-  if (document.readyState === 'loading') {
+  // REEMPLAZA el código de inicialización actual:
+// Inicializar optimizaciones - VERSIÓN OPTIMIZADA
+function initializeOptimizations() {
+  // Ejecutar optimizaciones de forma secuencial con retrasos estratégicos
+  setTimeout(() => {
+    optimizeLCPImage(); // Primero: optimizar imagen LCP
+    
+    setTimeout(() => {
+      loadTailwindCSS(); // Después: cargar CSS no crítico
+      
+      setTimeout(() => {
+        loadGoogleMap(); // Por último: cargar mapa (más pesado)
+      }, 1500);
+    }, 300);
+  }, 0);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeOptimizations);
+} else {
+  initializeOptimizations();
+}
     document.addEventListener('DOMContentLoaded', function() {
       optimizeLCPImage();
       loadTailwindCSS();
@@ -1534,11 +1560,11 @@ WhatsApp
     }
     
     /* Hero image optimization */
-    .hero-image {
-      max-height: 600px;
-      object-fit: cover;
-      object-position: center;
-    }
+   .hero-image {
+  will-change: opacity;
+  transform: translateZ(0); /* Promueve a capa GPU */
+  backface-visibility: hidden;
+}
     
     /* About us image optimization */
     .about-image {
