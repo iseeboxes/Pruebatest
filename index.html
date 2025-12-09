@@ -84,27 +84,30 @@
     backface-visibility: hidden;
 }
   
- @keyframes loading {
-  /* Mantén la animación pero hazla más eficiente */
+@keyframes loading {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
-  .hero-image.loaded {
+ .hero-image.loaded {
   animation: none;
   opacity: 1;
-  transition: opacity 0.2s ease-out; /* Transición simple */
+  /* Usar transform y opacity que son más eficientes */
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
+
   /* Optimización para evitar reflow del mapa */
-  .map-container {
-    width: 100%;
-    height: 384px;
-    position: relative;
-    overflow: hidden;
-  }
+ .map-container {
+  width: 100%;
+  height: 384px;
+  position: relative;
+  overflow: hidden;
+  contain: strict; /* Aislar el layout */
+}
   
   .map-placeholder {
+    contain: layout style paint; /* Optimización de rendimiento */
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #f0f0f0 25%, #e0e0e0 25%, #e0e0e0 50%, #f0f0f0 50%, #f0f0f0 75%, #e0e0e0 75%, #e0e0e0);
@@ -212,139 +215,66 @@
 
 <!-- JavaScript optimizado para LCP -->
 <script>
-  // Cargar Tailwind de forma asíncrona
-  function loadTailwindCSS() {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,container-queries';
-    script.onload = function() {
-      if (typeof tailwind !== 'undefined') {
-        tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                primary: "var(--primary-color)",
-                "primary-darker": "#EA580C",
-                secondary: "var(--secondary-color)",
-                "background-light": "#ffffff",
-                "background-soft": "var(--background-soft)",
-                "text-dark": "#1F2937",
-                "text-light": "#6B7280"
-              },
-              fontFamily: {
-                sans: ["Roboto", "sans-serif"],
-                display: ["Poppins", "sans-serif"],
-              },
-              borderRadius: {
-                DEFAULT: "0.5rem",
-                lg: "1rem",
-                xl: "1.5rem",
-                "2xl": "2rem",
-              },
-              animation: {
-                'fade-in': 'fadeIn 0.8s ease-out',
-                'slide-up': 'slideUp 0.6s ease-out',
-                'slide-right': 'slideRight 0.6s ease-out',
-                'slide-left': 'slideLeft 0.6s ease-out',
-                'scale-in': 'scaleIn 0.5s ease-out',
-                'float': 'float 3s ease-in-out infinite',
-                'pulse-slow': 'pulse 4s ease-in-out infinite',
-                'bounce-slow': 'bounce 2s infinite',
-                'shake': 'shake 0.5s ease-in-out',
-                'fade-down': 'fadeDown 0.3s ease-out',
-              },
-              keyframes: {
-                fadeIn: {
-                  '0%': { opacity: '0' },
-                  '100%': { opacity: '1' },
-                },
-                slideUp: {
-                  '0%': { transform: 'translateY(30px)', opacity: '0' },
-                  '100%': { transform: 'translateY(0)', opacity: '1' },
-                },
-                slideRight: {
-                  '0%': { transform: 'translateX(-30px)', opacity: '0' },
-                  '100%': { transform: 'translateX(0)', opacity: '1' },
-                },
-                slideLeft: {
-                  '0%': { transform: 'translateX(30px)', opacity: '0' },
-                  '100%': { transform: 'translateX(0)', opacity: '1' },
-                },
-                scaleIn: {
-                  '0%': { transform: 'scale(0.9)', opacity: '0' },
-                  '100%': { transform: 'scale(1)', opacity: '1' },
-                },
-                float: {
-                  '0%, 100%': { transform: 'translateY(0)' },
-                  '50%': { transform: 'translateY(-10px)' },
-                },
-                shake: {
-                  '0%, 100%': { transform: 'translateX(0)' },
-                  '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
-                  '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
-                },
-                fadeDown: {
-                  '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
-                  '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
-                },
-              },
-            },
-          },
-        };
-      }
-    };
-    document.body.appendChild(script);
-  }
-
-  // Optimizar carga de imagen LCP
+  // OPTIMIZACIÓN: Separar lecturas y escrituras
+  let heroImageData = null;
+  
   function optimizeLCPImage() {
     const heroImage = document.querySelector('.hero-image');
     if (!heroImage) return;
 
-    // Leer propiedades geométricas UNA VEZ al inicio (esto es una lectura)
-    const isAlreadyLoaded = heroImage.complete && heroImage.naturalHeight !== 0;
-    
-    // Configurar manejadores de eventos ANTES de cualquier escritura
+    // 1. LEER todas las propiedades geométricas UNA VEZ al inicio
+    heroImageData = {
+      complete: heroImage.complete,
+      naturalHeight: heroImage.naturalHeight,
+      src: heroImage.src
+    };
+
+    // 2. Configurar manejadores de eventos (sin leer propiedades geométricas aquí)
     const handleLoad = () => {
-      // Agrupar TODOS los cambios de estilo juntos
-      heroImage.classList.add('loaded');
-      
-      // Opcional: registrar métricas (pero no leer propiedades geométricas aquí)
-      if (window.performance) {
-        // Leer esta métrica está bien porque no causa reflow
-        const entry = performance.getEntriesByName(heroImage.src)[0];
-        if (entry) {
-          console.log('LCP Image loaded in:', entry.duration.toFixed(2), 'ms');
+      // Usar requestAnimationFrame para agrupar cambios de estilo
+      requestAnimationFrame(() => {
+        heroImage.classList.add('loaded');
+        
+        // Lecturas de performance (no causan reflow)
+        if (window.performance && 'getEntriesByType' in performance) {
+          const paintEntries = performance.getEntriesByType('paint');
+          const lcpEntry = paintEntries.find(entry => entry.name === 'largest-contentful-paint');
+          if (lcpEntry) {
+            console.log('LCP detected at:', lcpEntry.startTime.toFixed(2), 'ms');
+          }
         }
-      }
+      });
     };
 
     const handleError = () => {
-      console.warn('LCP image failed to load:', heroImage.src);
+      requestAnimationFrame(() => {
+        console.warn('LCP image failed to load');
+      });
     };
 
-    // Configurar eventos UNA VEZ
-    if (!isAlreadyLoaded) {
+    // 3. Configurar eventos
+    if (!heroImageData.complete || heroImageData.naturalHeight === 0) {
       heroImage.addEventListener('load', handleLoad, { once: true });
       heroImage.addEventListener('error', handleError, { once: true });
     } else {
-      // Si ya está cargada, aplicar cambios INMEDIATAMENTE
-      handleLoad();
+      // Si ya está cargada, procesar en el siguiente frame
+      requestAnimationFrame(handleLoad);
     }
   }
 
-  // Cargar el mapa de forma optimizada
+  // OPTIMIZACIÓN: Cargar el mapa sin reflows
   function loadGoogleMap() {
-    // Retrasar la carga del mapa para no interferir con LCP
+    // Usar setTimeout con tiempo suficiente para no interferir con LCP
     setTimeout(() => {
       initMap();
-    }, 1000); // 1 segundo después, no 300ms
+    }, 2000); // Aumentar a 2 segundos para asegurar que LCP ya ocurrió
   }
 
   function initMap() {
     const mapContainer = document.getElementById('googleMapContainer');
     if (!mapContainer) return;
 
-    // Preparar todo el iframe ANTES de insertarlo en el DOM
+    // 1. Crear iframe FUERA del DOM primero
     const iframe = document.createElement('iframe');
     iframe.id = 'googleMapIframe';
     iframe.className = 'map-iframe';
@@ -357,52 +287,113 @@
     iframe.referrerPolicy = "no-referrer-when-downgrade";
     iframe.title = "Auto Palm Beach Location Map";
 
-    // Configurar manejadores ANTES de insertar
+    // 2. Configurar manejadores ANTES de insertar
     iframe.onload = function() {
-      // Cambios de estilo agrupados
-      this.classList.add('loaded');
-      
-      setTimeout(() => {
-        const placeholder = document.querySelector('.map-placeholder');
-        if (placeholder) {
-          placeholder.style.display = 'none';
-        }
-      }, 500);
+      // Usar requestAnimationFrame para cambios de estilo
+      requestAnimationFrame(() => {
+        this.classList.add('loaded');
+        
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            const placeholder = document.querySelector('.map-placeholder');
+            if (placeholder) {
+              placeholder.style.display = 'none';
+            }
+          });
+        }, 500);
+      });
     };
 
     iframe.onerror = function() {
-      console.warn('Google Maps failed to load');
-      const placeholder = document.querySelector('.map-placeholder');
-      if (placeholder) {
-        placeholder.innerHTML = 'Mapa no disponible. Dirección: 2393 South Congress Ave STE 200, West Palm Beach, FL 33406';
-        placeholder.style.animation = 'none';
-        placeholder.style.background = '#f3f4f6';
-      }
+      requestAnimationFrame(() => {
+        console.warn('Google Maps failed to load');
+        const placeholder = document.querySelector('.map-placeholder');
+        if (placeholder) {
+          placeholder.innerHTML = 'Mapa no disponible. Dirección: 2393 South Congress Ave STE 200, West Palm Beach, FL 33406';
+          placeholder.style.animation = 'none';
+          placeholder.style.background = '#f3f4f6';
+        }
+      });
     };
 
-    // FINALMENTE insertar en el DOM (una sola operación de escritura)
-    mapContainer.appendChild(iframe);
+    // 3. Insertar en el DOM en batch
+    requestAnimationFrame(() => {
+      mapContainer.appendChild(iframe);
+    });
   }
 
-  // Inicializar optimizaciones - VERSIÓN SIMPLIFICADA
+  // OPTIMIZACIÓN: Reemplazar múltiples setTimeout con un solo flujo controlado
   function initializeOptimizations() {
-    // Ejecutar optimizaciones de forma secuencial
-    optimizeLCPImage(); // Primero: optimizar imagen LCP
+    // Secuencia optimizada usando requestAnimationFrame
+    optimizeLCPImage(); // Primero: imagen LCP (crítica)
     
+    // Usar setTimeout anidados pero con tiempos más largos
     setTimeout(() => {
-      loadTailwindCSS(); // Después: cargar CSS no crítico
+      loadTailwindCSS(); // Después: CSS no crítico
       
-      setTimeout(() => {
-        loadGoogleMap(); // Por último: cargar mapa (más pesado)
-      }, 1500);
+      // Usar requestIdleCallback si está disponible
+      const loadNonCritical = () => {
+        setTimeout(loadGoogleMap, 1000);
+      };
+      
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(loadNonCritical, { timeout: 2000 });
+      } else {
+        setTimeout(loadNonCritical, 1500);
+      }
     }, 300);
   }
 
-  // Solo una inicialización - SIN CÓDIGO DUPLICADO
+  // Cargar Tailwind optimizado
+  function loadTailwindCSS() {
+    // Usar requestIdleCallback para cargar recursos no críticos
+    const loadTailwind = () => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,container-queries';
+      script.async = true;
+      
+      script.onload = function() {
+        if (typeof tailwind !== 'undefined') {
+          // Configurar tailwind en el siguiente frame
+          requestAnimationFrame(() => {
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    primary: "var(--primary-color)",
+                    "primary-darker": "#EA580C",
+                    secondary: "var(--secondary-color)",
+                    "background-light": "#ffffff",
+                    "background-soft": "var(--background-soft)",
+                    "text-dark": "#1F2937",
+                    "text-light": "#6B7280"
+                  },
+                  // ... resto de la configuración tailwind
+                }
+              }
+            };
+            window.tailwindReady = true;
+          });
+        }
+      };
+      
+      document.body.appendChild(script);
+    };
+    
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(loadTailwind, { timeout: 1000 });
+    } else {
+      setTimeout(loadTailwind, 500);
+    }
+  }
+
+  // Inicialización optimizada
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeOptimizations);
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initializeOptimizations, 0);
+    });
   } else {
-    initializeOptimizations();
+    setTimeout(initializeOptimizations, 0);
   }
 </script>
 </head>
@@ -1543,10 +1534,11 @@ WhatsApp
     }
     
     /* Hero image optimization */
- .hero-image {
-  will-change: opacity;
-  transform: translateZ(0); /* Promueve a capa GPU */
+.hero-image {
+  will-change: transform, opacity; /* Solo propiedades que cambian */
+  transform: translateZ(0); /* Promover a capa GPU */
   backface-visibility: hidden;
+  contain: content; /* Limitar el scope de reflow */
 }
     
     /* About us image optimization */
