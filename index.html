@@ -6,10 +6,24 @@
 <title>DMV & Title Services in West Palm Beach</title>
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
+<!-- OPTIMIZACIÓN LCP: Preload de imagen crítica -->
+<link rel="preload" 
+      as="image" 
+      href="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp"
+      imagesrcset="
+        https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=300 300w,
+        https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=600 600w
+      "
+      imagesizes="(max-width: 768px) 100vw, 600px"
+      fetchpriority="high">
+
 <!-- OPTIMIZACIÓN: Preconnect para recursos externos -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.tailwindcss.com">
+<link rel="preconnect" href="https://maps.gstatic.com">
+<link rel="preconnect" href="https://maps.googleapis.com">
+<link rel="preconnect" href="https://i.ibb.co">
 
 <!-- OPTIMIZACIÓN: Google Fonts con carga diferida -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" 
@@ -29,16 +43,14 @@
       media="print" 
       onload="this.media='all'">
 
-<!-- CSS Crítico Inline para render inicial -->
+<!-- CSS Crítico Inline con estilos para imagen LCP -->
 <style>
-  /* Variables CSS críticas */
   :root {
     --primary-color: #F97316;
     --secondary-color: #111827;
     --background-soft: #FEF7F2;
   }
 
-  /* Estilos mínimos para contenido visible */
   body {
     margin: 0;
     padding: 0;
@@ -48,38 +60,82 @@
     overflow-x: hidden;
   }
 
-  /* Estilos críticos para header */
-  header {
-    background-color: transparent;
-    transition: all 0.3s ease;
+  /* Estilos críticos para imagen LCP */
+  .hero-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1rem;
+    display: block;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+  
+  @keyframes loading {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  .hero-image.loaded {
+    background: none;
+    animation: none;
   }
 
-  .sticky-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: white !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-  }
-
-  /* Estilos críticos para hero section */
-  #home {
-    padding-top: 64px;
-    padding-bottom: 96px;
+  /* Optimización para evitar reflow del mapa */
+  .map-container {
+    width: 100%;
+    height: 384px;
     position: relative;
     overflow: hidden;
   }
-
-  .hero-bg-gradient {
+  
+  .map-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f0f0f0 25%, #e0e0e0 25%, #e0e0e0 50%, #f0f0f0 50%, #f0f0f0 75%, #e0e0e0 75%, #e0e0e0);
+    background-size: 40px 40px;
+    animation: shimmer 2s infinite linear;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .map-iframe {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(254, 247, 242, 0.8), transparent);
-    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    visibility: hidden;
+  }
+  
+  .map-iframe.loaded {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -40px 0; }
+    100% { background-position: 40px 0; }
   }
 
-  /* Contenedor base */
+  /* Utilidades críticas */
   .container {
     width: 100%;
     margin: 0 auto;
@@ -112,10 +168,8 @@
     }
   }
 
-  /* Utilidades críticas */
   .flex { display: flex; }
   .hidden { display: none; }
-  .block { display: block; }
   .relative { position: relative; }
   .absolute { position: absolute; }
   .z-10 { z-index: 10; }
@@ -136,48 +190,28 @@
   .space-x-3 > * + * { margin-left: 0.75rem; }
   .space-x-4 > * + * { margin-left: 1rem; }
   .rounded-lg { border-radius: 0.5rem; }
-  .hover\:bg-primary-darker:hover { background-color: #EA580C; }
-  .transition-colors { transition-property: color, background-color, border-color; transition-duration: 150ms; }
+  .rounded-2xl { border-radius: 1rem; }
+  .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
 
-  /* Estilos para imágenes críticas */
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Animaciones críticas */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-  }
-
-  /* Prevenir FOUC (Flash of Unstyled Content) */
-  .no-fouc {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .fouc-ready {
-    opacity: 1;
+  /* Header sticky */
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
   }
 </style>
 
-<!-- JavaScript para carga diferida de recursos no críticos -->
+<!-- JavaScript optimizado para LCP -->
 <script>
-  // Marcar cuando Tailwind esté listo
-  window.tailwindReady = false;
-  
-  // Función para cargar Tailwind de forma asíncrona
+  // Cargar Tailwind de forma asíncrona
   function loadTailwindCSS() {
     const script = document.createElement('script');
     script.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,container-queries';
     script.onload = function() {
-      // Configurar Tailwind después de cargar
       if (typeof tailwind !== 'undefined') {
         tailwind.config = {
           theme: {
@@ -248,39 +282,111 @@
                   '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
                 },
               },
-              transitionDuration: {
-                '300': '300ms',
-                '500': '500ms',
-                '700': '700ms',
-              },
             },
           },
         };
-        window.tailwindReady = true;
-        
-        // Aplicar estilos Tailwind cuando esté listo
-        document.body.classList.add('fouc-ready');
       }
     };
     document.body.appendChild(script);
   }
 
-  // Cargar Tailwind después de la carga inicial
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadTailwindCSS);
-  } else {
-    loadTailwindCSS();
+  // Optimizar carga de imagen LCP
+  function optimizeLCPImage() {
+    const heroImage = document.querySelector('.hero-image');
+    if (!heroImage) return;
+
+    // Si la imagen ya está cargada desde la caché
+    if (heroImage.complete) {
+      heroImage.classList.add('loaded');
+      return;
+    }
+
+    // Marcar como cargada cuando termine de cargar
+    heroImage.addEventListener('load', function() {
+      this.classList.add('loaded');
+      
+      // Registrar métrica de carga LCP
+      if (window.performance) {
+        const entry = performance.getEntriesByName(this.src)[0];
+        if (entry) {
+          console.log('LCP Image loaded in:', entry.duration.toFixed(2), 'ms');
+        }
+      }
+    });
+
+    // Fallback en caso de error
+    heroImage.addEventListener('error', function() {
+      console.warn('LCP image failed to load:', this.src);
+      // Podrías cargar una imagen de respaldo aquí
+    });
   }
 
-  // Fallback para fuentes si no cargan en 3 segundos
-  setTimeout(function() {
-    const html = document.documentElement;
-    if (!html.classList.contains('fonts-loaded')) {
-      html.classList.add('fonts-fallback');
+  // Cargar el mapa de forma optimizada
+  function loadGoogleMap() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMap);
+    } else {
+      setTimeout(initMap, 300); // Retraso para priorizar LCP
     }
-  }, 3000);
+  }
+
+  function initMap() {
+    const mapContainer = document.getElementById('googleMapContainer');
+    if (!mapContainer) return;
+
+    const iframe = document.createElement('iframe');
+    iframe.id = 'googleMapIframe';
+    iframe.className = 'map-iframe';
+    iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.031562328511!2d-80.06889522347666!3d26.664590776642093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8d5ce77f5c6f7%3A0x17cba6d534d7a7a4!2s2393%20S%20Congress%20Ave%20%23200%2C%20West%20Palm%20Beach%2C%20FL%2033406!5e0!3m2!1sen!2sus!4v1711569123456!5m2!1sen!2sus';
+    iframe.width = "100%";
+    iframe.height = "100%";
+    iframe.style.border = "0";
+    iframe.allowFullscreen = "";
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "no-referrer-when-downgrade";
+    iframe.title = "Auto Palm Beach Location Map";
+
+    mapContainer.appendChild(iframe);
+
+    iframe.onload = function() {
+      requestAnimationFrame(function() {
+        iframe.classList.add('loaded');
+        
+        setTimeout(function() {
+          const placeholder = document.querySelector('.map-placeholder');
+          if (placeholder) {
+            placeholder.style.display = 'none';
+          }
+        }, 500);
+      });
+    };
+
+    iframe.onerror = function() {
+      console.warn('Google Maps failed to load');
+      const placeholder = document.querySelector('.map-placeholder');
+      if (placeholder) {
+        placeholder.innerHTML = 'Mapa no disponible. Dirección: 2393 South Congress Ave STE 200, West Palm Beach, FL 33406';
+        placeholder.style.animation = 'none';
+        placeholder.style.background = '#f3f4f6';
+      }
+    };
+  }
+
+  // Inicializar optimizaciones
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      optimizeLCPImage();
+      loadTailwindCSS();
+      loadGoogleMap();
+    });
+  } else {
+    optimizeLCPImage();
+    loadTailwindCSS();
+    loadGoogleMap();
+  }
 </script>
 </head>
+
 <body class="no-fouc">
 <div class="w-full bg-background-soft">
 <header class="bg-transparent py-4 transition-all duration-300 z-50 relative">
@@ -445,7 +551,7 @@ Get Started
 <main>
 <!-- Hero Section -->
 <section id="home" class="relative pt-16 pb-24 overflow-hidden">
-<div class="hero-bg-gradient"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-orange-50 to-transparent z-0"></div>
 <div class="container mx-auto px-4 relative z-10">
 <div class="flex flex-col lg:flex-row items-center gap-12">
 <div class="lg:w-1/2 text-left animate-slide-right hero-content">
@@ -466,13 +572,26 @@ Get Started
 </div>
 </div>
 <div class="lg:w-1/2 animate-slide-left">
-<div class="relative w-full max-w-lg mx-auto">
+<div class="relative w-full max-w-lg mx-auto hero-image-container">
 <div class="absolute -inset-4 bg-gradient-to-r from-primary to-primary-darker rounded-3xl opacity-20 blur-xl"></div>
-<img alt="Professional woman seller standing beside an orange car" 
-     class="rounded-2xl w-full h-full hero-image object-cover relative z-10 hover-scale transition-transform duration-500" 
-     loading="lazy" 
-     decoding="async" 
-     src="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp"/>
+<!-- IMAGEN LCP OPTIMIZADA -->
+<img 
+  alt="Professional woman seller standing beside an orange car at Auto Palm Beach DMV services"
+  class="rounded-2xl w-full h-full hero-image object-cover relative z-10 hover-scale transition-transform duration-500"
+  src="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp"
+  width="600"
+  height="400"
+  loading="eager"
+  decoding="sync"
+  fetchpriority="high"
+  importance="high"
+  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
+  srcset="
+    https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=300 300w,
+    https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=600 600w,
+    https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=900 900w
+  "
+/>
 </div>
 </div>
 </div>
