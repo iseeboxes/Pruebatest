@@ -22,6 +22,9 @@
   <!-- Preload de la imagen LCP (IMPORTANTE) -->
   <link rel="preload" as="image" href="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp" fetchpriority="high">
   
+  <!-- OPTIMIZACIÓN: Eliminar imágenes de Google AIDA no utilizadas -->
+  <!-- Se eliminaron las referencias a las imágenes problemáticas de Google -->
+  
   <!-- Estilos críticos inline -->
   <style>
     :root {
@@ -372,8 +375,8 @@
     }
   </style>
   
-  <!-- Tailwind diferido -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries" defer></script>
+  <!-- OPTIMIZACIÓN: Tailwind con plugins reducidos (eliminados typography y container-queries) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms" defer></script>
   
   <style type="text/tailwindcss">
     :root {
@@ -819,7 +822,8 @@ Get Started
 <!-- Servicio 1 -->
 <div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="Two people signing official documents with pens" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7kVeFNWpIeNT4L4X-Ekc330lCTL_caF5l6XhiMUFShDbhFM7xi360IeFZ4R3tzIq_oImHmNyu17wdI8mf9QJIobAtzyELnQW4tmUWp8h5l3Uko_IrMUaTSChiF-JAFBcj061RcPPz--wXc-i8Wms9RxFWd5j7Um-_wrhMCl1jwHuApLlD-FwyaJdVE7WSmelxPrsyyK_HoKptyH92JkN8pm5eFxzf2wnOzBj-tnONN_mmpGwifrWQ_l6niWRiLoWG8z6qHb4xT8s"/>
+<!-- OPTIMIZACIÓN: Imagen reemplazada de Google AIDA por una local -->
+<img alt="Two people signing official documents with pens" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/6vjqMkR/signing-documents-service.webp"/>
 </div>
 <div class="p-6">
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service1.title">Title Transfers & DMV Docs</h4>
@@ -834,7 +838,8 @@ Get Started
 <!-- Servicio 2 -->
 <div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="A person using a notary stamp on a document" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwVKqbLqqmDDL8-8QsOT74iXrx7B9kLvKNIW61F15UlISBTkR6Qjb8Vjhre2sV9ItQT53LxXPPD7mandJ3tMpQNZm1V4m2X6PREPMI_Kf9NjkN2Dmtg2qQstV7RULQgZHyWIApxJ_QPGBIZNPv8vdzTqYUPa4lnZ_rEHU57S2SkDqeFgYE7KwQn6IP5_LGJ-UwSXbTBo531BEfXdPi5R6SVzAgb-n57qQtOw3YH2o2QkYqztIv9UKL5O2e8dOp7W-ecovaR8UHT6w"/>
+<!-- OPTIMIZACIÓN: Imagen reemplazada de Google AIDA por una local -->
+<img alt="A person using a notary stamp on a document" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/7JtLpZQ/notary-service.webp"/>
 </div>
 <div class="p-6">
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service2.title">Notary Public VIN Verification</h4>
@@ -849,7 +854,8 @@ Get Started
 <!-- Servicio 3 -->
 <div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="A Florida license plate on a wooden surface" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcQC2Ul3kIuE8sN54g1jsb9Y-n8dw00JAOtCliE5b9tT-bDL48cdmqg5NFwQzL2tGdYVNtovxXs-GCbrKgagFJoGejTVJ2bEFYk36TqAPAZ90gQStViRGQ1_-tjAqlBD9lkjzXJz2aeIjz8iwLBBM-c_b4Gk29KzYdENwdmBK-ce2WUByza0w9vnOfnUQgIad3fq9E0Yh3-vcSLTQZqm89e3xiR-_OioXgGMFvjUtFqiP3NM-twWdC3OToLEayKA-FlckzSWqPoYc"/>
+<!-- OPTIMIZACIÓN: Imagen reemplazada de Google AIDA por una local -->
+<img alt="A Florida license plate on a wooden surface" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/2dWjKJ7/license-plate-service.webp"/>
 </div>
 <div class="p-6">
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service3.title">Registration & Plates</h4>
@@ -892,7 +898,7 @@ Get Started
 </div>
 
 <!-- Servicio 6 -->
-<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transitionall duration-500 hover-lift group">
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
 <img alt="Car being photographed for online listing" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/fYMJkH8x/Car-being-photographed-for-online-listing.webp"/>
 </div>
@@ -1011,7 +1017,7 @@ WhatsApp
 <p class="text-text-light" data-i18n="why.feature2.description">Skip the long lines and confusion. We handle the paperwork and logistics, including scheduling.</p>
 </div>
 </div>
-<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transitionall duration-300 group" style="animation-delay: 0.2s">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.2s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.4s">inventory_2</span>
 <div>
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature3.title">All-in-One Service</h4>
@@ -1074,7 +1080,7 @@ WhatsApp
 <p class="text-text-light mt-1" data-i18n="contact.emailDescription">Send us an email for quick responses</p>
 </div>
 </div>
-<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transitionall duration-300 hover-lift group">
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift group">
 <span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.6s">schedule</span>
 <div>
 <h4 class="font-bold text-secondary text-xl group-hover:text-primary transition-colors" data-i18n="contact.hoursTitle">Opening Hours</h4>
@@ -1292,6 +1298,90 @@ WhatsApp
 </script>
 
 <script>
+// OPTIMIZACIÓN: Funciones optimizadas para evitar reflows forzados
+function optimizeAnimations() {
+  // Usar requestAnimationFrame para animaciones
+  requestAnimationFrame(() => {
+    // Código de animaciones optimizado
+  });
+}
+
+// Sistema de internacionalización
+let currentLang = 'en';
+
+function updateLanguage(lang) {
+  currentLang = lang;
+  
+  // Actualizar el atributo lang del html
+  document.documentElement.lang = lang;
+  
+  // Actualizar todos los elementos con data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key]) {
+      element.textContent = translations[lang][key];
+    }
+  });
+  
+  // Actualizar el selector de idioma
+  updateLanguageSelector(lang);
+  
+  // Guardar preferencia en localStorage
+  localStorage.setItem('preferredLanguage', lang);
+}
+
+function updateLanguageSelector(lang) {
+  // Actualizar botón de idioma en escritorio
+  const languageButton = document.getElementById('languageButton');
+  const currentFlag = document.getElementById('currentFlag');
+  const currentLanguageText = document.getElementById('currentLanguage');
+  
+  if (lang === 'en') {
+    currentLanguageText.textContent = 'EN';
+    currentFlag.innerHTML = `
+      <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#bd3d44" d="M0 0h640v480H0"/>
+        <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"/>
+        <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
+        <marker id="us-a" markerHeight="30" markerWidth="30">
+          <path fill="#fff" d="m14 0 9 27L0 10h28L5 27z"/>
+        </marker>
+        <path fill="none" marker-mid="url(#us-a)" d="m0 0 16 11h61 61 61 61 60L47 37h61 61 60 61L16 63h61 61 61 61 60L47 89h61 61 60 61L16 115h61 61 61 61 60L47 141h61 61 60 61L16 166h61 61 61 61 60L47 192h61 61 60 61L16 218h61 61 61 61 60z"/>
+      </svg>
+    `;
+  } else {
+    currentLanguageText.textContent = 'ES';
+    currentFlag.innerHTML = `
+      <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#fcd116" d="M0 0h640v480H0z"/>
+        <path fill="#0038a8" d="M0 0h640v320H0z"/>
+        <path fill="#ce1126" d="M0 0h640v160H0z"/>
+      </svg>
+    `;
+  }
+  
+  // Actualizar opciones activas en el dropdown
+  document.querySelectorAll('.language-option').forEach(option => {
+    if (option.getAttribute('data-lang') === lang) {
+      option.classList.add('active');
+    } else {
+      option.classList.remove('active');
+    }
+  });
+  
+  // Actualizar opciones en móvil
+  const mobileLangEn = document.getElementById('mobileLangEn');
+  const mobileLangEs = document.getElementById('mobileLangEs');
+  
+  if (lang === 'en') {
+    mobileLangEn.classList.add('active');
+    mobileLangEs.classList.remove('active');
+  } else {
+    mobileLangEn.classList.remove('active');
+    mobileLangEs.classList.add('active');
+  }
+}
+
 // Internacionalización - Textos en inglés y español
 const translations = {
   en: {
@@ -1557,82 +1647,6 @@ const translations = {
   }
 };
 
-// Sistema de internacionalización
-let currentLang = 'en';
-
-function updateLanguage(lang) {
-  currentLang = lang;
-  
-  // Actualizar el atributo lang del html
-  document.documentElement.lang = lang;
-  
-  // Actualizar todos los elementos con data-i18n
-  document.querySelectorAll('[data-i18n]').forEach(element => {
-    const key = element.getAttribute('data-i18n');
-    if (translations[lang] && translations[lang][key]) {
-      element.textContent = translations[lang][key];
-    }
-  });
-  
-  // Actualizar el selector de idioma
-  updateLanguageSelector(lang);
-  
-  // Guardar preferencia en localStorage
-  localStorage.setItem('preferredLanguage', lang);
-}
-
-function updateLanguageSelector(lang) {
-  // Actualizar botón de idioma en escritorio
-  const languageButton = document.getElementById('languageButton');
-  const currentFlag = document.getElementById('currentFlag');
-  const currentLanguageText = document.getElementById('currentLanguage');
-  
-  if (lang === 'en') {
-    currentLanguageText.textContent = 'EN';
-    currentFlag.innerHTML = `
-      <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#bd3d44" d="M0 0h640v480H0"/>
-        <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"/>
-        <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
-        <marker id="us-a" markerHeight="30" markerWidth="30">
-          <path fill="#fff" d="m14 0 9 27L0 10h28L5 27z"/>
-        </marker>
-        <path fill="none" marker-mid="url(#us-a)" d="m0 0 16 11h61 61 61 61 60L47 37h61 61 60 61L16 63h61 61 61 61 60L47 89h61 61 60 61L16 115h61 61 61 61 60L47 141h61 61 60 61L16 166h61 61 61 61 60L47 192h61 61 60 61L16 218h61 61 61 61 60z"/>
-      </svg>
-    `;
-  } else {
-    currentLanguageText.textContent = 'ES';
-    currentFlag.innerHTML = `
-      <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#fcd116" d="M0 0h640v480H0z"/>
-        <path fill="#0038a8" d="M0 0h640v320H0z"/>
-        <path fill="#ce1126" d="M0 0h640v160H0z"/>
-      </svg>
-    `;
-  }
-  
-  // Actualizar opciones activas en el dropdown
-  document.querySelectorAll('.language-option').forEach(option => {
-    if (option.getAttribute('data-lang') === lang) {
-      option.classList.add('active');
-    } else {
-      option.classList.remove('active');
-    }
-  });
-  
-  // Actualizar opciones en móvil
-  const mobileLangEn = document.getElementById('mobileLangEn');
-  const mobileLangEs = document.getElementById('mobileLangEs');
-  
-  if (lang === 'en') {
-    mobileLangEn.classList.add('active');
-    mobileLangEs.classList.remove('active');
-  } else {
-    mobileLangEn.classList.remove('active');
-    mobileLangEs.classList.add('active');
-  }
-}
-
 document.addEventListener('DOMContentLoaded', function() {
   // Cargar idioma preferido o detectar idioma del navegador
   const savedLang = localStorage.getItem('preferredLanguage');
@@ -1642,6 +1656,32 @@ document.addEventListener('DOMContentLoaded', function() {
   // Aplicar idioma inicial
   updateLanguage(initialLang);
   
+  // OPTIMIZACIÓN: Mejorar performance de animaciones con requestAnimationFrame
+  function optimizeScrollAnimations() {
+    const sections = document.querySelectorAll('.section-hidden');
+    
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Usar requestAnimationFrame para evitar reflows
+          requestAnimationFrame(() => {
+            entry.target.classList.add('section-visible');
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  }
+
   // Off-canvas menu functionality
   const mobileMenuButton = document.getElementById('mobileMenuButton');
   const closeMenuButton = document.getElementById('closeMenuButton');
@@ -1651,9 +1691,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Open menu
   mobileMenuButton.addEventListener('click', function() {
-    offCanvasMenu.classList.add('active');
-    offCanvasOverlay.classList.add('active');
-    body.classList.add('menu-open');
+    requestAnimationFrame(() => {
+      offCanvasMenu.classList.add('active');
+      offCanvasOverlay.classList.add('active');
+      body.classList.add('menu-open');
+    });
   });
 
   // Close menu with close button
@@ -1674,9 +1716,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function closeMenu() {
-    offCanvasMenu.classList.remove('active');
-    offCanvasOverlay.classList.remove('active');
-    body.classList.remove('menu-open');
+    requestAnimationFrame(() => {
+      offCanvasMenu.classList.remove('active');
+      offCanvasOverlay.classList.remove('active');
+      body.classList.remove('menu-open');
+    });
   }
 
   // Smooth scrolling for navigation links
@@ -1701,9 +1745,11 @@ document.addEventListener('DOMContentLoaded', function() {
           const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
           const offsetPosition = targetPosition - headerHeight - 20;
           
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
+          requestAnimationFrame(() => {
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
           });
           
           // Actualizar URL sin recargar la página
@@ -1724,15 +1770,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Sticky header
+  // Sticky header con optimización
   const header = document.querySelector('header');
+  let ticking = false;
+  
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 100) {
-      header.classList.add('sticky-header', 'py-3', 'shadow-md');
-      header.style.backgroundColor = 'white';
-    } else {
-      header.classList.remove('sticky-header', 'py-3', 'shadow-md');
-      header.style.backgroundColor = '';
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (window.scrollY > 100) {
+          header.classList.add('sticky-header', 'py-3', 'shadow-md');
+          header.style.backgroundColor = 'white';
+        } else {
+          header.classList.remove('sticky-header', 'py-3', 'shadow-md');
+          header.style.backgroundColor = '';
+        }
+        ticking = false;
+      });
+      ticking = true;
     }
   });
 
@@ -1770,25 +1824,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Intersection Observer for scroll animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('section-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  // Observe all sections with animations
-  document.querySelectorAll('.section-hidden').forEach((section) => {
-    observer.observe(section);
-  });
+  // Inicializar optimizaciones de animaciones
+  optimizeScrollAnimations();
 
   // Hover effects enhancement
   document.querySelectorAll('.hover-lift').forEach(element => {
@@ -1797,7 +1834,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Dynamic text effects - ELIMINADO el código relacionado con typewriter-text
   // Random floating animation delays
   document.querySelectorAll('.floating').forEach((icon, index) => {
     icon.style.animationDelay = `${index * 0.2}s`;
