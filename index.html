@@ -808,17 +808,20 @@ WhatsApp
 </div>
 </div>
 <div class="lg:w-1/2 animate-slide-left">
-<div class="w-full h-96 rounded-2xl overflow-hidden shadow-xl hover-lift transition-all duration-500">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.031562328511!2d-80.06889522347666!3d26.664590776642093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8d5ce77f5c6f7%3A0x17cba6d534d7a7a4!2s2393%20S%20Congress%20Ave%20%23200%2C%20West%20Palm%20Beach%2C%20FL%2033406!5e0!3m2!1sen!2sus!4v1711569123456!5m2!1sen!2sus" 
-        width="100%" 
-        height="100%" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade"
-        class="hover:scale-105 transition-transform duration-700"
-        title="Auto Palm Beach Location Map">
-</iframe>
+<!-- CONTENEDOR OPTIMIZADO DEL MAPA -->
+<div class="w-full h-96 rounded-2xl overflow-hidden shadow-xl hover-lift transition-all duration-500 map-container" id="googleMapContainer">
+  <!-- Placeholder mientras carga -->
+  <div class="map-placeholder">
+    <div class="text-center">
+      <div class="mb-2">
+        <span class="material-symbols-outlined text-4xl text-gray-400">location_on</span>
+      </div>
+      <p>Cargando mapa...</p>
+      <p class="text-sm mt-2">2393 South Congress Ave STE 200</p>
+      <p class="text-sm">West Palm Beach, FL 33406</p>
+    </div>
+  </div>
+  <!-- El iframe se insertará aquí dinámicamente -->
 </div>
 <div class="mt-6 text-center">
 <p class="text-text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
