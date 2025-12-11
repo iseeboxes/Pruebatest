@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Expert DMV & Title Services in West Palm Beach. Skip the long lines and confusing paperwork. We are your local vehicle paperwork solution in South Florida.">
 <title>DMV & Title Services in West Palm Beach</title>
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
@@ -11,35 +12,24 @@
       as="image"
       href="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=600"
       imagesrcset="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=300 300w,
-                   https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=600 600w"
+                   https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=600 600w,
+                   https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=900 900w"
       imagesizes="(max-width: 768px) 100vw, 50vw"
       fetchpriority="high">
 
-<!-- ANTES del link de Google Fonts -->
+<!-- Preload de fuentes críticas -->
 <link rel="preload" 
       href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" 
       as="font" 
       type="font/woff2" 
       crossorigin>
-<link rel="preload" 
-      href="https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2" 
-      as="font" 
-      type="font/woff2" 
-      crossorigin>
-
-<!-- OPTIMIZACIÓN: Preconnect para recursos externos -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://maps.gstatic.com">
 <link rel="preconnect" href="https://maps.googleapis.com">
-<link rel="preconnect" href="https://i.ibb.co">
 
 <!-- OPTIMIZACIÓN: Google Fonts con carga diferida -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" 
-      rel="stylesheet" 
-      media="print" 
-      onload="this.media='all'">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" 
       rel="stylesheet" 
       media="print" 
       onload="this.media='all'">
@@ -55,18 +45,36 @@
 <!-- CSS Crítico Inline optimizado -->
 <style>
   :root {
-    --primary-color: #F97316;
-    --secondary-color: #111827;
+    --primary-color: #D2691E; /* Mejor contraste */
+    --secondary-color: #1a202c; /* Más oscuro para mejor contraste */
     --background-soft: #FEF7F2;
   }
 
+  /* Estilos críticos para renderizado inicial */
   body {
     margin: 0;
     padding: 0;
     background-color: white;
     color: #1F2937;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     overflow-x: hidden;
+    font-display: swap;
+  }
+
+  /* Layout crítico */
+  header, nav, .container, .flex, .justify-between, .items-center {
+    display: block;
+  }
+
+  /* Hero section visible inmediatamente */
+  #home, .hero-content, .hero-title, .hero-buttons {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-title, .hero-content p {
+    opacity: 1 !important;
+    color: #1a202c !important;
   }
 
   /* Estilos críticos para imagen LCP */
@@ -75,6 +83,7 @@
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    contain: content;
   }
   
   .hero-image {
@@ -85,13 +94,15 @@
     object-position: center;
     border-radius: 1rem;
     display: block;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+  
+  .hero-image.loading {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
     animation: loading 1.5s infinite;
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    contain: content;
-    transform: translateZ(0);
   }
   
   @keyframes loading {
@@ -151,7 +162,7 @@
     100% { background-position: 40px 0; }
   }
 
-  /* Utilidades críticas extendidas */
+  /* Utilidades críticas mínimas */
   .container {
     width: 100%;
     max-width: 100%;
@@ -159,88 +170,14 @@
     padding: 0 1rem;
   }
 
-  @media (min-width: 640px) {
-    .container {
-      max-width: 640px;
-      padding: 0 1.5rem;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .container {
-      max-width: 768px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      max-width: 1024px;
-      padding: 0 2rem;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .container {
-      max-width: 1280px;
-    }
-  }
-
-  /* Display utilities */
-  .flex { display: flex; }
-  .grid { display: grid; }
-  .block { display: block !important; }
-  .hidden { display: none !important; }
-  
-  /* Grid layouts críticos */
-  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  
-  @media (max-width: 768px) {
-    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
-  
-  @media (max-width: 640px) {
-    .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
-  
-  .gap-8 { gap: 2rem; }
-  .gap-12 { gap: 3rem; }
-
-  /* Positioning */
-  .relative { position: relative; }
-  .absolute { position: absolute; }
-  .z-10 { z-index: 10; }
-  .z-50 { z-index: 50; }
-  
-  /* Sizing */
-  .w-full { width: 100%; }
-  .h-10 { height: 2.5rem; }
-  .w-10 { width: 2.5rem; }
-  
-  /* Typography crítica */
-  .text-2xl { font-size: 1.5rem; line-height: 2rem; }
-  .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
-  .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  /* Typography crítica para evitar FOIT */
   .text-5xl { font-size: 3rem; line-height: 1; }
   .text-6xl { font-size: 3.75rem; line-height: 1; }
-  .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
-  .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
-  
-  @media (max-width: 768px) {
-    .text-5xl { font-size: 2.5rem; }
-    .text-6xl { font-size: 3rem; }
-  }
-  
-  @media (max-width: 640px) {
-    .text-4xl { font-size: 1.875rem; }
-    .text-5xl { font-size: 2.25rem; }
-  }
   
   .font-bold { font-weight: 700; }
   .font-extrabold { font-weight: 900; }
   
-  /* Colors */
+  /* Colors con mejor contraste */
   .text-secondary { color: var(--secondary-color); }
   .text-primary { color: var(--primary-color); }
   .bg-primary { background-color: var(--primary-color); }
@@ -251,20 +188,7 @@
   .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
   .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
   .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
-  .px-4 { padding-left: 1rem; padding-right: 1rem; }
-  .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
   
-  /* Flexbox */
-  .justify-between { justify-content: space-between; }
-  .items-center { align-items: center; }
-  .space-x-3 > * + * { margin-left: 0.75rem; }
-  .space-x-4 > * + * { margin-left: 1rem; }
-  
-  /* Borders & Shadows */
-  .rounded-lg { border-radius: 0.5rem; }
-  .rounded-2xl { border-radius: 1rem; }
-  .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-
   /* Header sticky */
   .sticky-header {
     position: fixed;
@@ -275,11 +199,50 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 100;
   }
+
+  /* Asegurar que el contenido sea visible */
+  .no-fouc {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Mejorar contraste de accesibilidad */
+  a, button {
+    color: #1a202c;
+  }
+
+  .bg-primary {
+    background-color: #D2691E;
+  }
+
+  .text-primary {
+    color: #D2691E;
+  }
 </style>
 
-<!-- JavaScript optimizado -->
+<!-- JavaScript mínimo crítico -->
 <script>
-  // Función optimizada para el menú
+  // Solo funciones críticas para el renderizado inicial
+  function optimizeLCPImage() {
+    const heroImage = document.querySelector('.hero-image');
+    if (!heroImage) return;
+
+    heroImage.classList.add('loading');
+    
+    if (heroImage.complete) {
+      heroImage.classList.remove('loading');
+      heroImage.classList.add('loaded');
+    } else {
+      heroImage.onload = function() {
+        this.classList.remove('loading');
+        this.classList.add('loaded');
+      };
+      heroImage.onerror = function() {
+        this.classList.remove('loading');
+      };
+    }
+  }
+
   function initMenu() {
     const menuBtn = document.getElementById('mobileMenuButton');
     const closeBtn = document.getElementById('closeMenuButton');
@@ -305,21 +268,53 @@
     overlay.addEventListener('click', () => toggleMenu(false));
   }
 
-  // Optimizar imagen LCP
-  function optimizeLCPImage() {
-    const heroImage = document.querySelector('.hero-image');
-    if (!heroImage) return;
+  // Inicialización crítica
+  document.addEventListener('DOMContentLoaded', function() {
+    optimizeLCPImage();
+    initMenu();
+    
+    // Scroll suave mínimo
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        if(this.getAttribute('href') === '/' || this.getAttribute('href') === '#') return;
+        
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        
+        if(targetId.startsWith('#')) {
+          const targetElement = document.querySelector(targetId);
+          
+          if(targetElement) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = targetPosition - headerHeight - 20;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
 
-    if (!heroImage.complete) {
-      heroImage.onload = function() {
-        this.classList.add('loaded');
-      };
-    } else {
-      heroImage.classList.add('loaded');
-    }
-  }
+    // Cargar recursos no críticos después de 1 segundo
+    setTimeout(() => {
+      // Cargar scripts diferidos
+      const script = document.createElement('script');
+      script.src = 'https://cdn.tailwindcss.com?plugins=forms,typography';
+      script.async = true;
+      document.body.appendChild(script);
 
-  // Cargar Google Maps solo cuando sea visible
+      // Cargar Google Maps cuando sea visible
+      loadGoogleMap();
+      
+      // Inicializar funcionalidades no críticas
+      initNonCriticalFeatures();
+    }, 1000);
+  });
+
+  // Funciones diferidas
   function loadGoogleMap() {
     const mapSection = document.getElementById('contact');
     if (!mapSection) return;
@@ -359,7 +354,6 @@
 
     iframe.onerror = function() {
       requestAnimationFrame(() => {
-        console.warn('Google Maps failed to load');
         const placeholder = document.querySelector('.map-placeholder');
         if (placeholder) {
           placeholder.innerHTML = 'Mapa no disponible. Dirección: 2393 South Congress Ave STE 200, West Palm Beach, FL 33406';
@@ -372,93 +366,8 @@
     mapContainer.appendChild(iframe);
   }
 
-  // Cargar Tailwind CSS asíncrono
-  function loadTailwindCSS() {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,container-queries';
-    script.async = true;
-    script.onload = function() {
-      if (typeof tailwind !== 'undefined') {
-        tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                primary: "var(--primary-color)",
-                "primary-darker": "#EA580C",
-                secondary: "var(--secondary-color)",
-                "background-light": "#ffffff",
-                "background-soft": "var(--background-soft)",
-                "text-dark": "#1F2937",
-                "text-light": "#6B7280"
-              }
-            }
-          }
-        };
-        document.body.classList.add('fouc-ready');
-      }
-    };
-    document.body.appendChild(script);
-  }
-
-  // Inicialización optimizada
-  document.addEventListener('DOMContentLoaded', function() {
-    // 1. Optimizar imagen LCP inmediatamente
-    optimizeLCPImage();
-    
-    // 2. Inicializar menú y funcionalidades básicas
-    initMenu();
-    
-    // 3. Configurar scroll suave
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        if(this.getAttribute('href') === '/' || this.getAttribute('href') === '#') return;
-        
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        
-        if(targetId.startsWith('#')) {
-          const targetElement = document.querySelector(targetId);
-          
-          if(targetElement) {
-            const headerHeight = document.querySelector('header').offsetHeight;
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = targetPosition - headerHeight - 20;
-            
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-            
-            history.pushState(null, null, targetId);
-          }
-        }
-      });
-    });
-    
-    // 4. Cargar idioma
-    const savedLang = localStorage.getItem('preferredLanguage') || 
-                     (navigator.language.startsWith('es') ? 'es' : 'en');
-    updateLanguage(savedLang);
-    
-    // 5. Configurar header sticky
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 100) {
-        header.classList.add('sticky-header', 'py-3', 'shadow-md');
-        header.style.backgroundColor = 'white';
-      } else {
-        header.classList.remove('sticky-header', 'py-3', 'shadow-md');
-        header.style.backgroundColor = '';
-      }
-    });
-    
-    // 6. Cargar recursos no críticos después de 500ms
-    setTimeout(() => {
-      loadTailwindCSS();
-      loadGoogleMap();
-    }, 500);
-    
-    // 7. Configurar FAQ
+  function initNonCriticalFeatures() {
+    // Configurar FAQ
     const faqButtons = document.querySelectorAll('.faq-button');
     faqButtons.forEach(button => {
       button.addEventListener('click', function() {
@@ -468,7 +377,6 @@
         if (answer.classList.contains('open')) {
           answer.classList.remove('open');
           icon.textContent = 'add_circle';
-          icon.classList.remove('rotate-180');
         } else {
           document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
             if(otherAnswer !== answer && otherAnswer.classList.contains('open')) {
@@ -476,68 +384,280 @@
               const otherIcon = otherAnswer.previousElementSibling.querySelector('.material-symbols-outlined');
               if(otherIcon) {
                 otherIcon.textContent = 'add_circle';
-                otherIcon.classList.remove('rotate-180');
               }
             }
           });
           
           answer.classList.add('open');
           icon.textContent = 'remove_circle';
-          icon.classList.add('rotate-180');
         }
       });
     });
-    
-    // 8. Observer para animaciones de scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
 
+    // Inicializar idioma
+    const savedLang = localStorage.getItem('preferredLanguage') || 
+                     (navigator.language.startsWith('es') ? 'es' : 'en');
+    updateLanguage(savedLang);
+  }
+
+  // Lazy loading de imágenes
+  function lazyLoadImages() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('section-visible');
-          observer.unobserve(entry.target);
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+          }
+          if (img.dataset.srcset) {
+            img.srcset = img.dataset.srcset;
+          }
+          observer.unobserve(img);
         }
       });
-    }, observerOptions);
+    }, { rootMargin: '100px' });
+    
+    images.forEach(img => observer.observe(img));
+  }
 
-    document.querySelectorAll('.section-hidden').forEach((section) => {
-      observer.observe(section);
+  // Internacionalización
+  const translations = {
+    en: {
+      "nav.home": "Home",
+      "nav.about": "About Us",
+      "nav.services": "Services",
+      "nav.process": "How it Works",
+      "nav.testimonials": "Testimonials",
+      "nav.contact": "Contact",
+      "nav.getStarted": "Get Started",
+      "hero.tagline": "DMV & VIN Verification",
+      "hero.title": "Expert DMV & Title Services",
+      "hero.subtitle": "in West Palm Beach",
+      "hero.description": "Skip the long lines and confusing paperwork. We are your local vehicle paperwork solution in South Florida.",
+      "hero.cta": "Get a Free Quote",
+      "hero.learnMore": "Learn More",
+      "about.tagline": "ABOUT US",
+      "about.title": "Your Trusted Partner in Vehicle Paperwork",
+      "about.description": "At Auto Palm Beach, we have helped hundreds of people in South Florida navigate the complex DMV system, making the paperwork simple, secure, and stress-free. We are your specialized administrative office in West Palm Beach.",
+      "about.feature1.title": "Transparency",
+      "about.feature1.description": "We guarantee 100% legal and clear transactions.",
+      "about.feature2.title": "Experience",
+      "about.feature2.description": "We have in-depth knowledge of DMV procedures.",
+      "about.feature3.title": "Effective Management",
+      "about.feature3.description": "We help you avoid long lines and paperwork errors.",
+      "about.feature4.title": "Client Focus",
+      "about.feature4.description": "Your peace of mind is the center of our service.",
+      "services.tagline": "OUR SERVICES",
+      "services.title": "Explore Our Services",
+      "services.cta": "Get Started",
+      "services.service1.title": "Title Transfers & DMV Docs",
+      "services.service1.description": "Simplifying title transfers and DMV documentation for a fast, stress-free process.",
+      "services.service2.title": "Notary Public VIN Verification",
+      "services.service2.description": "We offer Florida notary public VIN verification to certify your vehicle's legal identity.",
+      "services.service3.title": "Registration & Plates",
+      "services.service3.description": "We handle your vehicle's initial registration and plates, saving you time and DMV visits.",
+      "services.service4.title": "Administrative Support Services",
+      "services.service4.description": "Document organization and translation. Administrative accompaniment to the DMV or Tax Collector. Connection with external financing and insurance providers.",
+      "services.service5.title": "DMV Appointment Scheduling",
+      "services.service5.description": "Coordination of official appointments for license, registration, and plate paperwork. Confirmation of date, time, and specific requirements for each procedure.",
+      "services.service6.title": "Vehicle Listing & Online Promotion",
+      "services.service6.description": "We help you list your cars, motors, and auto parts. Digital promotion on partner platforms and social media.",
+      "cta.title": "Get Started Today",
+      "cta.description": "Get started with a free service evaluation. No obligations, just solutions.",
+      "cta.call": "Call Now: (561) 629-1310",
+      "process.tagline": "HOW IT WORKS",
+      "process.title": "Our Simple Process",
+      "process.description": "We've streamlined the DMV process into four easy steps, saving you time and stress.",
+      "process.step1.title": "Contact Us",
+      "process.step1.description": "Reach out by phone, email, or our contact form to get started.",
+      "process.step2.title": "Provide Documents",
+      "process.step2.description": "Easily and securely submit the necessary documents.",
+      "process.step3.title": "We Handle Paperwork",
+      "process.step3.description": "Our expert team takes over the complex DMV process.",
+      "process.step4.title": "Get Your Results",
+      "process.step4.description": "Receive your completed titles and registrations quickly.",
+      "testimonials.tagline": "TESTIMONIALS",
+      "testimonials.title": "What Our Clients Say",
+      "testimonials.testimonial1.text": "\"Saved me hours at the DMV! The title transfer was completed in half the time.\"",
+      "testimonials.testimonial1.date": "2 days ago",
+      "testimonials.testimonial2.text": "\"Professional and efficient. They handled everything from VIN verification to plates.\"",
+      "testimonials.testimonial2.date": "1 week ago",
+      "testimonials.testimonial3.text": "\"As a first-time car buyer in Florida, their guidance was invaluable.\"",
+      "testimonials.testimonial3.date": "3 weeks ago",
+      "why.tagline": "WHY CHOOSE US",
+      "why.title": "Advantages of Our Service",
+      "why.feature1.title": "Personalized Approach",
+      "why.feature1.description": "We provide clear, personalized advice to avoid common mistakes that delay your paperwork.",
+      "why.feature2.title": "Time Saving",
+      "why.feature2.description": "Skip the long lines and confusion. We handle the paperwork and logistics, including scheduling.",
+      "why.feature3.title": "All-in-One Service",
+      "why.feature3.description": "From VIN verification to title transfers, we simplify the entire administrative process.",
+      "why.feature4.title": "Total Transparency & Trust",
+      "why.feature4.description": "We offer absolute transparency in costs and procedures, ensuring your transaction is 100% legal.",
+      "why.feature5.title": "Administrative Support",
+      "why.feature5.description": "We connect you with trusted insurance providers, making the entire process seamless.",
+      "why.feature6.title": "Guaranteed Results",
+      "why.feature6.description": "Our reputation is built on results. We have helped hundreds in South Florida. Your success is our commitment.",
+      "contact.tagline": "CONTACT US",
+      "contact.title": "Visit or Contact Us",
+      "contact.address": "2393 South Congress Ave STE 200, West Palm Beach, FL 33406",
+      "contact.phoneDescription": "Give us a call - we're happy to help!",
+      "contact.emailDescription": "Send us an email for quick responses",
+      "contact.hoursTitle": "Opening Hours",
+      "contact.hoursWeekdays": "Monday - Friday: 9:00 AM - 5:00 PM",
+      "contact.hoursSaturday": "Saturday: 10:00 AM - 2:00 PM (By appointment only)",
+      "contact.mapDescription": "📍 Conveniently located in West Palm Beach with easy access and parking available.",
+      "faq.tagline": "FAQ",
+      "faq.title": "Frequently Asked Questions",
+      "faq.question1": "What services does Auto Palm Beach offer exactly?",
+      "faq.answer1": "We are your administrative assistant specialized in vehicle paperwork. We handle the preparation and review of DMV forms, notary public VIN verification, registration and license plate assistance, and DMV appointment scheduling.",
+      "faq.question2": "Are you a car dealership?",
+      "faq.answer2": "No. It's important to clarify that Auto Palm Beach is NOT a licensed motor vehicle dealer. We operate as an administrative service office and an advertising platform. The vehicles belong to private sellers; We help you list your vehicles and provide added exposure through digital promotion on partner platforms.",
+      "faq.question3": "I bought/sold a car privately. Can you help me with the paperwork?",
+      "faq.answer3": "Absolutely! This is our primary service. We assist you with the title transfer, the correct preparation of documentation (such as form HSMV 82040), and the VIN verification if required, ensuring everything is in order to avoid future problems at the DMV.",
+      "faq.question4": "Can you help me get temporary or permanent license plates?",
+      "faq.answer4": "Yes. We provide all the necessary administrative support to apply for your temporary tags or manage permanent registration and plates, guiding you through the specific process and requirements.",
+      "faq.question5": "What does \"VIN Verification by a Notary Public\" mean, and when do I need it?",
+      "faq.answer5": "This service (form HSMV 82042) is mandatory for vehicles coming from another state or in cases where the Florida DMV requires a physical inspection of the VIN number. Our authorized Notary Public certifies the accuracy of the VIN, a crucial step for titling the car in Florida.",
+      "faq.question6": "Do you offer document translation services?",
+      "faq.answer6": "Yes, as part of our administrative support services, we can assist you in organizing and translating documents needed for your paperwork, making the process easier if language is a barrier.",
+      "faq.question7": "How can I get in touch to use your services?",
+      "faq.answer7": "You can call us at (561) 629-1310, visit us at our office at 2393 South Congress Ave STE 200, West Palm Beach, FL 33406, or complete the contact form on our website to schedule a consultation.",
+      "footer.description": "Specialized administrative office for DMV Paperwork and VIN verification in West Palm Beach, South Florida.",
+      "footer.quickLinks": "Quick Links",
+      "footer.faq": "FAQ",
+      "footer.contactInfo": "Contact Info",
+      "footer.legalTitle": "Legal Disclosure",
+      "footer.legalText": "Auto Palm Beach is not a licensed motor vehicle dealer. We operate as an Administrative Office. All vehicles are sold as private sales between owners.",
+      "footer.copyright": "©2025 Auto Palm Beach. All rights reserved."
+    },
+    
+    es: {
+      "nav.home": "Inicio",
+      "nav.about": "Nosotros",
+      "nav.services": "Servicios",
+      "nav.process": "Cómo Funciona",
+      "nav.testimonials": "Testimonios",
+      "nav.contact": "Contacto",
+      "nav.getStarted": "Comenzar",
+      "hero.tagline": "DMV & Verificación VIN",
+      "hero.title": "Servicios Expertos de DMV y Títulos",
+      "hero.subtitle": "en West Palm Beach",
+      "hero.description": "Evite las largas filas y la confusión de trámites. Somos su solución local de papeleo vehicular en el sur de Florida.",
+      "hero.cta": "Obtener Cotización Gratis",
+      "hero.learnMore": "Saber Más",
+      "about.tagline": "SOBRE NOSOTROS",
+      "about.title": "Su Socio de Confianza en Trámites Vehiculares",
+      "about.description": "En Auto Palm Beach, hemos ayudado a cientos de personas en el sur de Florida a navegar el complejo sistema del DMV, haciendo que el papeleo sea simple, seguro y sin estrés. Somos su oficina administrativa especializada en West Palm Beach.",
+      "about.feature1.title": "Transparencia",
+      "about.feature1.description": "Garantizamos transacciones 100% legales y claras.",
+      "about.feature2.title": "Experiencia",
+      "about.feature2.description": "Tenemos conocimiento profundo de los procedimientos del DMV.",
+      "about.feature3.title": "Gestión Efectiva",
+      "about.feature3.description": "Le ayudamos a evitar largas filas y errores en el papeleo.",
+      "about.feature4.title": "Enfoque en el Cliente",
+      "about.feature4.description": "Su tranquilidad es el centro de nuestro servicio.",
+      "services.tagline": "NUESTROS SERVICIOS",
+      "services.title": "Explore Nuestros Servicios",
+      "services.cta": "Comenzar",
+      "services.service1.title": "Transferencias de Título y Documentos DMV",
+      "services.service1.description": "Simplificamos transferencias de título y documentación DMV para un proceso rápido y sin estrés.",
+      "services.service2.title": "Verificación VIN por Notario Público",
+      "services.service2.description": "Ofrecemos verificación VIN por notario público de Florida para certificar la identidad legal de su vehículo.",
+      "services.service3.title": "Registro y Placas",
+      "services.service3.description": "Manejamos el registro inicial de su vehículo y placas, ahorrándole tiempo y visitas al DMV.",
+      "services.service4.title": "Servicios de Apoyo Administrativo",
+      "services.service4.description": "Organización y traducción de documentos. Acompañamiento administrativo al DMV o Tax Collector. Conexión con proveedores externos de financiamiento y seguros.",
+      "services.service5.title": "Programación de Citas DMV",
+      "services.service5.description": "Coordinación de citas oficiales para trámites de licencia, registro y placas. Confirmación de fecha, hora y requisitos específicos para cada procedimiento.",
+      "services.service6.title": "Listado de Vehículos y Promoción en Línea",
+      "services.service6.description": "Le ayudamos a listar sus autos, motores y partes automotrices. Promoción digital en plataformas asociadas y redes sociales.",
+      "cta.title": "Comience Hoy",
+      "cta.description": "Comience con una evaluación gratuita del servicio. Sin obligaciones, solo soluciones.",
+      "cta.call": "Llame Ahora: (561) 629-1310",
+      "process.tagline": "CÓMO FUNCIONA",
+      "process.title": "Nuestro Proceso Simple",
+      "process.description": "Hemos simplificado el proceso del DMV en cuatro pasos fáciles, ahorrándole tiempo y estrés.",
+      "process.step1.title": "Contáctenos",
+      "process.step1.description": "Comuníquese por teléfono, correo electrónico o nuestro formulario de contacto para comenzar.",
+      "process.step2.title": "Proporcione Documentos",
+      "process.step2.description": "Envíe fácil y seguramente los documentos necesarios.",
+      "process.step3.title": "Nosotros Manejamos el Papeleo",
+      "process.step3.description": "Nuestro equipo experto se encarga del complejo proceso del DMV.",
+      "process.step4.title": "Obtenga Sus Resultados",
+      "process.step4.description": "Reciba sus títulos y registros completados rápidamente.",
+      "testimonials.tagline": "TESTIMONIOS",
+      "testimonials.title": "Lo que Dicen Nuestros Clientes",
+      "testimonials.testimonial1.text": "\"¡Me ahorró horas en el DMV! La transferencia de título se completó en la mitad del tiempo.\"",
+      "testimonials.testimonial1.date": "Hace 2 días",
+      "testimonials.testimonial2.text": "\"Profesionales y eficientes. Manejaron todo desde la verificación VIN hasta las placas.\"",
+      "testimonials.testimonial2.date": "Hace 1 semana",
+      "testimonials.testimonial3.text": "\"Como comprador de auto por primera vez en Florida, su orientación fue invaluable.\"",
+      "testimonials.testimonial3.date": "Hace 3 semanas",
+      "why.tagline": "POR QUÉ ELEGIRNOS",
+      "why.title": "Ventajas de Nuestro Servicio",
+      "why.feature1.title": "Enfoque Personalizado",
+      "why.feature1.description": "Proporcionamos asesoría clara y personalizada para evitar errores comunes que retrasan su papeleo.",
+      "why.feature2.title": "Ahorro de Tiempo",
+      "why.feature2.description": "Evite las largas filas y confusión. Nos encargamos del papeleo y logística, incluyendo programación.",
+      "why.feature3.title": "Servicio Todo en Uno",
+      "why.feature3.description": "Desde verificación VIN hasta transferencias de título, simplificamos todo el proceso administrativo.",
+      "why.feature4.title": "Transparencia Total y Confianza",
+      "why.feature4.description": "Ofrecemos transparencia absoluta en costos y procedimientos, asegurando que su transacción sea 100% legal.",
+      "why.feature5.title": "Apoyo Administrativo",
+      "why.feature5.description": "Lo conectamos con proveedores de seguros confiables, haciendo todo el proceso fluido.",
+      "why.feature6.title": "Resultados Garantizados",
+      "why.feature6.description": "Nuestra reputación se basa en resultados. Hemos ayudado a cientos en el sur de Florida. Su éxito es nuestro compromiso.",
+      "contact.tagline": "CONTÁCTENOS",
+      "contact.title": "Visítenos o Contáctenos",
+      "contact.address": "2393 South Congress Ave STE 200, West Palm Beach, FL 33406",
+      "contact.phoneDescription": "¡Llámenos - estamos felices de ayudar!",
+      "contact.emailDescription": "Envíenos un correo para respuestas rápidas",
+      "contact.hoursTitle": "Horario de Atención",
+      "contact.hoursWeekdays": "Lunes - Viernes: 9:00 AM - 5:00 PM",
+      "contact.hoursSaturday": "Sábado: 10:00 AM - 2:00 PM (Solo con cita previa)",
+      "contact.mapDescription": "📍 Ubicados convenientemente en West Palm Beach con fácil acceso y estacionamiento disponible.",
+      "faq.tagline": "PREGUNTAS FRECUENTES",
+      "faq.title": "Preguntas Frecuentes",
+      "faq.question1": "¿Qué servicios ofrece exactamente Auto Palm Beach?",
+      "faq.answer1": "Somos su asistente administrativo especializado en papeleo vehicular. Manejamos la preparación y revisión de formularios DMV, verificación VIN por notario público, asistencia de registro y placas, y programación de citas DMV.",
+      "faq.question2": "¿Son una agencia de autos?",
+      "faq.answer2": "No. Es importante aclarar que Auto Palm Beach NO es un concesionario de vehículos motorizados autorizado. Operamos como una oficina de servicios administrativos y una plataforma publicitaria. Los vehículos pertenecen a vendedores privados; le ayudamos a listar sus vehículos y proporcionamos exposición adicional a través de promoción digital en plataformas asociadas.",
+      "faq.question3": "Compré/vendí un auto de forma privada. ¿Pueden ayudarme con el papeleo?",
+      "faq.answer3": "¡Absolutamente! Este es nuestro servicio principal. Le asistimos con la transferencia de título, la preparación correcta de la documentación (como el formulario HSMV 82040), y la verificación VIN si es requerida, asegurando que todo esté en orden para evitar problemas futuros en el DMV.",
+      "faq.question4": "¿Pueden ayudarme a obtener placas temporales o permanentes?",
+      "faq.answer4": "Sí. Proporcionamos todo el apoyo administrativo necesario para solicitar sus placas temporales o manejar el registro permanente y placas, guiándolo a través del proceso y requisitos específicos.",
+      "faq.question5": "¿Qué significa \"Verificación VIN por un Notario Público\" y cuándo la necesito?",
+      "faq.answer5": "Este servicio (formulario HSMV 82042) es obligatorio para vehículos provenientes de otro estado o en casos donde el DMV de Florida requiera una inspección física del número VIN. Nuestro Notario Público autorizado certifica la precisión del VIN, un paso crucial para titular el auto en Florida.",
+      "faq.question6": "¿Ofrecen servicios de traducción de documentos?",
+      "faq.answer6": "Sí, como parte de nuestros servicios de apoyo administrativo, podemos asistirle en organizar y traducir documentos necesarios para su papeleo, facilitando el proceso si el idioma es una barrera.",
+      "faq.question7": "¿Cómo puedo contactarlos para usar sus servicios?",
+      "faq.answer7": "Puede llamarnos al (561) 629-1310, visitarnos en nuestra oficina en 2393 South Congress Ave STE 200, West Palm Beach, FL 33406, o completar el formulario de contacto en nuestro sitio web para programar una consulta.",
+      "footer.description": "Oficina administrativa especializada en trámites DMV y verificación VIN en West Palm Beach, sur de Florida.",
+      "footer.quickLinks": "Enlaces Rápidos",
+      "footer.faq": "Preguntas Frecuentes",
+      "footer.contactInfo": "Información de Contacto",
+      "footer.legalTitle": "Aviso Legal",
+      "footer.legalText": "Auto Palm Beach no es un concesionario de vehículos motorizados autorizado. Operamos como una Oficina Administrativa. Todos los vehículos se venden como ventas privadas entre propietarios.",
+      "footer.copyright": "©2025 Auto Palm Beach. Todos los derechos reservados."
+    }
+  };
+
+  let currentLang = 'en';
+
+  function updateLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      if (translations[lang] && translations[lang][key]) {
+        element.textContent = translations[lang][key];
+      }
     });
     
-    // 9. Random floating animation delays
-    document.querySelectorAll('.floating').forEach((icon, index) => {
-      icon.style.animationDelay = `${index * 0.2}s`;
-    });
-  });
-
-  // Script de métricas de rendimiento
-  if ('performance' in window) {
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        const paints = performance.getEntriesByType('paint');
-        const navigation = performance.getEntriesByType('navigation')[0];
-        
-        console.log('🚀 Métricas de rendimiento:');
-        paints.forEach(paint => {
-          console.log(`${paint.name}: ${paint.startTime.toFixed(2)}ms`);
-        });
-        
-        if (navigation) {
-          console.log(`DOMContentLoaded: ${navigation.domContentLoadedEventEnd.toFixed(2)}ms`);
-          console.log(`Load: ${navigation.loadEventEnd.toFixed(2)}ms`);
-        }
-        
-        // LCP Tracking
-        new PerformanceObserver((entryList) => {
-          const entries = entryList.getEntries();
-          const lastEntry = entries[entries.length - 1];
-          console.log(`LCP: ${lastEntry.startTime.toFixed(2)}ms`);
-        }).observe({ type: 'largest-contentful-paint', buffered: true });
-      }, 1000);
-    });
+    localStorage.setItem('preferredLanguage', lang);
   }
 </script>
 </head>
@@ -548,14 +668,14 @@
 <div class="container mx-auto px-4">
 <div class="flex justify-between items-center">
 <div class="flex items-center space-x-3 hover-scale transition-transform duration-300">
-<img alt="Auto Palm beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png" loading="lazy" decoding="async"/>
+<img alt="Auto Palm beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png" width="40" height="40" loading="lazy" decoding="async"/>
 <span class="text-2xl font-bold text-secondary">Auto Palm Beach</span>
 </div>
 
 <!-- LANGUAGE SELECTOR PARA ESCRITORIO -->
 <div class="desktop-language-selector" style="display: none;">
   <div class="language-selector">
-    <button class="language-button" id="languageButton">
+    <button class="language-button" id="languageButton" aria-label="Change language">
       <div class="language-flag" id="currentFlag">
         <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
           <path fill="#bd3d44" d="M0 0h640v480H0"/>
@@ -609,7 +729,7 @@
 </nav>
 
 <div class="flex items-center space-x-4">
-  <button id="mobileMenuButton" class="mobile-menu-button text-secondary hover-scale">
+  <button id="mobileMenuButton" class="mobile-menu-button text-secondary hover-scale" aria-label="Open menu">
     <span class="material-symbols-outlined text-3xl hover-shake">menu</span>
   </button>
   <a class="desktop-get-started bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-darker transition-colors hover-lift hover-glow whitespace-nowrap" href="https://wa.me/15616291310" data-i18n="nav.getStarted">Get Started</a>
@@ -625,10 +745,10 @@
 <div id="offCanvasMenu" class="off-canvas-menu">
 <div class="off-canvas-header">
 <div class="flex items-center space-x-3">
-<img alt="Auto Palms Beach logo" class="h-8 w-8" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png" loading="lazy" decoding="async"/>
+<img alt="Auto Palms Beach logo" class="h-8 w-8" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png" width="32" height="32" loading="lazy" decoding="async"/>
 <span class="text-xl font-bold text-secondary">Auto Palm Beach</span>
 </div>
-<button id="closeMenuButton" class="close-menu-btn">
+<button id="closeMenuButton" class="close-menu-btn" aria-label="Close menu">
 <span class="material-symbols-outlined text-2xl">close</span>
 </button>
 </div>
@@ -745,7 +865,6 @@ Get Started
   loading="eager"
   decoding="async"
   fetchpriority="high"
-  onload="this.classList.add('loaded')"
 />
 </div>
 </div>
@@ -765,7 +884,9 @@ Get Started
      class="rounded-2xl w-full about-image object-cover relative z-10 hover-scale transition-transform duration-500" 
      loading="lazy" 
      decoding="async" 
-     src="https://i.ibb.co/LzKgSnVm/bg-hero.webp"/>
+     src="https://i.ibb.co/LzKgSnVm/bg-hero.webp"
+     width="600"
+     height="400"/>
 </div>
 </div>
 <div class="lg:w-1/2 text-text-dark">
@@ -816,7 +937,7 @@ Get Started
 <!-- Servicio 1 -->
 <div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="Two people signing official documents with pens" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7kVeFNWpIeNT4L4X-Ekc330lCTL_caF5l6XhiMUFShDbhFM7xi360IeFZ4R3tzIq_oImHmNyu17wdI8mf9QJIobAtzyELnQW4tmUWp8h5l3Uko_IrMUaTSChiF-JAFBcj061RcPPz--wXc-i8Wms9RxFWd5j7Um-_wrhMCl1jwHuApLlD-FwyaJdVE7WSmelxPrsyyK_HoKptyH92JkN8pm5eFxzf2wnOzBj-tnONN_mmpGwifrWQ_l6niWRiLoWG8z6qHb4xT8s"/>
+<img alt="Two people signing official documents with pens" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7kVeFNWpIeNT4L4X-Ekc330lCTL_caF5l6XhiMUFShDbhFM7xi360IeFZ4R3tzIq_oImHmNyu17wdI8mf9QJIobAtzyELnQW4tmUWp8h5l3Uko_IrMUaTSChiF-JAFBcj061RcPPz--wXc-i8Wms9RxFWd5j7Um-_wrhMCl1jwHuApLlD-FwyaJdVE7WSmelxPrsyyK_HoKptyH92JkN8pm5eFxzf2wnOzBj-tnONN_mmpGwifrWQ_l6niWRiLoWG8z6qHb4xT8s" width="400" height="192"/>
 </div>
 <div class="p-6">
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service1.title">Title Transfers & DMV Docs</h4>
@@ -831,7 +952,7 @@ Get Started
 <!-- Servicio 2 -->
 <div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="A person using a notary stamp on a document" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwVKqbLqqmDDL8-8QsOT74iXrx7B9kLvKNIW61F15UlISBTkR6Qjb8Vjhre2sV9ItQT53LxXPPD7mandJ3tMpQNZm1V4m2X6PREPMI_Kf9NjkN2Dmtg2qQstV7RULQgZHyWIApxJ_QPGBIZNPv8vdzTqYUPa4lnZ_rEHU57S2SkDqeFgYE7KwQn6IP5_LGJ-UwSXbTBo531BEfXdPi5R6SVzAgb-n57qQtOw3YH2o2QkYqztIv9UKL5O2e8dOp7W-ecovaR8UHT6w"/>
+<img alt="A person using a notary stamp on a document" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwVKqbLqqmDDL8-8QsOT74iXrx7B9kLvKNIW61F15UlISBTkR6Qjb8Vjhre2sV9ItQT53LxXPPD7mandJ3tMpQNZm1V4m2X6PREPMI_Kf9NjkN2Dmtg2qQstV7RULQgZHyWIApxJ_QPGBIZNPv8vdzTqYUPa4lnZ_rEHU57S2SkDqeFgYE7KwQn6IP5_LGJ-UwSXbTBo531BEfXdPi5R6SVzAgb-n57qQtOw3YH2o2QkYqztIv9UKL5O2e8dOp7W-ecovaR8UHT6w" width="400" height="192"/>
 </div>
 <div class="p-6">
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service2.title">Notary Public VIN Verification</h4>
@@ -846,7 +967,7 @@ Get Started
 <!-- Servicio 3 -->
 <div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="A Florida license plate on a wooden surface" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcQC2Ul3kIuE8sN54g1jsb9Y-n8dw00JAOtCliE5b9tT-bDL48cdmqg5NFwQzL2tGdYVNtovxXs-GCbrKgagFJoGejTVJ2bEFYk36TqAPAZ90gQStViRGQ1_-tjAqlBD9lkjzXJz2aeIjz8iwLBBM-c_b4Gk29KzYdENwdmBK-ce2WUByza0w9vnOfnUQgIad3fq9E0Yh3-vcSLTQZqm89e3xiR-_OioXgGMFvjUtFqiP3NM-twWdC3OToLEayKA-FlckzSWqPoYc"/>
+<img alt="A Florida license plate on a wooden surface" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcQC2Ul3kIuE8sN54g1jsb9Y-n8dw00JAOtCliE5b9tT-bDL48cdmqg5NFwQzL2tGdYVNtovxXs-GCbrKgagFJoGejTVJ2bEFYk36TqAPAZ90gQStViRGQ1_-tjAqlBD9lkjzXJz2aeIjz8iwLBBM-c_b4Gk29KzYdENwdmBK-ce2WUByza0w9vnOfnUQgIad3fq9E0Yh3-vcSLTQZqm89e3xiR-_OioXgGMFvjUtFqiP3NM-twWdC3OToLEayKA-FlckzSWqPoYc" width="400" height="192"/>
 </div>
 <div class="p-6">
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service3.title">Registration & Plates</h4>
@@ -861,7 +982,7 @@ Get Started
 <!-- Servicio 4 -->
 <div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="Professional dmv accompaniment west palm beach florida" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/LXLs9dt4/professional-dmv-accompaniment-west-palm-beach-florida.webp"/>
+<img alt="Professional dmv accompaniment west palm beach florida" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/LXLs9dt4/professional-dmv-accompaniment-west-palm-beach-florida.webp" width="400" height="192"/>
 </div>
 <div class="p-6">
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service4.title">Administrative Support Services</h4>
@@ -876,7 +997,7 @@ Get Started
 <!-- Servicio 5 -->
 <div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="Calendar with appointment scheduling for DMV" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/p6ZtSMqr/dmv-appointment-scheduling-confirmation-west-palm-beach-florida.webp"/>
+<img alt="Calendar with appointment scheduling for DMV" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/p6ZtSMqr/dmv-appointment-scheduling-confirmation-west-palm-beach-florida.webp" width="400" height="192"/>
 </div>
 <div class="p-6">
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service5.title">DMV Appointment Scheduling</h4>
@@ -889,9 +1010,9 @@ Get Started
 </div>
 
 <!-- Servicio 6 -->
-<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transitionall duration-500 hover-lift group">
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="Car being photographed for online listing" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/fYMJkH8x/Car-being-photographed-for-online-listing.webp"/>
+<img alt="Car being photographed for online listing" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/fYMJkH8x/Car-being-photographed-for-online-listing.webp" width="400" height="192"/>
 </div>
 <div class="p-6">
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service6.title">Vehicle Listing & Online Promotion</h4>
@@ -1001,7 +1122,7 @@ WhatsApp
 <p class="text-text-light" data-i18n="why.feature1.description">We provide clear, personalized advice to avoid common mistakes that delay your paperwork.</p>
 </div>
 </div>
-<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transitionall duration-300 group" style="animation-delay: 0.1s">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.1s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.2s">hourglass_top</span>
 <div>
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature2.title">Time Saving</h4>
@@ -1213,7 +1334,7 @@ WhatsApp
 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
 <div>
 <div class="flex items-center space-x-3 mb-4 hover-scale transition-transform duration-300">
-<img alt="Auto Palms Beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png" loading="lazy" decoding="async"/>
+<img alt="Auto Palms Beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png" width="40" height="40" loading="lazy" decoding="async"/>
 <span class="text-2xl font-bold">Auto Palm Beach</span>
 </div>
 <p class="text-sm text-text-light" data-i18n="footer.description">Specialized administrative office for DMV Paperwork and VIN verification in West Palm Beach, South Florida.</p>
@@ -1369,10 +1490,10 @@ WhatsApp
       align-items: center;
       gap: 6px;
       padding: 8px 12px;
-      background: rgba(249, 115, 22, 0.1);
-      border: 1px solid rgba(249, 115, 22, 0.2);
+      background: rgba(210, 105, 30, 0.1);
+      border: 1px solid rgba(210, 105, 30, 0.2);
       border-radius: 6px;
-      color: #F97316;
+      color: #D2691E;
       font-weight: 500;
       font-size: 14px;
       cursor: pointer;
@@ -1381,8 +1502,8 @@ WhatsApp
     }
     
     .language-button:hover {
-      background: rgba(249, 115, 22, 0.15);
-      border-color: rgba(249, 115, 22, 0.3);
+      background: rgba(210, 105, 30, 0.15);
+      border-color: rgba(210, 105, 30, 0.3);
     }
     
     .language-dropdown {
@@ -1427,7 +1548,7 @@ WhatsApp
     
     .language-option.active {
       background-color: #fef7f2;
-      color: #F97316;
+      color: #D2691E;
       font-weight: 600;
     }
     
@@ -1468,7 +1589,7 @@ WhatsApp
     }
     
     .hover-glow:hover {
-      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+      box-shadow: 0 0 20px rgba(210, 105, 30, 0.3);
     }
     
     .hover-shake:hover {
@@ -1484,7 +1605,7 @@ WhatsApp
     }
     
     .text-gradient {
-      background: linear-gradient(45deg, #F97316, #EA580C);
+      background: linear-gradient(45deg, #D2691E, #B3591A);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -1519,12 +1640,12 @@ WhatsApp
     }
     
     ::-webkit-scrollbar-thumb {
-      background: #F97316;
+      background: #D2691E;
       border-radius: 4px;
     }
     
     ::-webkit-scrollbar-thumb:hover {
-      background: #EA580C;
+      background: #B3591A;
     }
     
     /* Hero text fix - RESPONSIVE CORREGIDO */
@@ -1669,7 +1790,7 @@ WhatsApp
     .cta-section {
       position: relative;
       z-index: 10;
-      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+      background: linear-gradient(135deg, #D2691E 0%, #B3591A 100%);
     }
     
     /* Contact section margin */
@@ -1691,352 +1812,58 @@ WhatsApp
       object-fit: cover;
       object-position: center;
     }
+    
+    /* Animations keyframes */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
 </style>
 
 <script>
-// Internacionalización - Textos en inglés y español
-const translations = {
-  en: {
-    // Navbar
-    "nav.home": "Home",
-    "nav.about": "About Us",
-    "nav.services": "Services",
-    "nav.process": "How it Works",
-    "nav.testimonials": "Testimonials",
-    "nav.contact": "Contact",
-    "nav.getStarted": "Get Started",
-    
-    // Hero
-    "hero.tagline": "DMV & VIN Verification",
-    "hero.title": "Expert DMV & Title Services",
-    "hero.subtitle": "in West Palm Beach",
-    "hero.description": "Skip the long lines and confusing paperwork. We are your local vehicle paperwork solution in South Florida.",
-    "hero.cta": "Get a Free Quote",
-    "hero.learnMore": "Learn More",
-    
-    // About
-    "about.tagline": "ABOUT US",
-    "about.title": "Your Trusted Partner in Vehicle Paperwork",
-    "about.description": "At Auto Palm Beach, we have helped hundreds of people in South Florida navigate the complex DMV system, making the paperwork simple, secure, and stress-free. We are your specialized administrative office in West Palm Beach.",
-    "about.feature1.title": "Transparency",
-    "about.feature1.description": "We guarantee 100% legal and clear transactions.",
-    "about.feature2.title": "Experience",
-    "about.feature2.description": "We have in-depth knowledge of DMV procedures.",
-    "about.feature3.title": "Effective Management",
-    "about.feature3.description": "We help you avoid long lines and paperwork errors.",
-    "about.feature4.title": "Client Focus",
-    "about.feature4.description": "Your peace of mind is the center of our service.",
-    
-    // Services
-    "services.tagline": "OUR SERVICES",
-    "services.title": "Explore Our Services",
-    "services.cta": "Get Started",
-    "services.service1.title": "Title Transfers & DMV Docs",
-    "services.service1.description": "Simplifying title transfers and DMV documentation for a fast, stress-free process.",
-    "services.service2.title": "Notary Public VIN Verification",
-    "services.service2.description": "We offer Florida notary public VIN verification to certify your vehicle's legal identity.",
-    "services.service3.title": "Registration & Plates",
-    "services.service3.description": "We handle your vehicle's initial registration and plates, saving you time and DMV visits.",
-    "services.service4.title": "Administrative Support Services",
-    "services.service4.description": "Document organization and translation. Administrative accompaniment to the DMV or Tax Collector. Connection with external financing and insurance providers.",
-    "services.service5.title": "DMV Appointment Scheduling",
-    "services.service5.description": "Coordination of official appointments for license, registration, and plate paperwork. Confirmation of date, time, and specific requirements for each procedure.",
-    "services.service6.title": "Vehicle Listing & Online Promotion",
-    "services.service6.description": "We help you list your cars, motors, and auto parts. Digital promotion on partner platforms and social media.",
-    
-    // CTA
-    "cta.title": "Get Started Today",
-    "cta.description": "Get started with a free service evaluation. No obligations, just solutions.",
-    "cta.call": "Call Now: (561) 629-1310",
-    
-    // Process
-    "process.tagline": "HOW IT WORKS",
-    "process.title": "Our Simple Process",
-    "process.description": "We've streamlined the DMV process into four easy steps, saving you time and stress.",
-    "process.step1.title": "Contact Us",
-    "process.step1.description": "Reach out by phone, email, or our contact form to get started.",
-    "process.step2.title": "Provide Documents",
-    "process.step2.description": "Easily and securely submit the necessary documents.",
-    "process.step3.title": "We Handle Paperwork",
-    "process.step3.description": "Our expert team takes over the complex DMV process.",
-    "process.step4.title": "Get Your Results",
-    "process.step4.description": "Receive your completed titles and registrations quickly.",
-    
-    // Testimonials
-    "testimonials.tagline": "TESTIMONIALS",
-    "testimonials.title": "What Our Clients Say",
-    "testimonials.testimonial1.text": "\"Saved me hours at the DMV! The title transfer was completed in half the time.\"",
-    "testimonials.testimonial1.date": "2 days ago",
-    "testimonials.testimonial2.text": "\"Professional and efficient. They handled everything from VIN verification to plates.\"",
-    "testimonials.testimonial2.date": "1 week ago",
-    "testimonials.testimonial3.text": "\"As a first-time car buyer in Florida, their guidance was invaluable.\"",
-    "testimonials.testimonial3.date": "3 weeks ago",
-    
-    // Why Choose Us
-    "why.tagline": "WHY CHOOSE US",
-    "why.title": "Advantages of Our Service",
-    "why.feature1.title": "Personalized Approach",
-    "why.feature1.description": "We provide clear, personalized advice to avoid common mistakes that delay your paperwork.",
-    "why.feature2.title": "Time Saving",
-    "why.feature2.description": "Skip the long lines and confusion. We handle the paperwork and logistics, including scheduling.",
-    "why.feature3.title": "All-in-One Service",
-    "why.feature3.description": "From VIN verification to title transfers, we simplify the entire administrative process.",
-    "why.feature4.title": "Total Transparency & Trust",
-    "why.feature4.description": "We offer absolute transparency in costs and procedures, ensuring your transaction is 100% legal.",
-    "why.feature5.title": "Administrative Support",
-    "why.feature5.description": "We connect you with trusted insurance providers, making the entire process seamless.",
-    "why.feature6.title": "Guaranteed Results",
-    "why.feature6.description": "Our reputation is built on results. We have helped hundreds in South Florida. Your success is our commitment.",
-    
-    // Contact
-    "contact.tagline": "CONTACT US",
-    "contact.title": "Visit or Contact Us",
-    "contact.address": "2393 South Congress Ave STE 200, West Palm Beach, FL 33406",
-    "contact.phoneDescription": "Give us a call - we're happy to help!",
-    "contact.emailDescription": "Send us an email for quick responses",
-    "contact.hoursTitle": "Opening Hours",
-    "contact.hoursWeekdays": "Monday - Friday: 9:00 AM - 5:00 PM",
-    "contact.hoursSaturday": "Saturday: 10:00 AM - 2:00 PM (By appointment only)",
-    "contact.mapDescription": "📍 Conveniently located in West Palm Beach with easy access and parking available.",
-    
-    // FAQ
-    "faq.tagline": "FAQ",
-    "faq.title": "Frequently Asked Questions",
-    "faq.question1": "What services does Auto Palm Beach offer exactly?",
-    "faq.answer1": "We are your administrative assistant specialized in vehicle paperwork. We handle the preparation and review of DMV forms, notary public VIN verification, registration and license plate assistance, and DMV appointment scheduling.",
-    "faq.question2": "Are you a car dealership?",
-    "faq.answer2": "No. It's important to clarify that Auto Palm Beach is NOT a licensed motor vehicle dealer. We operate as an administrative service office and an advertising platform. The vehicles belong to private sellers; We help you list your vehicles and provide added exposure through digital promotion on partner platforms.",
-    "faq.question3": "I bought/sold a car privately. Can you help me with the paperwork?",
-    "faq.answer3": "Absolutely! This is our primary service. We assist you with the title transfer, the correct preparation of documentation (such as form HSMV 82040), and the VIN verification if required, ensuring everything is in order to avoid future problems at the DMV.",
-    "faq.question4": "Can you help me get temporary or permanent license plates?",
-    "faq.answer4": "Yes. We provide all the necessary administrative support to apply for your temporary tags or manage permanent registration and plates, guiding you through the specific process and requirements.",
-    "faq.question5": "What does \"VIN Verification by a Notary Public\" mean, and when do I need it?",
-    "faq.answer5": "This service (form HSMV 82042) is mandatory for vehicles coming from another state or in cases where the Florida DMV requires a physical inspection of the VIN number. Our authorized Notary Public certifies the accuracy of the VIN, a crucial step for titling the car in Florida.",
-    "faq.question6": "Do you offer document translation services?",
-    "faq.answer6": "Yes, as part of our administrative support services, we can assist you in organizing and translating documents needed for your paperwork, making the process easier if language is a barrier.",
-    "faq.question7": "How can I get in touch to use your services?",
-    "faq.answer7": "You can call us at (561) 629-1310, visit us at our office at 2393 South Congress Ave STE 200, West Palm Beach, FL 33406, or complete the contact form on our website to schedule a consultation.",
-    
-    // Footer
-    "footer.description": "Specialized administrative office for DMV Paperwork and VIN verification in West Palm Beach, South Florida.",
-    "footer.quickLinks": "Quick Links",
-    "footer.faq": "FAQ",
-    "footer.contactInfo": "Contact Info",
-    "footer.legalTitle": "Legal Disclosure",
-    "footer.legalText": "Auto Palm Beach is not a licensed motor vehicle dealer. We operate as an Administrative Office. All vehicles are sold as private sales between owners.",
-    "footer.copyright": "©2025 Auto Palm Beach. All rights reserved."
-  },
+// Funciones no críticas diferidas
+window.addEventListener('load', function() {
+  // Inicializar lazy loading de imágenes
+  setTimeout(lazyLoadImages, 2000);
   
-  es: {
-    // Navbar
-    "nav.home": "Inicio",
-    "nav.about": "Nosotros",
-    "nav.services": "Servicios",
-    "nav.process": "Cómo Funciona",
-    "nav.testimonials": "Testimonios",
-    "nav.contact": "Contacto",
-    "nav.getStarted": "Comenzar",
-    
-    // Hero
-    "hero.tagline": "DMV & Verificación VIN",
-    "hero.title": "Servicios Expertos de DMV y Títulos",
-    "hero.subtitle": "en West Palm Beach",
-    "hero.description": "Evite las largas filas y la confusión de trámites. Somos su solución local de papeleo vehicular en el sur de Florida.",
-    "hero.cta": "Obtener Cotización Gratis",
-    "hero.learnMore": "Saber Más",
-    
-    // About
-    "about.tagline": "SOBRE NOSOTROS",
-    "about.title": "Su Socio de Confianza en Trámites Vehiculares",
-    "about.description": "En Auto Palm Beach, hemos ayudado a cientos de personas en el sur de Florida a navegar el complejo sistema del DMV, haciendo que el papeleo sea simple, seguro y sin estrés. Somos su oficina administrativa especializada en West Palm Beach.",
-    "about.feature1.title": "Transparencia",
-    "about.feature1.description": "Garantizamos transacciones 100% legales y claras.",
-    "about.feature2.title": "Experiencia",
-    "about.feature2.description": "Tenemos conocimiento profundo de los procedimientos del DMV.",
-    "about.feature3.title": "Gestión Efectiva",
-    "about.feature3.description": "Le ayudamos a evitar largas filas y errores en el papeleo.",
-    "about.feature4.title": "Enfoque en el Cliente",
-    "about.feature4.description": "Su tranquilidad es el centro de nuestro servicio.",
-    
-    // Services
-    "services.tagline": "NUESTROS SERVICIOS",
-    "services.title": "Explore Nuestros Servicios",
-    "services.cta": "Comenzar",
-    "services.service1.title": "Transferencias de Título y Documentos DMV",
-    "services.service1.description": "Simplificamos transferencias de título y documentación DMV para un proceso rápido y sin estrés.",
-    "services.service2.title": "Verificación VIN por Notario Público",
-    "services.service2.description": "Ofrecemos verificación VIN por notario público de Florida para certificar la identidad legal de su vehículo.",
-    "services.service3.title": "Registro y Placas",
-    "services.service3.description": "Manejamos el registro inicial de su vehículo y placas, ahorrándole tiempo y visitas al DMV.",
-    "services.service4.title": "Servicios de Apoyo Administrativo",
-    "services.service4.description": "Organización y traducción de documentos. Acompañamiento administrativo al DMV o Tax Collector. Conexión con proveedores externos de financiamiento y seguros.",
-    "services.service5.title": "Programación de Citas DMV",
-    "services.service5.description": "Coordinación de citas oficiales para trámites de licencia, registro y placas. Confirmación de fecha, hora y requisitos específicos para cada procedimiento.",
-    "services.service6.title": "Listado de Vehículos y Promoción en Línea",
-    "services.service6.description": "Le ayudamos a listar sus autos, motores y partes automotrices. Promoción digital en plataformas asociadas y redes sociales.",
-    
-    // CTA
-    "cta.title": "Comience Hoy",
-    "cta.description": "Comience con una evaluación gratuita del servicio. Sin obligaciones, solo soluciones.",
-    "cta.call": "Llame Ahora: (561) 629-1310",
-    
-    // Process
-    "process.tagline": "CÓMO FUNCIONA",
-    "process.title": "Nuestro Proceso Simple",
-    "process.description": "Hemos simplificado el proceso del DMV en cuatro pasos fáciles, ahorrándole tiempo y estrés.",
-    "process.step1.title": "Contáctenos",
-    "process.step1.description": "Comuníquese por teléfono, correo electrónico o nuestro formulario de contacto para comenzar.",
-    "process.step2.title": "Proporcione Documentos",
-    "process.step2.description": "Envíe fácil y seguramente los documentos necesarios.",
-    "process.step3.title": "Nosotros Manejamos el Papeleo",
-    "process.step3.description": "Nuestro equipo experto se encarga del complejo proceso del DMV.",
-    "process.step4.title": "Obtenga Sus Resultados",
-    "process.step4.description": "Reciba sus títulos y registros completados rápidamente.",
-    
-    // Testimonials
-    "testimonials.tagline": "TESTIMONIOS",
-    "testimonials.title": "Lo que Dicen Nuestros Clientes",
-    "testimonials.testimonial1.text": "\"¡Me ahorró horas en el DMV! La transferencia de título se completó en la mitad del tiempo.\"",
-    "testimonials.testimonial1.date": "Hace 2 días",
-    "testimonials.testimonial2.text": "\"Profesionales y eficientes. Manejaron todo desde la verificación VIN hasta las placas.\"",
-    "testimonials.testimonial2.date": "Hace 1 semana",
-    "testimonials.testimonial3.text": "\"Como comprador de auto por primera vez en Florida, su orientación fue invaluable.\"",
-    "testimonials.testimonial3.date": "Hace 3 semanas",
-    
-    // Why Choose Us
-    "why.tagline": "POR QUÉ ELEGIRNOS",
-    "why.title": "Ventajas de Nuestro Servicio",
-    "why.feature1.title": "Enfoque Personalizado",
-    "why.feature1.description": "Proporcionamos asesoría clara y personalizada para evitar errores comunes que retrasan su papeleo.",
-    "why.feature2.title": "Ahorro de Tiempo",
-    "why.feature2.description": "Evite las largas filas y confusión. Nos encargamos del papeleo y logística, incluyendo programación.",
-    "why.feature3.title": "Servicio Todo en Uno",
-    "why.feature3.description": "Desde verificación VIN hasta transferencias de título, simplificamos todo el proceso administrativo.",
-    "why.feature4.title": "Transparencia Total y Confianza",
-    "why.feature4.description": "Ofrecemos transparencia absoluta en costos y procedimientos, asegurando que su transacción sea 100% legal.",
-    "why.feature5.title": "Apoyo Administrativo",
-    "why.feature5.description": "Lo conectamos con proveedores de seguros confiables, haciendo todo el proceso fluido.",
-    "why.feature6.title": "Resultados Garantizados",
-    "why.feature6.description": "Nuestra reputación se basa en resultados. Hemos ayudado a cientos en el sur de Florida. Su éxito es nuestro compromiso.",
-    
-    // Contact
-    "contact.tagline": "CONTÁCTENOS",
-    "contact.title": "Visítenos o Contáctenos",
-    "contact.address": "2393 South Congress Ave STE 200, West Palm Beach, FL 33406",
-    "contact.phoneDescription": "¡Llámenos - estamos felices de ayudar!",
-    "contact.emailDescription": "Envíenos un correo para respuestas rápidas",
-    "contact.hoursTitle": "Horario de Atención",
-    "contact.hoursWeekdays": "Lunes - Viernes: 9:00 AM - 5:00 PM",
-    "contact.hoursSaturday": "Sábado: 10:00 AM - 2:00 PM (Solo con cita previa)",
-    "contact.mapDescription": "📍 Ubicados convenientemente en West Palm Beach con fácil acceso y estacionamiento disponible.",
-    
-    // FAQ
-    "faq.tagline": "PREGUNTAS FRECUENTES",
-    "faq.title": "Preguntas Frecuentes",
-    "faq.question1": "¿Qué servicios ofrece exactamente Auto Palm Beach?",
-    "faq.answer1": "Somos su asistente administrativo especializado en papeleo vehicular. Manejamos la preparación y revisión de formularios DMV, verificación VIN por notario público, asistencia de registro y placas, y programación de citas DMV.",
-    "faq.question2": "¿Son una agencia de autos?",
-    "faq.answer2": "No. Es importante aclarar que Auto Palm Beach NO es un concesionario de vehículos motorizados autorizado. Operamos como una oficina de servicios administrativos y una plataforma publicitaria. Los vehículos pertenecen a vendedores privados; le ayudamos a listar sus vehículos y proporcionamos exposición adicional a través de promoción digital en plataformas asociadas.",
-    "faq.question3": "Compré/vendí un auto de forma privada. ¿Pueden ayudarme con el papeleo?",
-    "faq.answer3": "¡Absolutamente! Este es nuestro servicio principal. Le asistimos con la transferencia de título, la preparación correcta de la documentación (como el formulario HSMV 82040), y la verificación VIN si es requerida, asegurando que todo esté en orden para evitar problemas futuros en el DMV.",
-    "faq.question4": "¿Pueden ayudarme a obtener placas temporales o permanentes?",
-    "faq.answer4": "Sí. Proporcionamos todo el apoyo administrativo necesario para solicitar sus placas temporales o manejar el registro permanente y placas, guiándolo a través del proceso y requisitos específicos.",
-    "faq.question5": "¿Qué significa \"Verificación VIN por un Notario Público\" y cuándo la necesito?",
-    "faq.answer5": "Este servicio (formulario HSMV 82042) es obligatorio para vehículos provenientes de otro estado o en casos donde el DMV de Florida requiera una inspección física del número VIN. Nuestro Notario Público autorizado certifica la precisión del VIN, un paso crucial para titular el auto en Florida.",
-    "faq.question6": "¿Ofrecen servicios de traducción de documentos?",
-    "faq.answer6": "Sí, como parte de nuestros servicios de apoyo administrativo, podemos asistirle en organizar y traducir documentos necesarios para su papeleo, facilitando el proceso si el idioma es una barrera.",
-    "faq.question7": "¿Cómo puedo contactarlos para usar sus servicios?",
-    "faq.answer7": "Puede llamarnos al (561) 629-1310, visitarnos en nuestra oficina en 2393 South Congress Ave STE 200, West Palm Beach, FL 33406, o completar el formulario de contacto en nuestro sitio web para programar una consulta.",
-    
-    // Footer
-    "footer.description": "Oficina administrativa especializada en trámites DMV y verificación VIN en West Palm Beach, sur de Florida.",
-    "footer.quickLinks": "Enlaces Rápidos",
-    "footer.faq": "Preguntas Frecuentes",
-    "footer.contactInfo": "Información de Contacto",
-    "footer.legalTitle": "Aviso Legal",
-    "footer.legalText": "Auto Palm Beach no es un concesionario de vehículos motorizados autorizado. Operamos como una Oficina Administrativa. Todos los vehículos se venden como ventas privadas entre propietarios.",
-    "footer.copyright": "©2025 Auto Palm Beach. Todos los derechos reservados."
-  }
-};
-
-// Sistema de internacionalización
-let currentLang = 'en';
-
-function updateLanguage(lang) {
-  currentLang = lang;
-  
-  // Actualizar el atributo lang del html
-  document.documentElement.lang = lang;
-  
-  // Actualizar todos los elementos con data-i18n
-  document.querySelectorAll('[data-i18n]').forEach(element => {
-    const key = element.getAttribute('data-i18n');
-    if (translations[lang] && translations[lang][key]) {
-      element.textContent = translations[lang][key];
-    }
-  });
-  
-  // Actualizar el selector de idioma
-  updateLanguageSelector(lang);
-  
-  // Guardar preferencia en localStorage
-  localStorage.setItem('preferredLanguage', lang);
-}
-
-function updateLanguageSelector(lang) {
-  // Actualizar botón de idioma en escritorio
-  const languageButton = document.getElementById('languageButton');
-  const currentFlag = document.getElementById('currentFlag');
-  const currentLanguageText = document.getElementById('currentLanguage');
-  
-  if (lang === 'en') {
-    currentLanguageText.textContent = 'EN';
-    currentFlag.innerHTML = `
-      <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#bd3d44" d="M0 0h640v480H0"/>
-        <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"/>
-        <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
-        <marker id="us-a" markerHeight="30" markerWidth="30">
-          <path fill="#fff" d="m14 0 9 27L0 10h28L5 27z"/>
-        </marker>
-        <path fill="none" marker-mid="url(#us-a)" d="m0 0 16 11h61 61 61 61 60L47 37h61 61 60 61L16 63h61 61 61 61 60L47 89h61 61 60 61L16 115h61 61 61 61 60L47 141h61 61 60 61L16 166h61 61 61 61 60L47 192h61 61 60 61L16 218h61 61 61 61 60z"/>
-      </svg>
-    `;
-  } else {
-    currentLanguageText.textContent = 'ES';
-    currentFlag.innerHTML = `
-      <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#fcd116" d="M0 0h640v480H0z"/>
-        <path fill="#0038a8" d="M0 0h640v320H0z"/>
-        <path fill="#ce1126" d="M0 0h640v160H0z"/>
-      </svg>
-    `;
-  }
-  
-  // Actualizar opciones activas en el dropdown
-  document.querySelectorAll('.language-option').forEach(option => {
-    if (option.getAttribute('data-lang') === lang) {
-      option.classList.add('active');
+  // Configurar header sticky
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 100) {
+      header.classList.add('sticky-header', 'py-3', 'shadow-md');
+      header.style.backgroundColor = 'white';
     } else {
-      option.classList.remove('active');
+      header.classList.remove('sticky-header', 'py-3', 'shadow-md');
+      header.style.backgroundColor = '';
     }
   });
   
-  // Actualizar opciones en móvil
-  const mobileLangEn = document.getElementById('mobileLangEn');
-  const mobileLangEs = document.getElementById('mobileLangEs');
-  
-  if (lang === 'en') {
-    mobileLangEn.classList.add('active');
-    mobileLangEs.classList.remove('active');
-  } else {
-    mobileLangEn.classList.remove('active');
-    mobileLangEs.classList.add('active');
-  }
-}
+  // Configurar observer para animaciones
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('section-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-// Inicializar funcionalidades de idioma
-document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.section-hidden').forEach((section) => {
+    observer.observe(section);
+  });
+  
   // Language selector functionality
   const languageButton = document.getElementById('languageButton');
   const languageDropdown = document.getElementById('languageDropdown');
@@ -2044,7 +1871,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileLangEn = document.getElementById('mobileLangEn');
   const mobileLangEs = document.getElementById('mobileLangEs');
 
-  // Toggle dropdown
   if (languageButton) {
     languageButton.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -2052,14 +1878,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Close dropdown when clicking outside
   document.addEventListener('click', function() {
     if (languageDropdown) {
       languageDropdown.classList.remove('active');
     }
   });
 
-  // Language option selection (desktop)
   if (languageOptions.length > 0) {
     languageOptions.forEach(option => {
       option.addEventListener('click', function(e) {
@@ -2073,7 +1897,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Language option selection (mobile)
   if (mobileLangEn) {
     mobileLangEn.addEventListener('click', function() {
       updateLanguage('en');
@@ -2085,42 +1908,11 @@ document.addEventListener('DOMContentLoaded', function() {
       updateLanguage('es');
     });
   }
-
-  // Aplicar estilos Tailwind cuando estén listos
-  const checkTailwindReady = setInterval(function() {
-    if (window.tailwindReady) {
-      document.body.classList.add('fouc-ready');
-      clearInterval(checkTailwindReady);
-    }
-  }, 100);
-});
-
-// Añadir al final del JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-  // Añadir width/height a imágenes que no los tengan
-  const images = document.querySelectorAll('img:not([width]):not([height])');
   
-  images.forEach(img => {
-    if (img.complete) {
-      setImageDimensions(img);
-    } else {
-      img.addEventListener('load', function() {
-        setImageDimensions(this);
-      });
-    }
-  });
-  
-  function setImageDimensions(image) {
-    if (!image.width || !image.height) return;
-    
-    // Solo añadir si no tiene ya
-    if (!image.hasAttribute('width')) {
-      image.setAttribute('width', image.naturalWidth);
-    }
-    if (!image.hasAttribute('height')) {
-      image.setAttribute('height', image.naturalHeight);
-    }
-  }
+  // Inicializar con idioma guardado
+  const savedLang = localStorage.getItem('preferredLanguage') || 
+                   (navigator.language.startsWith('es') ? 'es' : 'en');
+  updateLanguage(savedLang);
 });
 </script>
 </body>
