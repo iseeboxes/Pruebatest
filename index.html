@@ -8,14 +8,13 @@
 
 <!-- OPTIMIZACIÓN LCP: Preload de imagen crítica -->
 <link rel="preload" 
-      as="image" 
-      href="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp"
-      imagesrcset="
-        https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=300 300w,
-        https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=600 600w
-      "
-      imagesizes="(max-width: 768px) 100vw, 600px"
+      as="image"
+      href="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=600"
+      imagesrcset="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=300 300w,
+                   https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=600 600w"
+      imagesizes="(max-width: 768px) 100vw, 50vw"
       fetchpriority="high">
+
 <!-- ANTES del link de Google Fonts -->
 <link rel="preload" 
       href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2" 
@@ -27,10 +26,10 @@
       as="font" 
       type="font/woff2" 
       crossorigin>
+
 <!-- OPTIMIZACIÓN: Preconnect para recursos externos -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
 <link rel="preconnect" href="https://maps.gstatic.com">
 <link rel="preconnect" href="https://maps.googleapis.com">
 <link rel="preconnect" href="https://i.ibb.co">
@@ -53,7 +52,7 @@
       media="print" 
       onload="this.media='all'">
 
-<!-- CSS Crítico Inline con estilos para imagen LCP -->
+<!-- CSS Crítico Inline optimizado -->
 <style>
   :root {
     --primary-color: #F97316;
@@ -70,7 +69,6 @@
     overflow-x: hidden;
   }
 
-  
   /* Estilos críticos para imagen LCP */
   .hero-image-container {
     position: relative;
@@ -79,7 +77,7 @@
     margin: 0 auto;
   }
   
- .hero-image {
+  .hero-image {
     width: 100%;
     height: auto;
     max-height: 400px;
@@ -90,34 +88,34 @@
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
     animation: loading 1.5s infinite;
-    will-change: opacity;
+    will-change: transform, opacity;
     backface-visibility: hidden;
-}
+    contain: content;
+    transform: translateZ(0);
+  }
   
-@keyframes loading {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
- .hero-image.loaded {
-  animation: none;
-  opacity: 1;
-  /* Usar transform y opacity que son más eficientes */
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-
+  @keyframes loading {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  .hero-image.loaded {
+    animation: none;
+    opacity: 1;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
   /* Optimización para evitar reflow del mapa */
- .map-container {
-  width: 100%;
-  height: 384px;
-  position: relative;
-  overflow: hidden;
-  contain: strict; /* Aislar el layout */
-}
+  .map-container {
+    width: 100%;
+    height: 384px;
+    position: relative;
+    overflow: hidden;
+    contain: strict;
+  }
   
   .map-placeholder {
-    contain: layout style paint; /* Optimización de rendimiento */
+    contain: layout style paint;
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #f0f0f0 25%, #e0e0e0 25%, #e0e0e0 50%, #f0f0f0 50%, #f0f0f0 75%, #e0e0e0 75%, #e0e0e0);
@@ -153,9 +151,10 @@
     100% { background-position: 40px 0; }
   }
 
-  /* Utilidades críticas */
+  /* Utilidades críticas extendidas */
   .container {
     width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 1rem;
   }
@@ -186,27 +185,82 @@
     }
   }
 
+  /* Display utilities */
   .flex { display: flex; }
-  .hidden { display: none; }
+  .grid { display: grid; }
+  .block { display: block !important; }
+  .hidden { display: none !important; }
+  
+  /* Grid layouts críticos */
+  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  
+  @media (max-width: 768px) {
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  
+  @media (max-width: 640px) {
+    .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  
+  .gap-8 { gap: 2rem; }
+  .gap-12 { gap: 3rem; }
+
+  /* Positioning */
   .relative { position: relative; }
   .absolute { position: absolute; }
   .z-10 { z-index: 10; }
   .z-50 { z-index: 50; }
+  
+  /* Sizing */
   .w-full { width: 100%; }
   .h-10 { height: 2.5rem; }
   .w-10 { width: 2.5rem; }
+  
+  /* Typography crítica */
   .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+  .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  .text-5xl { font-size: 3rem; line-height: 1; }
+  .text-6xl { font-size: 3.75rem; line-height: 1; }
+  .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+  
+  @media (max-width: 768px) {
+    .text-5xl { font-size: 2.5rem; }
+    .text-6xl { font-size: 3rem; }
+  }
+  
+  @media (max-width: 640px) {
+    .text-4xl { font-size: 1.875rem; }
+    .text-5xl { font-size: 2.25rem; }
+  }
+  
   .font-bold { font-weight: 700; }
+  .font-extrabold { font-weight: 900; }
+  
+  /* Colors */
   .text-secondary { color: var(--secondary-color); }
   .text-primary { color: var(--primary-color); }
   .bg-primary { background-color: var(--primary-color); }
+  .bg-background-soft { background-color: var(--background-soft); }
   .text-white { color: white; }
+  
+  /* Spacing crítica */
   .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+  .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
   .px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  
+  /* Flexbox */
   .justify-between { justify-content: space-between; }
   .items-center { align-items: center; }
   .space-x-3 > * + * { margin-left: 0.75rem; }
   .space-x-4 > * + * { margin-left: 1rem; }
+  
+  /* Borders & Shadows */
   .rounded-lg { border-radius: 0.5rem; }
   .rounded-2xl { border-radius: 1rem; }
   .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
@@ -223,94 +277,83 @@
   }
 </style>
 
-<!-- JavaScript optimizado para LCP -->
+<!-- JavaScript optimizado -->
 <script>
-  // OPTIMIZACIÓN: Separar lecturas y escrituras
-  let heroImageData = null;
-  
+  // Función optimizada para el menú
+  function initMenu() {
+    const menuBtn = document.getElementById('mobileMenuButton');
+    const closeBtn = document.getElementById('closeMenuButton');
+    const menu = document.getElementById('offCanvasMenu');
+    const overlay = document.getElementById('offCanvasOverlay');
+    
+    if (!menuBtn || !menu) return;
+    
+    const toggleMenu = (open) => {
+      if (open) {
+        menu.classList.add('active');
+        overlay.classList.add('active');
+        document.body.classList.add('menu-open');
+      } else {
+        menu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+    };
+    
+    menuBtn.addEventListener('click', () => toggleMenu(true));
+    closeBtn.addEventListener('click', () => toggleMenu(false));
+    overlay.addEventListener('click', () => toggleMenu(false));
+  }
+
+  // Optimizar imagen LCP
   function optimizeLCPImage() {
     const heroImage = document.querySelector('.hero-image');
     if (!heroImage) return;
 
-    // 1. LEER todas las propiedades geométricas UNA VEZ al inicio
-    heroImageData = {
-      complete: heroImage.complete,
-      naturalHeight: heroImage.naturalHeight,
-      src: heroImage.src
-    };
-
-    // 2. Configurar manejadores de eventos (sin leer propiedades geométricas aquí)
-    const handleLoad = () => {
-      // Usar requestAnimationFrame para agrupar cambios de estilo
-      requestAnimationFrame(() => {
-        heroImage.classList.add('loaded');
-        
-        // Lecturas de performance (no causan reflow)
-        if (window.performance && 'getEntriesByType' in performance) {
-          const paintEntries = performance.getEntriesByType('paint');
-          const lcpEntry = paintEntries.find(entry => entry.name === 'largest-contentful-paint');
-          if (lcpEntry) {
-            console.log('LCP detected at:', lcpEntry.startTime.toFixed(2), 'ms');
-          }
-        }
-      });
-    };
-
-    const handleError = () => {
-      requestAnimationFrame(() => {
-        console.warn('LCP image failed to load');
-      });
-    };
-
-    // 3. Configurar eventos
-    if (!heroImageData.complete || heroImageData.naturalHeight === 0) {
-      heroImage.addEventListener('load', handleLoad, { once: true });
-      heroImage.addEventListener('error', handleError, { once: true });
+    if (!heroImage.complete) {
+      heroImage.onload = function() {
+        this.classList.add('loaded');
+      };
     } else {
-      // Si ya está cargada, procesar en el siguiente frame
-      requestAnimationFrame(handleLoad);
+      heroImage.classList.add('loaded');
     }
   }
 
-  // OPTIMIZACIÓN: Cargar el mapa sin reflows
+  // Cargar Google Maps solo cuando sea visible
   function loadGoogleMap() {
-    // Usar setTimeout con tiempo suficiente para no interferir con LCP
-    setTimeout(() => {
-      initMap();
-    }, 2000); // Aumentar a 2 segundos para asegurar que LCP ya ocurrió
+    const mapSection = document.getElementById('contact');
+    if (!mapSection) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(initMap, 500);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '200px' });
+
+    observer.observe(mapSection);
   }
 
   function initMap() {
     const mapContainer = document.getElementById('googleMapContainer');
     if (!mapContainer) return;
 
-    // 1. Crear iframe FUERA del DOM primero
     const iframe = document.createElement('iframe');
     iframe.id = 'googleMapIframe';
     iframe.className = 'map-iframe';
-    iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.031562328511!2d-80.06889522347666!3d26.664590776642093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8d5ce77f5c6f7%3A0x17cba6d534d7a7a4!2s2393%20S%20Congress%20Ave%20%23200%2C%20West%20Palm%20Beach%2C%20FL%2033406!5e0!3m2!1sen!2sus!4v1711569123456!5m2!1sen!2sus';
-    iframe.width = "100%";
-    iframe.height = "100%";
-    iframe.style.border = "0";
-    iframe.allowFullscreen = "";
     iframe.loading = "lazy";
-    iframe.referrerPolicy = "no-referrer-when-downgrade";
-    iframe.title = "Auto Palm Beach Location Map";
-
-    // 2. Configurar manejadores ANTES de insertar
+    iframe.decoding = "async";
+    iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.031562328511!2d-80.06889522347666!3d26.664590776642093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8d5ce77f5c6f7%3A0x17cba6d534d7a7a4!2s2393%20S%20Congress%20Ave%20%23200%2C%20West%20Palm%20Beach%2C%20FL%2033406!5e0!3m2!1sen!2sus!4v1711569123456!5m2!1sen!2sus';
+    
     iframe.onload = function() {
-      // Usar requestAnimationFrame para cambios de estilo
       requestAnimationFrame(() => {
         this.classList.add('loaded');
-        
-        setTimeout(() => {
-          requestAnimationFrame(() => {
-            const placeholder = document.querySelector('.map-placeholder');
-            if (placeholder) {
-              placeholder.style.display = 'none';
-            }
-          });
-        }, 500);
+        const placeholder = document.querySelector('.map-placeholder');
+        if (placeholder) {
+          placeholder.style.display = 'none';
+        }
       });
     };
 
@@ -326,84 +369,175 @@
       });
     };
 
-    // 3. Insertar en el DOM en batch
-    requestAnimationFrame(() => {
-      mapContainer.appendChild(iframe);
-    });
+    mapContainer.appendChild(iframe);
   }
 
-  // OPTIMIZACIÓN: Reemplazar múltiples setTimeout con un solo flujo controlado
-  function initializeOptimizations() {
-    // Secuencia optimizada usando requestAnimationFrame
-    optimizeLCPImage(); // Primero: imagen LCP (crítica)
-    
-    // Usar setTimeout anidados pero con tiempos más largos
-    setTimeout(() => {
-      loadTailwindCSS(); // Después: CSS no crítico
-      
-      // Usar requestIdleCallback si está disponible
-      const loadNonCritical = () => {
-        setTimeout(loadGoogleMap, 1000);
-      };
-      
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(loadNonCritical, { timeout: 2000 });
-      } else {
-        setTimeout(loadNonCritical, 1500);
-      }
-    }, 300);
-  }
-
-  // Cargar Tailwind optimizado
+  // Cargar Tailwind CSS asíncrono
   function loadTailwindCSS() {
-    // Usar requestIdleCallback para cargar recursos no críticos
-    const loadTailwind = () => {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,container-queries';
-      script.async = true;
-      
-      script.onload = function() {
-        if (typeof tailwind !== 'undefined') {
-          // Configurar tailwind en el siguiente frame
-          requestAnimationFrame(() => {
-            tailwind.config = {
-              theme: {
-                extend: {
-                  colors: {
-                    primary: "var(--primary-color)",
-                    "primary-darker": "#EA580C",
-                    secondary: "var(--secondary-color)",
-                    "background-light": "#ffffff",
-                    "background-soft": "var(--background-soft)",
-                    "text-dark": "#1F2937",
-                    "text-light": "#6B7280"
-                  },
-                  // ... resto de la configuración tailwind
-                }
+    const script = document.createElement('script');
+    script.src = 'https://cdn.tailwindcss.com?plugins=forms,typography,container-queries';
+    script.async = true;
+    script.onload = function() {
+      if (typeof tailwind !== 'undefined') {
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: "var(--primary-color)",
+                "primary-darker": "#EA580C",
+                secondary: "var(--secondary-color)",
+                "background-light": "#ffffff",
+                "background-soft": "var(--background-soft)",
+                "text-dark": "#1F2937",
+                "text-light": "#6B7280"
               }
-            };
-            window.tailwindReady = true;
-          });
-        }
-      };
-      
-      document.body.appendChild(script);
+            }
+          }
+        };
+        document.body.classList.add('fouc-ready');
+      }
     };
-    
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(loadTailwind, { timeout: 1000 });
-    } else {
-      setTimeout(loadTailwind, 500);
-    }
+    document.body.appendChild(script);
   }
 
   // Inicialización optimizada
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(initializeOptimizations, 0);
+  document.addEventListener('DOMContentLoaded', function() {
+    // 1. Optimizar imagen LCP inmediatamente
+    optimizeLCPImage();
+    
+    // 2. Inicializar menú y funcionalidades básicas
+    initMenu();
+    
+    // 3. Configurar scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        if(this.getAttribute('href') === '/' || this.getAttribute('href') === '#') return;
+        
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        
+        if(targetId.startsWith('#')) {
+          const targetElement = document.querySelector(targetId);
+          
+          if(targetElement) {
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = targetPosition - headerHeight - 20;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+            
+            history.pushState(null, null, targetId);
+          }
+        }
+      });
     });
-  } else {
-    setTimeout(initializeOptimizations, 0);
+    
+    // 4. Cargar idioma
+    const savedLang = localStorage.getItem('preferredLanguage') || 
+                     (navigator.language.startsWith('es') ? 'es' : 'en');
+    updateLanguage(savedLang);
+    
+    // 5. Configurar header sticky
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 100) {
+        header.classList.add('sticky-header', 'py-3', 'shadow-md');
+        header.style.backgroundColor = 'white';
+      } else {
+        header.classList.remove('sticky-header', 'py-3', 'shadow-md');
+        header.style.backgroundColor = '';
+      }
+    });
+    
+    // 6. Cargar recursos no críticos después de 500ms
+    setTimeout(() => {
+      loadTailwindCSS();
+      loadGoogleMap();
+    }, 500);
+    
+    // 7. Configurar FAQ
+    const faqButtons = document.querySelectorAll('.faq-button');
+    faqButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        const icon = this.querySelector('.material-symbols-outlined');
+        
+        if (answer.classList.contains('open')) {
+          answer.classList.remove('open');
+          icon.textContent = 'add_circle';
+          icon.classList.remove('rotate-180');
+        } else {
+          document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+            if(otherAnswer !== answer && otherAnswer.classList.contains('open')) {
+              otherAnswer.classList.remove('open');
+              const otherIcon = otherAnswer.previousElementSibling.querySelector('.material-symbols-outlined');
+              if(otherIcon) {
+                otherIcon.textContent = 'add_circle';
+                otherIcon.classList.remove('rotate-180');
+              }
+            }
+          });
+          
+          answer.classList.add('open');
+          icon.textContent = 'remove_circle';
+          icon.classList.add('rotate-180');
+        }
+      });
+    });
+    
+    // 8. Observer para animaciones de scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section-hidden').forEach((section) => {
+      observer.observe(section);
+    });
+    
+    // 9. Random floating animation delays
+    document.querySelectorAll('.floating').forEach((icon, index) => {
+      icon.style.animationDelay = `${index * 0.2}s`;
+    });
+  });
+
+  // Script de métricas de rendimiento
+  if ('performance' in window) {
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const paints = performance.getEntriesByType('paint');
+        const navigation = performance.getEntriesByType('navigation')[0];
+        
+        console.log('🚀 Métricas de rendimiento:');
+        paints.forEach(paint => {
+          console.log(`${paint.name}: ${paint.startTime.toFixed(2)}ms`);
+        });
+        
+        if (navigation) {
+          console.log(`DOMContentLoaded: ${navigation.domContentLoadedEventEnd.toFixed(2)}ms`);
+          console.log(`Load: ${navigation.loadEventEnd.toFixed(2)}ms`);
+        }
+        
+        // LCP Tracking
+        new PerformanceObserver((entryList) => {
+          const entries = entryList.getEntries();
+          const lastEntry = entries[entries.length - 1];
+          console.log(`LCP: ${lastEntry.startTime.toFixed(2)}ms`);
+        }).observe({ type: 'largest-contentful-paint', buffered: true });
+      }, 1000);
+    });
   }
 </script>
 </head>
@@ -598,20 +732,20 @@ Get Started
 <!-- IMAGEN LCP OPTIMIZADA -->
 <img 
   alt="Professional woman seller standing beside an orange car at Auto Palm Beach DMV services"
-  class="rounded-2xl w-full h-full hero-image object-cover relative z-10 hover-scale transition-transform duration-500"
-  src="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp"
-  width="600"
-  height="400"
-  loading="eager"
-  decoding="sync"
-  fetchpriority="high"
-  importance="high"
-  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
+  class="rounded-2xl w-full hero-image object-cover relative z-10"
+  src="https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=300"
   srcset="
     https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=300 300w,
     https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=600 600w,
     https://i.ibb.co/h113tx3Q/woman-seller-standing-beside-orange-car.webp?width=900 900w
   "
+  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
+  width="600"
+  height="400"
+  loading="eager"
+  decoding="async"
+  fetchpriority="high"
+  onload="this.classList.add('loaded')"
 />
 </div>
 </div>
@@ -1545,10 +1679,10 @@ WhatsApp
     
     /* Hero image optimization */
 .hero-image {
-  will-change: transform, opacity; /* Solo propiedades que cambian */
-  transform: translateZ(0); /* Promover a capa GPU */
+  will-change: transform, opacity;
+  transform: translateZ(0);
   backface-visibility: hidden;
-  contain: content; /* Limitar el scope de reflow */
+  contain: content;
 }
     
     /* About us image optimization */
@@ -1901,175 +2035,8 @@ function updateLanguageSelector(lang) {
   }
 }
 
+// Inicializar funcionalidades de idioma
 document.addEventListener('DOMContentLoaded', function() {
-  // Cargar idioma preferido o detectar idioma del navegador
-  const savedLang = localStorage.getItem('preferredLanguage');
-  const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
-  const initialLang = savedLang || browserLang;
-  
-  // Aplicar idioma inicial
-  updateLanguage(initialLang);
-  
-  // Off-canvas menu functionality
-  const mobileMenuButton = document.getElementById('mobileMenuButton');
-  const closeMenuButton = document.getElementById('closeMenuButton');
-  const offCanvasMenu = document.getElementById('offCanvasMenu');
-  const offCanvasOverlay = document.getElementById('offCanvasOverlay');
-  const body = document.body;
-
-  // Open menu
-  mobileMenuButton.addEventListener('click', function() {
-    offCanvasMenu.classList.add('active');
-    offCanvasOverlay.classList.add('active');
-    body.classList.add('menu-open');
-  });
-
-  // Close menu with close button
-  closeMenuButton.addEventListener('click', function() {
-    closeMenu();
-  });
-
-  // Close menu with overlay click
-  offCanvasOverlay.addEventListener('click', function() {
-    closeMenu();
-  });
-
-  // Close menu with ESC key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && offCanvasMenu.classList.contains('active')) {
-      closeMenu();
-    }
-  });
-
-  function closeMenu() {
-    offCanvasMenu.classList.remove('active');
-    offCanvasOverlay.classList.remove('active');
-    body.classList.remove('menu-open');
-  }
-
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      // Si es el enlace de Home "/", no hacer nada especial
-      if(this.getAttribute('href') === '/' || this.getAttribute('href') === '#') return;
-      
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
-      
-      // Verificar si es un enlace interno (#about, #services, etc.)
-      if(targetId.startsWith('#')) {
-        const targetElement = document.querySelector(targetId);
-        
-        if(targetElement) {
-          // Close menu if open
-          closeMenu();
-          
-          // Scroll suave con offset para el navbar fijo
-          const headerHeight = document.querySelector('header').offsetHeight;
-          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = targetPosition - headerHeight - 20;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-          
-          // Actualizar URL sin recargar la página
-          history.pushState(null, null, targetId);
-        }
-      }
-    });
-  });
-
-  // Home link - mantener comportamiento actual
-  document.querySelectorAll('a[href="/"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      // Solo prevenir comportamiento por defecto si es un enlace interno
-      if(!this.getAttribute('href').startsWith('http')) {
-        e.preventDefault();
-        window.location.href = '/';
-      }
-    });
-  });
-
-  // Sticky header
-  const header = document.querySelector('header');
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 100) {
-      header.classList.add('sticky-header', 'py-3', 'shadow-md');
-      header.style.backgroundColor = 'white';
-    } else {
-      header.classList.remove('sticky-header', 'py-3', 'shadow-md');
-      header.style.backgroundColor = '';
-    }
-  });
-
-  // FAQ functionality with smooth animations
-  const faqButtons = document.querySelectorAll('.faq-button');
-  
-  faqButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const answer = this.nextElementSibling;
-      const icon = this.querySelector('.material-symbols-outlined');
-      
-      // Toggle current answer
-      if (answer.classList.contains('open')) {
-        answer.classList.remove('open');
-        icon.textContent = 'add_circle';
-        icon.classList.remove('rotate-180');
-      } else {
-        // Close all other answers
-        document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
-          if(otherAnswer !== answer && otherAnswer.classList.contains('open')) {
-            otherAnswer.classList.remove('open');
-            const otherIcon = otherAnswer.previousElementSibling.querySelector('.material-symbols-outlined');
-            if(otherIcon) {
-              otherIcon.textContent = 'add_circle';
-              otherIcon.classList.remove('rotate-180');
-            }
-          }
-        });
-        
-        // Open current answer
-        answer.classList.add('open');
-        icon.textContent = 'remove_circle';
-        icon.classList.add('rotate-180');
-      }
-    });
-  });
-
-  // Intersection Observer for scroll animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('section-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  // Observe all sections with animations
-  document.querySelectorAll('.section-hidden').forEach((section) => {
-    observer.observe(section);
-  });
-
-  // Hover effects enhancement
-  document.querySelectorAll('.hover-lift').forEach(element => {
-    element.addEventListener('mouseenter', function() {
-      this.style.transition = 'all 0.3s ease';
-    });
-  });
-
-  // Random floating animation delays
-  document.querySelectorAll('.floating').forEach((icon, index) => {
-    icon.style.animationDelay = `${index * 0.2}s`;
-  });
-
   // Language selector functionality
   const languageButton = document.getElementById('languageButton');
   const languageDropdown = document.getElementById('languageDropdown');
@@ -2078,34 +2045,46 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileLangEs = document.getElementById('mobileLangEs');
 
   // Toggle dropdown
-  languageButton.addEventListener('click', function(e) {
-    e.stopPropagation();
-    languageDropdown.classList.toggle('active');
-  });
+  if (languageButton) {
+    languageButton.addEventListener('click', function(e) {
+      e.stopPropagation();
+      languageDropdown.classList.toggle('active');
+    });
+  }
 
   // Close dropdown when clicking outside
   document.addEventListener('click', function() {
-    languageDropdown.classList.remove('active');
+    if (languageDropdown) {
+      languageDropdown.classList.remove('active');
+    }
   });
 
   // Language option selection (desktop)
-  languageOptions.forEach(option => {
-    option.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const lang = this.getAttribute('data-lang');
-      updateLanguage(lang);
-      languageDropdown.classList.remove('active');
+  if (languageOptions.length > 0) {
+    languageOptions.forEach(option => {
+      option.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const lang = this.getAttribute('data-lang');
+        updateLanguage(lang);
+        if (languageDropdown) {
+          languageDropdown.classList.remove('active');
+        }
+      });
     });
-  });
+  }
 
   // Language option selection (mobile)
-  mobileLangEn.addEventListener('click', function() {
-    updateLanguage('en');
-  });
+  if (mobileLangEn) {
+    mobileLangEn.addEventListener('click', function() {
+      updateLanguage('en');
+    });
+  }
 
-  mobileLangEs.addEventListener('click', function() {
-    updateLanguage('es');
-  });
+  if (mobileLangEs) {
+    mobileLangEs.addEventListener('click', function() {
+      updateLanguage('es');
+    });
+  }
 
   // Aplicar estilos Tailwind cuando estén listos
   const checkTailwindReady = setInterval(function() {
