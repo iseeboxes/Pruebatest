@@ -2094,6 +2094,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, 100);
 });
+
+// Añadir al final del JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+  // Añadir width/height a imágenes que no los tengan
+  const images = document.querySelectorAll('img:not([width]):not([height])');
+  
+  images.forEach(img => {
+    if (img.complete) {
+      setImageDimensions(img);
+    } else {
+      img.addEventListener('load', function() {
+        setImageDimensions(this);
+      });
+    }
+  });
+  
+  function setImageDimensions(image) {
+    if (!image.width || !image.height) return;
+    
+    // Solo añadir si no tiene ya
+    if (!image.hasAttribute('width')) {
+      image.setAttribute('width', image.naturalWidth);
+    }
+    if (!image.hasAttribute('height')) {
+      image.setAttribute('height', image.naturalHeight);
+    }
+  }
+});
 </script>
 </body>
 </html>
