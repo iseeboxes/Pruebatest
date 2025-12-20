@@ -71,6 +71,12 @@
     font-display: swap; /* Evita FOIT */
   }
 
+  /* Scroll behavior suave en CSS */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* Altura estimada del header */
+  }
+
   /* Estilos críticos para imagen LCP */
   .hero-image-container {
     position: relative;
@@ -295,7 +301,7 @@
   }
 </style>
 
-<!-- JavaScript optimizado - SOLO FUNCIONES CRÍTICAS -->
+<!-- JavaScript optimizado - SIN REFLOWS FORZADOS -->
 <script>
   // Función optimizada para el menú
   function initMenu() {
@@ -307,15 +313,17 @@
     if (!menuBtn || !menu) return;
     
     const toggleMenu = (open) => {
-      if (open) {
-        menu.classList.add('active');
-        overlay.classList.add('active');
-        document.body.classList.add('menu-open');
-      } else {
-        menu.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.classList.remove('menu-open');
-      }
+      requestAnimationFrame(() => {
+        if (open) {
+          menu.classList.add('active');
+          overlay.classList.add('active');
+          document.body.classList.add('menu-open');
+        } else {
+          menu.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        }
+      });
     };
     
     menuBtn.addEventListener('click', () => toggleMenu(true));
@@ -331,15 +339,21 @@
     heroImage.classList.add('loading');
     
     if (heroImage.complete) {
-      heroImage.classList.remove('loading');
-      heroImage.classList.add('loaded');
+      requestAnimationFrame(() => {
+        heroImage.classList.remove('loading');
+        heroImage.classList.add('loaded');
+      });
     } else {
       heroImage.onload = function() {
-        this.classList.remove('loading');
-        this.classList.add('loaded');
+        requestAnimationFrame(() => {
+          this.classList.remove('loading');
+          this.classList.add('loaded');
+        });
       };
       heroImage.onerror = function() {
-        this.classList.remove('loading');
+        requestAnimationFrame(() => {
+          this.classList.remove('loading');
+        });
       };
     }
   }
@@ -397,7 +411,7 @@
     mapContainer.appendChild(iframe);
   }
 
-  // Inicialización optimizada - SOLO LO CRÍTICO
+  // Inicialización optimizada - SIN REFLOWS FORZADOS
   document.addEventListener('DOMContentLoaded', function() {
     // 1. Optimizar imagen LCP inmediatamente
     optimizeLCPImage();
@@ -405,7 +419,7 @@
     // 2. Inicializar menú y funcionalidades básicas
     initMenu();
     
-    // 3. Configurar scroll suave
+    // 3. Configurar scroll suave SIN REFLOWS FORZADOS
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         if(this.getAttribute('href') === '/' || this.getAttribute('href') === '#') return;
@@ -417,10 +431,20 @@
           const targetElement = document.querySelector(targetId);
           
           if(targetElement) {
-            const headerHeight = document.querySelector('header').offsetHeight;
+            // EVITAR offsetHeight durante el click - usar valor guardado
+            let headerHeight = 80; // Valor por defecto estimado
+            
+            // Usar altura cacheada si existe
+            if (window.cachedHeaderHeight) {
+              headerHeight = window.cachedHeaderHeight;
+            }
+            
+            // Calcular posición sin forzar reflows
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
             const offsetPosition = targetPosition - headerHeight - 20;
             
+            // Usar scroll-behavior CSS (ya configurado en CSS crítico)
+            // El navegador manejará esto de forma optimizada
             window.scrollTo({
               top: offsetPosition,
               behavior: 'smooth'
@@ -432,21 +456,41 @@
       });
     });
     
-    // 4. Configurar header sticky
+    // 4. Configurar header sticky SIN REFLOWS FORZADOS
     const header = document.querySelector('header');
     if (header) {
+      let ticking = false;
+      
       window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-          header.classList.add('sticky-header', 'py-3', 'shadow-md');
-          header.style.backgroundColor = 'white';
-        } else {
-          header.classList.remove('sticky-header', 'py-3', 'shadow-md');
-          header.style.backgroundColor = '';
+        if (!ticking) {
+          window.requestAnimationFrame(function() {
+            // Usar pageYOffset en lugar de propiedades que causan reflow
+            if (window.pageYOffset > 100) {
+              header.classList.add('sticky-header', 'py-3', 'shadow-md');
+              header.style.backgroundColor = 'white';
+            } else {
+              header.classList.remove('sticky-header', 'py-3', 'shadow-md');
+              header.style.backgroundColor = '';
+            }
+            ticking = false;
+          });
+          ticking = true;
         }
       });
     }
     
-    // 5. Cargar recursos no críticos después de 1 segundo
+    // 5. Cachear la altura del header después de que la página cargue
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const header = document.querySelector('header');
+        if (header) {
+          // Calcular una sola vez y cachear
+          window.cachedHeaderHeight = header.offsetHeight;
+        }
+      }, 100);
+    });
+    
+    // 6. Cargar recursos no críticos después de 1 segundo
     setTimeout(() => {
       // Cargar Tailwind CSS asíncrono
       const script = document.createElement('script');
@@ -462,39 +506,44 @@
     }, 1000);
   });
 
-  // Funciones no críticas diferidas
+  // Funciones no críticas diferidas - OPTIMIZADAS SIN REFLOWS
   function initNonCriticalFeatures() {
-    // Configurar FAQ
+    // Configurar FAQ sin reflows forzados
     const faqButtons = document.querySelectorAll('.faq-button');
     faqButtons.forEach(button => {
       button.addEventListener('click', function() {
         const answer = this.nextElementSibling;
         const icon = this.querySelector('.material-symbols-outlined');
         
-        if (answer.classList.contains('open')) {
-          answer.classList.remove('open');
-          icon.textContent = 'add_circle';
-          icon.classList.remove('rotate-180');
-        } else {
-          document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
-            if(otherAnswer !== answer && otherAnswer.classList.contains('open')) {
-              otherAnswer.classList.remove('open');
-              const otherIcon = otherAnswer.previousElementSibling.querySelector('.material-symbols-outlined');
-              if(otherIcon) {
-                otherIcon.textContent = 'add_circle';
-                otherIcon.classList.remove('rotate-180');
+        // Usar requestAnimationFrame para evitar reflows
+        requestAnimationFrame(() => {
+          if (answer.classList.contains('open')) {
+            answer.classList.remove('open');
+            icon.textContent = 'add_circle';
+            icon.classList.remove('rotate-180');
+          } else {
+            // Cerrar otros FAQs
+            document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+              if(otherAnswer !== answer && otherAnswer.classList.contains('open')) {
+                otherAnswer.classList.remove('open');
+                const otherIcon = otherAnswer.previousElementSibling.querySelector('.material-symbols-outlined');
+                if(otherIcon) {
+                  otherIcon.textContent = 'add_circle';
+                  otherIcon.classList.remove('rotate-180');
+                }
               }
-            }
-          });
-          
-          answer.classList.add('open');
-          icon.textContent = 'remove_circle';
-          icon.classList.add('rotate-180');
-        }
+            });
+            
+            // Abrir el actual
+            answer.classList.add('open');
+            icon.textContent = 'remove_circle';
+            icon.classList.add('rotate-180');
+          }
+        });
       });
     });
     
-    // Observer para animaciones de scroll
+    // Observer para animaciones de scroll - OPTIMIZADO
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -503,8 +552,11 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('section-visible');
-          observer.unobserve(entry.target);
+          // Usar requestAnimationFrame para evitar reflows
+          requestAnimationFrame(() => {
+            entry.target.classList.add('section-visible');
+            observer.unobserve(entry.target);
+          });
         }
       });
     }, observerOptions);
@@ -1818,7 +1870,7 @@ const translations = {
     "why.feature5.title": "Administrative Support",
     "why.feature5.description": "We connect you with trusted insurance providers, making the entire process seamless.",
     "why.feature6.title": "Guaranteed Results",
-    "why.feature6.description": "Our reputation is built on results. We have helped hundreds in South Florida. Your success is our commitment.",
+    "why.feature6.description": "Our reputation is built on results. We have helped hundreds in South Florida. Your success is nuestro commitment.",
     
     // Contact
     "contact.tagline": "CONTACT US",
