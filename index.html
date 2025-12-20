@@ -71,11 +71,16 @@
     font-display: swap; /* Evita FOIT */
   }
 
+  html {
+  scroll-padding-top: 80px; /* Altura fija estimada */
+}
+
   /* Scroll behavior suave en CSS */
+@media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px; /* Altura estimada del header */
   }
+}
 
   /* Estilos críticos para imagen LCP */
   .hero-image-container {
@@ -271,15 +276,17 @@
   .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
 
   /* Header sticky */
-  .sticky-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: white !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-  }
+ .sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  transform: translateZ(0); /* Acelera hardware */
+  will-change: transform; /* Optimiza animaciones */
+}
 
   /* Asegurar que el texto sea visible inmediatamente */
   .hero-title, .hero-content p {
@@ -302,7 +309,12 @@
 </style>
 
 <!-- JavaScript optimizado - SIN REFLOWS FORZADOS -->
+<!-- JavaScript optimizado - ELIMINACIÓN COMPLETA DE REFLOWS -->
 <script>
+  // Variables globales para cache
+  let cachedHeaderHeight = 80; // Valor por defecto
+  let isMeasuring = false;
+
   // Función optimizada para el menú
   function initMenu() {
     const menuBtn = document.getElementById('mobileMenuButton');
@@ -313,17 +325,15 @@
     if (!menuBtn || !menu) return;
     
     const toggleMenu = (open) => {
-      requestAnimationFrame(() => {
-        if (open) {
-          menu.classList.add('active');
-          overlay.classList.add('active');
-          document.body.classList.add('menu-open');
-        } else {
-          menu.classList.remove('active');
-          overlay.classList.remove('active');
-          document.body.classList.remove('menu-open');
-        }
-      });
+      if (open) {
+        menu.classList.add('active');
+        overlay.classList.add('active');
+        document.body.classList.add('menu-open');
+      } else {
+        menu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
     };
     
     menuBtn.addEventListener('click', () => toggleMenu(true));
@@ -339,21 +349,15 @@
     heroImage.classList.add('loading');
     
     if (heroImage.complete) {
-      requestAnimationFrame(() => {
-        heroImage.classList.remove('loading');
-        heroImage.classList.add('loaded');
-      });
+      heroImage.classList.remove('loading');
+      heroImage.classList.add('loaded');
     } else {
       heroImage.onload = function() {
-        requestAnimationFrame(() => {
-          this.classList.remove('loading');
-          this.classList.add('loaded');
-        });
+        this.classList.remove('loading');
+        this.classList.add('loaded');
       };
       heroImage.onerror = function() {
-        requestAnimationFrame(() => {
-          this.classList.remove('loading');
-        });
+        this.classList.remove('loading');
       };
     }
   }
@@ -387,28 +391,43 @@
     iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.031562328511!2d-80.06889522347666!3d26.664590776642093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d8d5ce77f5c6f7%3A0x17cba6d534d7a7a4!2s2393%20S%20Congress%20Ave%20%23200%2C%20West%20Palm%20Beach%2C%20FL%2033406!5e0!3m2!1sen!2sus!4v1711569123456!5m2!1sen!2sus';
     
     iframe.onload = function() {
-      requestAnimationFrame(() => {
-        this.classList.add('loaded');
-        const placeholder = document.querySelector('.map-placeholder');
-        if (placeholder) {
-          placeholder.style.display = 'none';
-        }
-      });
+      this.classList.add('loaded');
+      const placeholder = document.querySelector('.map-placeholder');
+      if (placeholder) {
+        placeholder.style.display = 'none';
+      }
     };
 
     iframe.onerror = function() {
-      requestAnimationFrame(() => {
-        console.warn('Google Maps failed to load');
-        const placeholder = document.querySelector('.map-placeholder');
-        if (placeholder) {
-          placeholder.innerHTML = 'Mapa no disponible. Dirección: 2393 South Congress Ave STE 200, West Palm Beach, FL 33406';
-          placeholder.style.animation = 'none';
-          placeholder.style.background = '#f3f4f6';
-        }
-      });
+      console.warn('Google Maps failed to load');
+      const placeholder = document.querySelector('.map-placeholder');
+      if (placeholder) {
+        placeholder.innerHTML = 'Mapa no disponible. Dirección: 2393 South Congress Ave STE 200, West Palm Beach, FL 33406';
+        placeholder.style.animation = 'none';
+        placeholder.style.background = '#f3f4f6';
+      }
     };
 
     mapContainer.appendChild(iframe);
+  }
+
+  // Función para obtener altura del header SIN causar reflow
+  function getHeaderHeight() {
+    if (isMeasuring) return cachedHeaderHeight;
+    
+    const header = document.querySelector('header');
+    if (!header) return cachedHeaderHeight;
+    
+    // Forzar una medición solo si es necesario
+    isMeasuring = true;
+    
+    // Usar requestAnimationFrame para medir en el momento adecuado
+    requestAnimationFrame(() => {
+      cachedHeaderHeight = header.offsetHeight;
+      isMeasuring = false;
+    });
+    
+    return cachedHeaderHeight;
   }
 
   // Inicialización optimizada - SIN REFLOWS FORZADOS
@@ -419,75 +438,71 @@
     // 2. Inicializar menú y funcionalidades básicas
     initMenu();
     
-    // 3. Configurar scroll suave SIN REFLOWS FORZADOS
+    // 3. Configurar scroll suave COMPLETAMENTE OPTIMIZADO
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
-        if(this.getAttribute('href') === '/' || this.getAttribute('href') === '#') return;
+        const href = this.getAttribute('href');
+        if(href === '/' || href === '#') return;
         
         e.preventDefault();
-        const targetId = this.getAttribute('href');
         
-        if(targetId.startsWith('#')) {
-          const targetElement = document.querySelector(targetId);
+        if(href.startsWith('#')) {
+          const targetElement = document.querySelector(href);
           
           if(targetElement) {
-            // EVITAR offsetHeight durante el click - usar valor guardado
-            let headerHeight = 80; // Valor por defecto estimado
-            
-            // Usar altura cacheada si existe
-            if (window.cachedHeaderHeight) {
-              headerHeight = window.cachedHeaderHeight;
-            }
-            
-            // Calcular posición sin forzar reflows
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = targetPosition - headerHeight - 20;
-            
-            // Usar scroll-behavior CSS (ya configurado en CSS crítico)
-            // El navegador manejará esto de forma optimizada
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
+            // CALCULAR POSICIÓN SIN CAUSAR REFLOW
+            // Usamos scrollIntoView con comportamiento suave
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
             });
             
-            history.pushState(null, null, targetId);
+            history.pushState(null, null, href);
           }
         }
       });
     });
     
-    // 4. Configurar header sticky SIN REFLOWS FORZADOS
+    // 4. Configurar header sticky OPTIMIZADO
     const header = document.querySelector('header');
     if (header) {
       let ticking = false;
+      let lastScrollY = window.pageYOffset;
+      
+      const updateHeader = () => {
+        if (lastScrollY > 100) {
+          header.classList.add('sticky-header', 'py-3', 'shadow-md');
+          header.style.backgroundColor = 'white';
+        } else {
+          header.classList.remove('sticky-header', 'py-3', 'shadow-md');
+          header.style.backgroundColor = '';
+        }
+        ticking = false;
+      };
       
       window.addEventListener('scroll', function() {
+        lastScrollY = window.pageYOffset;
+        
         if (!ticking) {
-          window.requestAnimationFrame(function() {
-            // Usar pageYOffset en lugar de propiedades que causan reflow
-            if (window.pageYOffset > 100) {
-              header.classList.add('sticky-header', 'py-3', 'shadow-md');
-              header.style.backgroundColor = 'white';
-            } else {
-              header.classList.remove('sticky-header', 'py-3', 'shadow-md');
-              header.style.backgroundColor = '';
-            }
-            ticking = false;
+          window.requestAnimationFrame(() => {
+            updateHeader();
           });
           ticking = true;
         }
       });
     }
     
-    // 5. Cachear la altura del header después de que la página cargue
+    // 5. Cachear altura del header DESPUÉS de que todo esté renderizado
     window.addEventListener('load', function() {
-      setTimeout(function() {
+      setTimeout(() => {
+        // Medir altura del header una sola vez
         const header = document.querySelector('header');
         if (header) {
-          // Calcular una sola vez y cachear
-          window.cachedHeaderHeight = header.offsetHeight;
+          requestAnimationFrame(() => {
+            cachedHeaderHeight = header.offsetHeight;
+          });
         }
-      }, 100);
+      }, 300);
     });
     
     // 6. Cargar recursos no críticos después de 1 segundo
@@ -506,60 +521,49 @@
     }, 1000);
   });
 
-  // Funciones no críticas diferidas - OPTIMIZADAS SIN REFLOWS
+  // Funciones no críticas diferidas - OPTIMIZADAS
   function initNonCriticalFeatures() {
-    // Configurar FAQ sin reflows forzados
+    // Configurar FAQ - SIN requestAnimationFrame innecesario
     const faqButtons = document.querySelectorAll('.faq-button');
     faqButtons.forEach(button => {
       button.addEventListener('click', function() {
         const answer = this.nextElementSibling;
         const icon = this.querySelector('.material-symbols-outlined');
         
-        // Usar requestAnimationFrame para evitar reflows
-        requestAnimationFrame(() => {
-          if (answer.classList.contains('open')) {
-            answer.classList.remove('open');
-            icon.textContent = 'add_circle';
-            icon.classList.remove('rotate-180');
-          } else {
-            // Cerrar otros FAQs
-            document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
-              if(otherAnswer !== answer && otherAnswer.classList.contains('open')) {
-                otherAnswer.classList.remove('open');
-                const otherIcon = otherAnswer.previousElementSibling.querySelector('.material-symbols-outlined');
-                if(otherIcon) {
-                  otherIcon.textContent = 'add_circle';
-                  otherIcon.classList.remove('rotate-180');
-                }
+        if (answer.classList.contains('open')) {
+          answer.classList.remove('open');
+          icon.textContent = 'add_circle';
+          icon.classList.remove('rotate-180');
+        } else {
+          // Cerrar otros FAQs
+          document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+            if(otherAnswer !== answer && otherAnswer.classList.contains('open')) {
+              otherAnswer.classList.remove('open');
+              const otherIcon = otherAnswer.previousElementSibling.querySelector('.material-symbols-outlined');
+              if(otherIcon) {
+                otherIcon.textContent = 'add_circle';
+                otherIcon.classList.remove('rotate-180');
               }
-            });
-            
-            // Abrir el actual
-            answer.classList.add('open');
-            icon.textContent = 'remove_circle';
-            icon.classList.add('rotate-180');
-          }
-        });
+            }
+          });
+          
+          // Abrir el actual
+          answer.classList.add('open');
+          icon.textContent = 'remove_circle';
+          icon.classList.add('rotate-180');
+        }
       });
     });
     
-    // Observer para animaciones de scroll - OPTIMIZADO
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
+    // Observer para animaciones de scroll - SIN threshold dinámico
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Usar requestAnimationFrame para evitar reflows
-          requestAnimationFrame(() => {
-            entry.target.classList.add('section-visible');
-            observer.unobserve(entry.target);
-          });
+          entry.target.classList.add('section-visible');
+          observer.unobserve(entry.target);
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.section-hidden').forEach((section) => {
       observer.observe(section);
