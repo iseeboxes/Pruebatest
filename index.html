@@ -104,9 +104,9 @@
 </script>
 
 <!-- 2. CSS crítico MÍNIMO inline -->
+<!-- 2. CSS crítico MEJORADO para estabilizar layout -->
 <style>
-  /* Solo lo ABSOLUTAMENTE necesario para que la página no se vea rota */
-
+  /* CSS CRÍTICO - Prevenir cambios de diseño (CLS) */
   
   :root {
     --primary-color: #F97316;
@@ -114,42 +114,175 @@
     --background-soft: #FEF7F2;
   }
   
+  /* RESET CRÍTICO - Establecer dimensiones fijas */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
   body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1F2937;
+    background-color: #ffffff;
+    line-height: 1.5;
+    min-height: 100vh;
   }
   
-  /* Mientras cargan las fuentes personalizadas, usamos system fonts */
-  .font-sans {
-    font-family: system-ui, -apple-system, sans-serif;
+  /* FUENTES DE FALLBACK MEJORADAS - Evitar CLS */
+  /* Establecer tamaños de fuente idénticos a las fuentes personalizadas */
+  h1, .hero-title, .mobile-hero-text {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
   
-  .font-display {
+  h2, h3, h4, .font-display {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  
+  /* Asegurar que los textos no cambien de tamaño */
+  .text-5xl, .text-6xl {
+    font-size: 3rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  @media (min-width: 1024px) {
+    .text-5xl, .text-6xl {
+      font-size: 3.75rem !important;
+    }
+  }
+  
+  .text-4xl {
+    font-size: 2.25rem !important;
+    line-height: 2.5rem !important;
+  }
+  
+  .text-lg {
+    font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+  }
+  
+  /* MANTENER ESPACIOS DE FUENTES */
+  .font-sans, .font-display {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  /* PREVENIR CLS EN IMÁGENES */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Dimensiones explícitas para imágenes críticas */
+  .hero-image, .about-image {
+    aspect-ratio: 4/3;
+    width: 100%;
+    object-fit: cover;
+    background-color: #f3f4f6;
+  }
+  
+  /* Evitar que los botones cambien de tamaño */
+  button, a.btn, .btn-primary {
     font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+  }
+  
+  /* Container básico para mantener layout */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 </style>
 
 <!-- 3. Google Fonts normales (PERO CON display=swap) -->
-<!-- Preload para la fuente principal -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<!-- 3. Google Fonts OPTIMIZADAS para CLS -->
+<!-- Font-display: swap ya no es suficiente, necesitamos font-display: optional o block -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- Carga las fuentes de forma no bloqueante -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
+<!-- OPTIMIZACIÓN AVANZADA: Usar font-display: optional para máxima estabilidad -->
+<style>
+  @font-face {
+    font-family: 'Roboto-fallback';
+    src: local('Arial'), local('Helvetica');
+    ascent-override: 95%;
+    descent-override: 22%;
+    line-gap-override: 0%;
+    size-adjust: 100%;
+  }
+  
+  @font-face {
+    font-family: 'Poppins-fallback';
+    src: local('Arial'), local('Helvetica');
+    ascent-override: 98%;
+    descent-override: 24%;
+    line-gap-override: 0%;
+    size-adjust: 102%;
+  }
+</style>
 
-<!-- Fallback para navegadores sin JavaScript -->
-<noscript>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-</noscript>
+<!-- Precargar solo los pesos críticos -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=block" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=block" as="style">
 
+<!-- Cargar fuentes con font-display: block para evitar CLS -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=block" rel="stylesheet" media="all">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=block" rel="stylesheet" media="all">
+
+<!-- Icon fonts con display: block -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet" media="all">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet" media="all">
+
+<!-- JavaScript para manejar la transición suave de fuentes -->
+<script>
+  (function() {
+    // Esperar a que las fuentes carguen
+    function onFontsLoaded() {
+      document.documentElement.classList.add('fonts-loaded');
+    }
+    
+    // Verificar si las fuentes ya están cargadas
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(onFontsLoaded);
+    } else {
+      // Fallback: esperar 1 segundo
+      setTimeout(onFontsLoaded, 1000);
+    }
+  })();
+</script>
+
+<!-- CSS para transición suave cuando carguen las fuentes -->
+<style>
+  /* Transición suave cuando carguen las fuentes personalizadas */
+  body {
+    font-family: 'Roboto-fallback', system-ui, -apple-system, sans-serif;
+    transition: font-family 0.3s ease;
+  }
+  
+  .fonts-loaded body {
+    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  }
+  
+  .fonts-loaded .font-display,
+  .fonts-loaded h1,
+  .fonts-loaded h2,
+  .fonts-loaded h3,
+  .fonts-loaded h4 {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  }
+</style>
 <!-- 4. Tu configuración de Tailwind (mantenla aquí) -->
 <script>
     tailwind.config = {
@@ -235,6 +368,86 @@
 
 
 <!-- 5. AÑADE AQUÍ TODO TU CSS PERSONALIZADO QUE FALTA -->
+ <!-- 5. AÑADE AQUÍ TODO TU CSS PERSONALIZADO QUE FALTA -->
+<style>
+    /* ====== PREVENIR CLS (Cumulative Layout Shift) ====== */
+    
+    /* 1. Dimensiones explícitas para elementos críticos */
+    .hero-title,
+    .mobile-hero-text,
+    .mobile-hero-subtitle {
+      min-height: 1.2em;
+      display: block;
+    }
+    
+    /* 2. Contenedores con altura mínima */
+    .hero-content,
+    .hero-buttons {
+      min-height: 80px;
+    }
+    
+    /* 3. Imágenes con aspect-ratio y placeholder */
+    img[loading="lazy"] {
+      background-color: #f3f4f6;
+      min-height: 200px;
+    }
+    
+    /* 4. Evitar que los iconos cambien el layout */
+    .material-icons,
+    .material-symbols-outlined {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 1em;
+      font-size: inherit;
+      vertical-align: middle;
+    }
+    
+    /* 5. Asegurar que los botones mantengan su tamaño */
+    button,
+    a[class*="bg-"],
+    .btn-primary {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* 6. Header fijo para evitar movimientos */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+    
+    /* 7. Transición suave para cambios de fuente */
+    .font-sans,
+    .font-display,
+    h1, h2, h3, h4, h5, h6 {
+      transition: font-family 0.3s ease, font-size 0.3s ease;
+    }
+    
+    /* 8. Placeholder para texto mientras cargan las fuentes */
+    .text-placeholder {
+      visibility: hidden;
+    }
+    
+    .fonts-loaded .text-placeholder {
+      visibility: visible;
+    }
+    
+    /* ====== FIN DE CSS ANTI-CLS ====== */
+    
+    /* Tus estilos originales continúan aquí */
+    .material-icons {
+      font-size: inherit;
+    }
+    
+    /* Off-canvas menu styles */
+    .off-canvas-overlay {
 <style>
     .material-icons {
       font-size: inherit;
@@ -1934,6 +2147,43 @@ document.addEventListener('DOMContentLoaded', function() {
   mobileLangEs.addEventListener('click', function() {
     updateLanguage('es');
   });
+});
+</script>
+
+<script>
+// Script específico para reducir CLS
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. Prevenir CLS causado por imágenes
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    if (!img.complete) {
+      img.style.backgroundColor = '#f3f4f6';
+      img.style.minHeight = '200px';
+    }
+  });
+  
+  // 2. Asegurar que las fuentes no causen CLS
+  if ('fonts' in document) {
+    document.fonts.ready.then(() => {
+      document.documentElement.classList.add('fonts-loaded');
+      
+      // Forzar reflow para estabilizar layout
+      document.body.offsetHeight;
+    });
+  } else {
+    // Fallback para navegadores antiguos
+    setTimeout(() => {
+      document.documentElement.classList.add('fonts-loaded');
+    }, 300);
+  }
+  
+  // 3. Medir y reportar CLS (solo en desarrollo)
+  if (window.performance && performance.getEntriesByType) {
+    const clsEntries = performance.getEntriesByType('layout-shift');
+    if (clsEntries.length > 0) {
+      console.log('CLS detected:', clsEntries);
+    }
+  }
 });
 </script>
 </body>
