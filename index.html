@@ -7,73 +7,34 @@
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
 <!-- 1. PRIMERO: Tailwind CSS normal (sin async) -->
-<!-- 1. Tailwind CSS optimizado -->
-<script>
-  // Cargar Tailwind de forma asíncrona
-  (function() {
-    var script = document.createElement('script');
-    script.src = 'https://cdn.tailwindcss.com/3.4.0';
-    script.async = true;
-    document.head.appendChild(script);
-  })();
-</script>
+<script src="https://cdn.tailwindcss.com/3.4.0"></script>
 
 <!-- 2. CSS crítico MÍNIMO inline -->
 <style>
   /* Solo lo ABSOLUTAMENTE necesario para que la página no se vea rota */
 
-  /* CSS CRÍTICO MEJORADO - Solo lo esencial para renderizado inicial */
-:root {
-  --primary-color: #F97316;
-  --secondary-color: #111827;
-  --background-soft: #FEF7F2;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: #1F2937;
-  background-color: #ffffff;
-}
-
-/* Fallback fonts mientras cargan las personalizadas */
-h1, h2, h3, h4, h5, h6, .font-display {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-weight: bold;
-}
-
-/* Asegurar que los botones sean visibles inmediatamente */
-button, a {
-  font-family: system-ui, -apple-system, sans-serif;
-}
-
-/* Layout crítico para el hero */
-.hero-title, .mobile-hero-text {
-  font-family: system-ui, -apple-system, sans-serif;
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-/* Evitar CLS (Cumulative Layout Shift) */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Placeholder para imágenes mientras cargan */
-img[loading="lazy"] {
-  background-color: #f3f4f6;
-  min-height: 100px;
-}
-
-/* Navbar básico */
-header {
-  background-color: white;
-  position: relative;
-  z-index: 50;
-}
+  
+  :root {
+    --primary-color: #F97316;
+    --secondary-color: #111827;
+    --background-soft: #FEF7F2;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Mientras cargan las fuentes personalizadas, usamos system fonts */
+  .font-sans {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  
+  .font-display {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
 </style>
 
 <!-- 3. Google Fonts normales (PERO CON display=swap) -->
