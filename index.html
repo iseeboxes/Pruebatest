@@ -2,190 +2,129 @@
 <html lang="en">
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>DMV & Title Services in West Palm Beach</title>
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
-<!-- Preconexión para recursos externos (mejora velocidad de conexión) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<!-- 1. PRIMERO: Tailwind CSS normal (sin async) -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.0/dist/tailwind.min.css" rel="stylesheet">
 
-<!-- Tailwind CSS desde CDN optimizado -->
-<link rel="preload" 
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.0/dist/tailwind.min.css" 
-      as="style" 
-      onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-  <link rel="stylesheet" 
-        href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.0/dist/tailwind.min.css">
-</noscript>
-
-<!-- CSS crítico inline - Lo esencial para el renderizado inicial -->
+<!-- 2. CSS crítico MÍNIMO inline -->
 <style>
-  /* Variables CSS */
+  /* Solo lo ABSOLUTAMENTE necesario para que la página no se vea rota */
   :root {
     --primary-color: #F97316;
     --secondary-color: #111827;
     --background-soft: #FEF7F2;
   }
   
-  /* Estilos críticos para contenido visible de inmediato */
   body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    color: #1F2937;
-    background-color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
   }
   
-  /* Evitar Cumulative Layout Shift (CLS) */
-  img, video, iframe {
-    max-width: 100%;
-    height: auto;
-    display: block;
+  /* Mientras cargan las fuentes personalizadas, usamos system fonts */
+  .font-sans {
+    font-family: system-ui, -apple-system, sans-serif;
   }
   
-  /* Header inicial */
-  header {
-    background-color: transparent;
-    transition: all 0.3s ease;
-  }
-  
-  /* Hero section - contenido crítico */
-  .hero-title {
-    line-height: 1.1;
-    font-weight: 800;
-    color: #111827;
-  }
-  
-  /* Botones principales */
-  .btn-primary {
-    background-color: #F97316;
-    color: white;
-    border-radius: 0.5rem;
-    padding: 1rem 2rem;
-    font-weight: bold;
-    transition: background-color 0.3s;
-  }
-  
-  .btn-primary:hover {
-    background-color: #EA580C;
-  }
-  
-  /* Fallback fonts mientras cargan Google Fonts */
-  .font-sans-fallback {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  }
-  
-  .font-display-fallback {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  }
-  
-  /* Material Icons fallback */
-  .material-icons-fallback {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background-color: #6B7280;
-    border-radius: 2px;
-  }
-  
-  /* Asegurar contenedores principales */
-  .container {
-    width: 100%;
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  .font-display {
+    font-family: system-ui, -apple-system, sans-serif;
   }
 </style>
 
-<!-- Google Fonts optimizadas -->
-<!-- Fuente principal (Roboto) - carga asíncrona -->
-<link rel="preload" 
-      as="style" 
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap&display=swap">
-<link rel="stylesheet" 
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" 
-      media="print" 
-      onload="this.media='all'">
-<noscript>
-  <link rel="stylesheet" 
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
-</noscript>
+<!-- 3. Google Fonts normales (PERO CON display=swap) -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
-<!-- Fuente secundaria (Poppins) - carga diferida -->
-<link rel="preload" 
-      as="style" 
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" 
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" 
-      media="print" 
-      onload="this.media='all'">
-<noscript>
-  <link rel="stylesheet" 
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
-</noscript>
-
-<!-- Material Icons (NO críticos - cargar después) -->
-<link rel="preload" 
-      as="style" 
-      href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap">
-<link rel="stylesheet" 
-      href="https://fonts.googleapis.com/icon?family=Material+Icons" 
-      media="print" 
-      onload="this.media='all'">
-<noscript>
-  <link rel="stylesheet" 
-        href="https://fonts.googleapis.com/icon?family=Material+Icons">
-</noscript>
-
-<!-- Material Symbols (NO críticos - cargar al final) -->
-<link rel="preload" 
-      as="style" 
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
-<link rel="stylesheet" 
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" 
-      media="print" 
-      onload="this.media='all'">
-<noscript>
-  <link rel="stylesheet" 
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
-</noscript>
-
-<!-- CSS personalizado externo (cargar después del render inicial) -->
-<link rel="preload" 
-      as="style" 
-      href="/css/custom.css" 
-      onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-  <link rel="stylesheet" 
-        href="/css/custom.css">
-</noscript>
-
-<!-- Tu configuración de Tailwind (mover al final del body) -->
+<!-- 4. Tu configuración de Tailwind (mantenla aquí) -->
 <script>
-  // Este script se ejecutará después de cargar la página
-  document.addEventListener('DOMContentLoaded', function() {
-    // Mover la configuración de Tailwind aquí si es necesario
-    // Pero mejor moverla al final del body
-  });
-</script>
-
-<!-- Meta tags adicionales para SEO y performance -->
-<meta name="description" content="Expert DMV & Title Services in West Palm Beach. Skip the long lines and confusing paperwork with our professional vehicle paperwork solutions.">
-<meta name="keywords" content="DMV West Palm Beach, title transfer Florida, VIN verification, car registration Florida">
-<meta name="author" content="Auto Palm Beach">
-<meta property="og:title" content="DMV & Title Services in West Palm Beach">
-<meta property="og:description" content="Expert DMV & Title Services in West Palm Beach">
-<meta property="og:image" content="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
-<meta property="og:url" content="https://autopalmbeach.com">
-<meta name="twitter:card" content="summary_large_image">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary-color)",
+            "primary-darker": "#EA580C",
+            secondary: "var(--secondary-color)",
+            "background-light": "#ffffff",
+            "background-soft": "var(--background-soft)",
+            "text-dark": "#1F2937",
+            "text-light": "#6B7280"
+          },
+          fontFamily: {
+            sans: ["Roboto", "system-ui", "sans-serif"],
+            display: ["Poppins", "system-ui", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            "2xl": "2rem",
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'slide-right': 'slideRight 0.6s ease-out',
+            'slide-left': 'slideLeft 0.6s ease-out',
+            'scale-in': 'scaleIn 0.5s ease-out',
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s ease-in-out infinite',
+            'bounce-slow': 'bounce 2s infinite',
+            'shake': 'shake 0.5s ease-in-out',
+            'fade-down': 'fadeDown 0.3s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            slideRight: {
+              '0%': { transform: 'translateX(-30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            slideLeft: {
+              '0%': { transform: 'translateX(30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.9)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shake: {
+              '0%, 100%': { transform: 'translateX(0)' },
+              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+              '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+            },
+            fadeDown: {
+              '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
+              '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
+            },
+          },
+          transitionDuration: {
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+          },
+        },
+      },
+    };
+  </script>
 </head>
 
 
