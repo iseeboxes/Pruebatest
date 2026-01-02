@@ -6,690 +6,550 @@
 <title>DMV & Title Services in West Palm Beach</title>
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
-<!-- TAILWIND CSS ASÍNCRONO -->
-<script>
-  (function() {
-    var script = document.createElement('script');
-    script.src = 'https://cdn.tailwindcss.com/3.4.0';
-    script.async = true;
-    script.defer = true;
-    
-    script.onload = function() {
-      if (window.tailwind && window.tailwind.config) {
-        window.tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                primary: "#F97316",
-                "primary-darker": "#EA580C",
-                secondary: "#111827",
-                "background-light": "#ffffff",
-                "background-soft": "#FEF7F2",
-                "text-dark": "#1F2937",
-                "text-light": "#6B7280"
-              },
-              fontFamily: {
-                sans: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
-                display: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
-              },
-              borderRadius: {
-                DEFAULT: "0.5rem",
-                lg: "1rem",
-                xl: "1.5rem",
-                "2xl": "2rem",
-              },
-              animation: {
-                'fade-in': 'fadeIn 0.8s ease-out',
-                'slide-up': 'slideUp 0.6s ease-out',
-                'slide-right': 'slideRight 0.6s ease-out',
-                'slide-left': 'slideLeft 0.6s ease-out',
-                'scale-in': 'scaleIn 0.5s ease-out',
-                'float': 'float 3s ease-in-out infinite',
-                'pulse-slow': 'pulse 4s ease-in-out infinite',
-                'bounce-slow': 'bounce 2s infinite',
-                'shake': 'shake 0.5s ease-in-out',
-                'fade-down': 'fadeDown 0.3s ease-out',
-              },
-              keyframes: {
-                fadeIn: {
-                  '0%': { opacity: '0' },
-                  '100%': { opacity: '1' },
-                },
-                slideUp: {
-                  '0%': { transform: 'translateY(30px)', opacity: '0' },
-                  '100%': { transform: 'translateY(0)', opacity: '1' },
-                },
-                slideRight: {
-                  '0%': { transform: 'translateX(-30px)', opacity: '0' },
-                  '100%': { transform: 'translateX(0)', opacity: '1' },
-                },
-                slideLeft: {
-                  '0%': { transform: 'translateX(30px)', opacity: '0' },
-                  '100%': { transform: 'translateX(0)', opacity: '1' },
-                },
-                scaleIn: {
-                  '0%': { transform: 'scale(0.9)', opacity: '0' },
-                  '100%': { transform: 'scale(1)', opacity: '1' },
-                },
-                float: {
-                  '0%, 100%': { transform: 'translateY(0)' },
-                  '50%': { transform: 'translateY(-10px)' },
-                },
-                shake: {
-                  '0%, 100%': { transform: 'translateX(0)' },
-                  '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
-                  '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
-                },
-                fadeDown: {
-                  '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
-                  '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
-                },
-              },
-              transitionDuration: {
-                '300': '300ms',
-                '500': '500ms',
-                '700': '700ms',
-              },
-            },
-          },
-        };
-      }
-    };
-    
-    document.head.appendChild(script);
-  })();
-</script>
+<!-- 1. PRIMERO: Tailwind CSS normal (sin async) -->
+<script src="https://cdn.tailwindcss.com/3.4.0"></script>
 
-<!-- CSS CRÍTICO ANTI-CLS -->
+<!-- 2. CSS crítico MÍNIMO inline -->
 <style>
-  /* RESET CON DIMENSIONES FIJAS */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
+  /* Solo lo ABSOLUTAMENTE necesario para que la página no se vea rota */
   :root {
     --primary-color: #F97316;
     --secondary-color: #111827;
     --background-soft: #FEF7F2;
   }
   
-  /* BODY CON FUENTES DEL SISTEMA */
   body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #1F2937;
-    background-color: #ffffff;
-    line-height: 1.5;
-    min-height: 100vh;
-    width: 100%;
+    font-family: system-ui, -apple-system, sans-serif;
   }
   
-  /* CONTAINER BÁSICO */
-  .container {
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  /* Mientras cargan las fuentes personalizadas, usamos system fonts */
+  .font-sans {
+    font-family: system-ui, -apple-system, sans-serif;
   }
   
-  /* IMÁGENES CON DIMENSIONES FIJAS */
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* HEADER FIJADO */
-  header {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-    transition: all 0.3s ease;
-  }
-  
-  /* DIMENSIONES FIJAS PARA ELEMENTOS CRÍTICOS */
-  .hero-title {
-    min-height: 140px;
-  }
-  
-  .mobile-hero-text {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    min-height: 60px;
-    font-weight: 800;
-  }
-  
-  .mobile-hero-subtitle {
-    font-size: 2rem;
-    line-height: 1.2;
-    min-height: 50px;
-    font-weight: 700;
-  }
-  
-  @media (min-width: 1024px) {
-    .mobile-hero-text {
-      font-size: 3.75rem;
-      min-height: 90px;
-    }
-    .mobile-hero-subtitle {
-      font-size: 2.5rem;
-      min-height: 60px;
-    }
-  }
-  
-  .hero-description {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    min-height: 90px;
-    max-width: 600px;
-  }
-  
-  .hero-buttons {
-    min-height: 60px;
-  }
-  
-  /* ANIMACIONES CONTROLADAS */
-  .section-hidden {
-    opacity: 1;
-    transform: none;
-  }
-  
-  .page-loaded .section-hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  
-  .page-loaded .section-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  /* TRANSICIÓN DE FUENTES */
-  .google-fonts-loaded .font-sans {
-    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
-  }
-  
-  .google-fonts-loaded .font-display,
-  .google-fonts-loaded h1,
-  .google-fonts-loaded h2,
-  .google-fonts-loaded h3,
-  .google-fonts-loaded h4 {
-    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  .font-display {
+    font-family: system-ui, -apple-system, sans-serif;
   }
 </style>
 
-<!-- CSS PERSONALIZADO ORIGINAL (OPTIMIZADO) -->
+<!-- 3. Google Fonts normales (PERO CON display=swap) -->
+<!-- Preload para la fuente principal -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+
+<!-- Carga las fuentes de forma no bloqueante -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
+
+<!-- Fallback para navegadores sin JavaScript -->
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+</noscript>
+
+<!-- 4. Tu configuración de Tailwind (mantenla aquí) -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary-color)",
+            "primary-darker": "#EA580C",
+            secondary: "var(--secondary-color)",
+            "background-light": "#ffffff",
+            "background-soft": "var(--background-soft)",
+            "text-dark": "#1F2937",
+            "text-light": "#6B7280"
+          },
+          fontFamily: {
+            sans: ["Roboto", "system-ui", "sans-serif"],
+            display: ["Poppins", "system-ui", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            "2xl": "2rem",
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'slide-right': 'slideRight 0.6s ease-out',
+            'slide-left': 'slideLeft 0.6s ease-out',
+            'scale-in': 'scaleIn 0.5s ease-out',
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s ease-in-out infinite',
+            'bounce-slow': 'bounce 2s infinite',
+            'shake': 'shake 0.5s ease-in-out',
+            'fade-down': 'fadeDown 0.3s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            slideRight: {
+              '0%': { transform: 'translateX(-30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            slideLeft: {
+              '0%': { transform: 'translateX(30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.9)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shake: {
+              '0%, 100%': { transform: 'translateX(0)' },
+              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+              '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+            },
+            fadeDown: {
+              '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
+              '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
+            },
+          },
+          transitionDuration: {
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+          },
+        },
+      },
+    };
+  </script>
+
+<!-- 5. AÑADE AQUÍ TODO TU CSS PERSONALIZADO QUE FALTA -->
 <style>
-  /* ====== PREVENIR CLS ====== */
-  
-  .hero-title,
-  .mobile-hero-text,
-  .mobile-hero-subtitle {
-    min-height: 1.2em;
-    display: block;
-  }
-  
-  .hero-content,
-  .hero-buttons {
-    min-height: 80px;
-  }
-  
-  img[loading="lazy"] {
-    background-color: #f3f4f6;
-    min-height: 200px;
-  }
-  
-  .material-icons,
-  .material-symbols-outlined {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1em;
-    height: 1em;
-    font-size: inherit;
-    vertical-align: middle;
-  }
-  
-  button,
-  a[class*="bg-"],
-  .btn-primary {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  header {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-    transition: all 0.3s ease;
-  }
-  
-  .font-sans,
-  .font-display,
-  h1, h2, h3, h4, h5, h6 {
-    transition: font-family 0.3s ease, font-size 0.3s ease;
-  }
-  
-  .text-placeholder {
-    visibility: hidden;
-  }
-  
-  .fonts-loaded .text-placeholder {
-    visibility: visible;
-  }
-  
-  /* ====== ESTILOS ORIGINALES ====== */
-  
-  .material-icons {
-    font-size: inherit;
-  }
-  
-  /* Off-canvas menu styles */
-  .off-canvas-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-  }
-  
-  .off-canvas-overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .off-canvas-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 85%;
-    max-width: 320px;
-    height: 100vh;
-    background-color: white;
-    z-index: 1000;
-    transition: right 0.3s ease;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-  }
-  
-  .off-canvas-menu.active {
-    right: 0;
-  }
-  
-  .off-canvas-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid #e5e7eb;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .off-canvas-content {
-    padding: 1.5rem;
-  }
-  
-  .close-menu-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #6b7280;
-    transition: color 0.2s;
-  }
-  
-  .close-menu-btn:hover {
-    color: #111827;
-  }
-  
-  /* Language selector styles */
-  .language-selector {
-    position: relative;
-    margin-right: 15px;
-  }
-  
-  .language-button {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 12px;
-    background: rgba(249, 115, 22, 0.1);
-    border: 1px solid rgba(249, 115, 22, 0.2);
-    border-radius: 6px;
-    color: #F97316;
-    font-weight: 500;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-  }
-  
-  .language-button:hover {
-    background: rgba(249, 115, 22, 0.15);
-    border-color: rgba(249, 115, 22, 0.3);
-  }
-  
-  .language-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 5px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    min-width: 120px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 100;
-  }
-  
-  .language-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  .language-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border-bottom: 1px solid #f3f4f6;
-  }
-  
-  .language-option:last-child {
-    border-bottom: none;
-  }
-  
-  .language-option:hover {
-    background-color: #fef7f2;
-  }
-  
-  .language-option.active {
-    background-color: #fef7f2;
-    color: #F97316;
-    font-weight: 600;
-  }
-  
-  .language-flag {
-    width: 20px;
-    height: 15px;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  
-  /* Animations and effects */
-  .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .hover-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hover-scale {
-    transition: transform 0.3s ease;
-  }
-  
-  .hover-scale:hover {
-    transform: scale(1.05);
-  }
-  
-  .hover-glow:hover {
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
-  }
-  
-  .hover-shake:hover {
-    animation: shake 0.5s ease-in-out;
-  }
-  
-  .pulse-animation {
-    animation: pulse 2s infinite;
-  }
-  
-  .floating {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  .text-gradient {
-    background: linear-gradient(45deg, #F97316, #EA580C);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  /* FAQ answer animations */
-  .faq-answer {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-  }
-  
-  .faq-answer.open {
-    max-height: 500px;
-    opacity: 1;
-    padding-top: 1rem;
-  }
-  
-  /* Prevent body scroll when menu is open */
-  body.menu-open {
-    overflow: hidden;
-  }
-  
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  ::webkit-scrollbar-thumb {
-    background: #F97316;
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #EA580C;
-  }
-  
-  /* Hero text fix */
-  .hero-title {
-    line-height: 1.1;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  /* Fix for Services section text */
-  .services-title {
-    word-break: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  /* NAVBAR FIX MODIFICADO */
-  @media (max-width: 1279px) {
-    .desktop-menu {
-      display: none !important;
+    .material-icons {
+      font-size: inherit;
     }
     
-    .mobile-menu-button {
-      display: flex !important;
+    /* Off-canvas menu styles */
+    .off-canvas-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
     }
     
-    .desktop-get-started {
-      display: none !important;
+    .off-canvas-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
     
-    .hero-content {
-      text-align: center;
+    .off-canvas-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 85%;
+      max-width: 320px;
+      height: 100vh;
+      background-color: white;
+      z-index: 1000;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+    
+    .off-canvas-menu.active {
+      right: 0;
+    }
+    
+    .off-canvas-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
     }
-    .hero-buttons {
-      justify-content: center;
+    
+    .off-canvas-content {
+      padding: 1.5rem;
     }
     
-    .desktop-language-selector {
-      display: none !important;
+    .close-menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #6b7280;
+      transition: color 0.2s;
     }
     
-    .mobile-language-selector {
-      display: flex !important;
-      margin-bottom: 20px;
-      justify-content: center;
-    }
-  }
-  
-  /* Mostrar menú desktop solo a partir de 1280px */
-  @media (min-width: 1280px) {
-    .desktop-menu {
-      display: flex !important;
+    .close-menu-btn:hover {
+      color: #111827;
     }
     
-    .mobile-menu-button {
-      display: none !important;
+    /* Language selector styles */
+    .language-selector {
+      position: relative;
+      margin-right: 15px;
     }
     
-    .desktop-get-started {
-      display: inline-block !important;
+    .language-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      border-radius: 6px;
+      color: #F97316;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
     }
     
-    .desktop-language-selector {
-      display: block !important;
+    .language-button:hover {
+      background: rgba(249, 115, 22, 0.15);
+      border-color: rgba(249, 115, 22, 0.3);
     }
     
-    .mobile-language-selector {
-      display: none !important;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .mobile-hero-text {
-      font-size: 2.2rem;
-    }
-    .mobile-hero-subtitle {
-      font-size: 1.6rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .mobile-hero-text {
-      font-size: 1.8rem;
-    }
-    .mobile-hero-subtitle {
-      font-size: 1.4rem;
-    }
-  }
-  
-  /* Tablet responsive fix */
-  @media (min-width: 768px) and (max-width: 1279px) {
-    .hero-content {
-      text-align: center;
+    .language-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 5px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-width: 120px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 100;
     }
     
-    .hero-buttons {
-      justify-content: center;
+    .language-dropdown.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
-  }
-  
-  /* CTA banner fix */
-  .cta-section {
-    position: relative;
-    z-index: 10;
-    background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
-  }
-  
-  /* Contact section margin */
-  .contact-section {
-    margin-top: 4rem;
-  }
-  
-  /* Hero image optimization */
-  .hero-image {
-    max-height: 600px;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  /* About us image optimization */
-  .about-image {
-    max-height: 600px;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  /* Sticky header styles */
-  .sticky-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: white !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-  }
-</style>
-
-<!-- SCRIPT PARA CARGAR FUENTES SIN CLS -->
-<script>
-  // Cargar fuentes de Google SOLO cuando la página esté completamente estable
-  window.addEventListener('load', function() {
-    // 1. Marcar que la página está cargada
-    document.documentElement.classList.add('page-loaded');
     
-    // 2. Esperar 1 segundo para asegurar estabilidad
-    setTimeout(function() {
-      // 3. Cargar fuentes de Google en segundo plano
-      var fontLinks = [
-        'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap',
-        'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap',
-        'https://fonts.googleapis.com/icon?family=Material+Icons&display=swap',
-        'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap'
-      ];
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .language-option:last-child {
+      border-bottom: none;
+    }
+    
+    .language-option:hover {
+      background-color: #fef7f2;
+    }
+    
+    .language-option.active {
+      background-color: #fef7f2;
+      color: #F97316;
+      font-weight: 600;
+    }
+    
+    .language-flag {
+      width: 20px;
+      height: 15px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    /* Animations and effects */
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+    }
+    
+    .hover-shake:hover {
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .text-gradient {
+      background: linear-gradient(45deg, #F97316, #EA580C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* FAQ answer animations */
+    .faq-answer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+    }
+    
+    .faq-answer.open {
+      max-height: 500px;
+      opacity: 1;
+      padding-top: 1rem;
+    }
+    
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+      overflow: hidden;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #F97316;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #EA580C;
+    }
+    
+    /* Hero text fix - RESPONSIVE CORREGIDO */
+    .hero-title {
+      line-height: 1.1;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    /* Fix for Services section text */
+    .services-title {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    /* NAVBAR FIX MODIFICADO: Menú responsive desde 1279px hacia abajo */
+    @media (max-width: 1279px) {
+      /* Ocultar menú de escritorio */
+      .desktop-menu {
+        display: none !important;
+      }
       
-      fontLinks.forEach(function(fontUrl) {
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = fontUrl;
-        link.media = 'print';
-        link.onload = function() {
-          this.media = 'all';
-          requestAnimationFrame(function() {
-            document.documentElement.classList.add('google-fonts-loaded');
-          });
-        };
-        document.head.appendChild(link);
-      });
-    }, 1000);
-  });
-</script>
+      /* Mostrar botón hamburguesa */
+      .mobile-menu-button {
+        display: flex !important;
+      }
+      
+      /* Ocultar botón Get Started en navbar para móvil */
+      .desktop-get-started {
+        display: none !important;
+      }
+      
+      /* Hero section adjustments */
+      .mobile-hero-text {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        text-align: center;
+        white-space: normal;
+        display: block;
+        width: 100%;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.8rem;
+        text-align: center;
+        display: block;
+        width: 100%;
+      }
+      .hero-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      
+      /* Language selector para móvil */
+      .desktop-language-selector {
+        display: none !important;
+      }
+      
+      .mobile-language-selector {
+        display: flex !important;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+    }
+    
+    /* Mostrar menú desktop solo a partir de 1280px */
+    @media (min-width: 1280px) {
+      .desktop-menu {
+        display: flex !important;
+      }
+      
+      .mobile-menu-button {
+        display: none !important;
+      }
+      
+      .desktop-get-started {
+        display: inline-block !important;
+      }
+      
+      .desktop-language-selector {
+        display: block !important;
+      }
+      
+      .mobile-language-selector {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .mobile-hero-text {
+        font-size: 2.2rem;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.6rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .mobile-hero-text {
+        font-size: 1.8rem;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.4rem;
+      }
+    }
+    
+    /* Ajuste especial para el texto del hero en iPad Pro y pantallas medianas */
+    @media (min-width: 768px) and (max-width: 1279px) {
+      .hero-title .typewriter-text {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        white-space: normal;
+      }
+      
+      .hero-content {
+        text-align: center;
+      }
+      
+      .hero-buttons {
+        justify-content: center;
+      }
+    }
+    
+    /* Tablet responsive fix (para otros elementos) */
+    @media (min-width: 641px) and (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem !important;
+      }
+      
+      .typewriter-text {
+        white-space: normal;
+        display: block;
+      }
+    }
+    
+    /* CTA banner fix */
+    .cta-section {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    }
+    
+    /* Contact section margin */
+    .contact-section {
+      margin-top: 4rem;
+    }
+    
+    /* Hero image optimization */
+    .hero-image {
+      max-height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    /* About us image optimization */
+    .about-image {
+      max-height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    /* Sticky header styles */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: white !important;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+  </style>
 </head>
 
-<body class="bg-background-light text-text-dark">
-<div class="font-sans w-full bg-background-soft">
+<body class="bg-background-light text-text-dark font-sans overflow-x-hidden">
+<div class="w-full bg-background-soft">
 <header class="bg-transparent py-4 transition-all duration-300 z-50 relative">
 <div class="container mx-auto px-4">
 <div class="flex justify-between items-center">
@@ -888,12 +748,461 @@ Get Started
 </div>
 </section>
 
-<!-- AQUÍ ESTÁ EL PROBLEMA - ELIMINAR ESTE DIV DE CIERRE -->
-<!-- </div> --> <!-- ESTA LÍNEA ES EL PROBLEMA -->
-
 <!-- About Section -->
 <div class="bg-white rounded-t-[50px] transform -translate-y-4">
 <section id="about" class="py-24 section-hidden">
+<div class="container mx-auto px-4">
+<div class="flex flex-col lg:flex-row items-center gap-16">
+<div class="lg:w-1/2">
+<div class="relative w-full max-w-lg mx-auto">
+<div class="absolute -inset-4 bg-gradient-to-br from-orange-100 to-transparent rounded-3xl opacity-50"></div>
+<img alt="Background image showing professional documents and office setting" 
+     class="rounded-2xl w-full about-image object-cover relative z-10 hover-scale transition-transform duration-500" 
+     loading="lazy" 
+     decoding="async" 
+     src="https://i.ibb.co/LzKgSnVm/bg-hero.webp"/>
+</div>
+</div>
+<div class="lg:w-1/2 text-text-dark">
+<span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="about.tagline">ABOUT US</span>
+<h2 class="text-4xl font-bold font-display mb-6 text-secondary animate-slide-up" data-i18n="about.title">Your Trusted Partner in Vehicle Paperwork</h2>
+<p class="mb-8 text-text-light animate-slide-up" style="animation-delay: 0.2s" data-i18n="about.description">At Auto Palm Beach, we have helped hundreds of people in South Florida navigate the complex DMV system, making the paperwork simple, secure, and stress-free. We are your specialized administrative office in West Palm Beach.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating">visibility</span>
+<div>
+<h4 class="font-bold text-lg text-secondary" data-i18n="about.feature1.title">Transparency</h4>
+<p class="text-text-light" data-i18n="about.feature1.description">We guarantee 100% legal and clear transactions.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.2s">military_tech</span>
+<div>
+<h4 class="font-bold text-lg text-secondary" data-i18n="about.feature2.title">Experience</h4>
+<p class="text-text-light" data-i18n="about.feature2.description">We have in-depth knowledge of DMV procedures.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.4s">manage_accounts</span>
+<div>
+<h4 class="font-bold text-lg text-secondary" data-i18n="about.feature3.title">Effective Management</h4>
+<p class="text-text-light" data-i18n="about.feature3.description">We help you avoid long lines and paperwork errors.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.6s">groups</span>
+<div>
+<h4 class="font-bold text-lg text-secondary" data-i18n="about.feature4.title">Client Focus</h4>
+<p class="text-text-light" data-i18n="about.feature4.description">Your peace of mind is the center of our service.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-24 bg-background-light section-hidden">
+<div class="container mx-auto px-4 text-center">
+<span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="services.tagline">OUR SERVICES</span>
+<h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up services-title" data-i18n="services.title">Explore Our Services</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+<!-- Servicio 1 -->
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
+<div class="overflow-hidden">
+<img alt="Two people signing official documents with pens" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7kVeFNWpIeNT4L4X-Ekc330lCTL_caF5l6XhiMUFShDbhFM7xi360IeFZ4R3tzIq_oImHmNyu17wdI8mf9QJIobAtzyELnQW4tmUWp8h5l3Uko_IrMUaTSChiF-JAFBcj061RcPPz--wXc-i8Wms9RxFWd5j7Um-_wrhMCl1jwHuApLlD-FwyaJdVE7WSmelxPrsyyK_HoKptyH92JkN8pm5eFxzf2wnOzBj-tnONN_mmpGwifrWQ_l6niWRiLoWG8z6qHb4xT8s"/>
+</div>
+<div class="p-6">
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service1.title">Title Transfers & DMV Docs</h4>
+<p class="text-text-light mb-4" data-i18n="services.service1.description">Simplifying title transfers and DMV documentation for a fast, stress-free process.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
+<span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
+</a>
+</div>
+</div>
+
+<!-- Servicio 2 -->
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
+<div class="overflow-hidden">
+<img alt="A person using a notary stamp on a document" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwVKqbLqqmDDL8-8QsOT74iXrx7B9kLvKNIW61F15UlISBTkR6Qjb8Vjhre2sV9ItQT53LxXPPD7mandJ3tMpQNZm1V4m2X6PREPMI_Kf9NjkN2Dmtg2qQstV7RULQgZHyWIApxJ_QPGBIZNPv8vdzTqYUPa4lnZ_rEHU57S2SkDqeFgYE7KwQn6IP5_LGJ-UwSXbTBo531BEfXdPi5R6SVzAgb-n57qQtOw3YH2o2QkYqztIv9UKL5O2e8dOp7W-ecovaR8UHT6w"/>
+</div>
+<div class="p-6">
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service2.title">Notary Public VIN Verification</h4>
+<p class="text-text-light mb-4" data-i18n="services.service2.description">We offer Florida notary public VIN verification to certify your vehicle's legal identity.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
+<span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
+</a>
+</div>
+</div>
+
+<!-- Servicio 3 -->
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
+<div class="overflow-hidden">
+<img alt="A Florida license plate on a wooden surface" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcQC2Ul3kIuE8sN54g1jsb9Y-n8dw00JAOtCliE5b9tT-bDL48cdmqg5NFwQzL2tGdYVNtovxXs-GCbrKgagFJoGejTVJ2bEFYk36TqAPAZ90gQStViRGQ1_-tjAqlBD9lkjzXJz2aeIjz8iwLBBM-c_b4Gk29KzYdENwdmBK-ce2WUByza0w9vnOfnUQgIad3fq9E0Yh3-vcSLTQZqm89e3xiR-_OioXgGMFvjUtFqiP3NM-twWdC3OToLEayKA-FlckzSWqPoYc"/>
+</div>
+<div class="p-6">
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service3.title">Registration & Plates</h4>
+<p class="text-text-light mb-4" data-i18n="services.service3.description">We handle your vehicle's initial registration and plates, saving you time and DMV visits.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
+<span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
+</a>
+</div>
+</div>
+
+<!-- Servicio 4 -->
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
+<div class="overflow-hidden">
+<img alt="Professional dmv accompaniment west palm beach florida" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/LXLs9dt4//img/professional-dmv-accompaniment-west-palm-beach-florida.webp"/>
+</div>
+<div class="p-6">
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service4.title">Administrative Support Services</h4>
+<p class="text-text-light mb-4" data-i18n="services.service4.description">Document organization and translation. Administrative accompaniment to the DMV or Tax Collector. Connection with external financing and insurance providers.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
+<span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
+</a>
+</div>
+</div>
+
+<!-- Servicio 5 -->
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
+<div class="overflow-hidden">
+<img alt="Calendar with appointment scheduling for DMV" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/p6ZtSMqr/dmv-appointment-scheduling-confirmation-west-palm-beach-florida.webp"/>
+</div>
+<div class="p-6">
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service5.title">DMV Appointment Scheduling</h4>
+<p class="text-text-light mb-4" data-i18n="services.service5.description">Coordination of official appointments for license, registration, and plate paperwork. Confirmation of date, time, and specific requirements for each procedure.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
+<span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
+</a>
+</div>
+</div>
+
+<!-- Servicio 6 -->
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transitionall duration-500 hover-lift group">
+<div class="overflow-hidden">
+<img alt="Car being photographed for online listing" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/fYMJkH8x/Car-being-photographed-for-online-listing.webp"/>
+</div>
+<div class="p-6">
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service6.title">Vehicle Listing & Online Promotion</h4>
+<p class="text-text-light mb-4" data-i18n="services.service6.description">We help you list your cars, motors, and auto parts. Digital promotion on partner platforms and social media.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
+<span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section py-16 text-white">
+<div class="container mx-auto px-4 text-center">
+<h2 class="text-3xl font-bold font-display mb-6" data-i18n="cta.title">Get Started Today</h2>
+<p class="mb-8 max-w-2xl mx-auto text-lg" data-i18n="cta.description">Get started with a free service evaluation. No obligations, just solutions.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<a href="tel:5616291310" class="bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-all duration-300 hover-lift">
+<span class="material-symbols-outlined align-middle mr-2">call</span>
+<span data-i18n="cta.call">Call Now: (561) 303-9783</span>
+</a>
+<a href="https://wa.me/15613039783" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-primary transition-all duration-300 hover-lift">
+WhatsApp
+</a>
+</div>
+</div>
+</section>
+
+<!-- Process Section -->
+<section id="process" class="py-24 bg-background-soft rounded-[50px] my-12 section-hidden">
+<div class="container mx-auto px-4 text-center">
+<span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="process.tagline">HOW IT WORKS</span>
+<h2 class="text-4xl font-bold font-display mb-4 text-secondary animate-slide-up" data-i18n="process.title">Our Simple Process</h2>
+<p class="mb-16 text-text-light max-w-2xl mx-auto animate-slide-up" style="animation-delay: 0.2s" data-i18n="process.description">We've streamlined the DMV process into four easy steps, saving you time and stress.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover-lift transition-all duration-300 group">
+<div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-3xl font-bold group-hover:scale-110 transition-transform duration-300 floating">1</div>
+<h4 class="text-lg font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="process.step1.title">Contact Us</h4>
+<p class="text-text-light" data-i18n="process.step1.description">Reach out by phone, email, or our contact form to get started.</p>
+</div>
+<div class="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover-lift transition-all duration-300 group" style="animation-delay: 0.2s">
+<div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-3xl font-bold group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.2s">2</div>
+<h4 class="text-lg font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="process.step2.title">Provide Documents</h4>
+<p class="text-text-light" data-i18n="process.step2.description">Easily and securely submit the necessary documents.</p>
+</div>
+<div class="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover-lift transition-all duration-300 group" style="animation-delay: 0.4s">
+<div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-3xl font-bold group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.4s">3</div>
+<h4 class="text-lg font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="process.step3.title">We Handle Paperwork</h4>
+<p class="text-text-light" data-i18n="process.step3.description">Our expert team takes over the complex DMV process.</p>
+</div>
+<div class="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover-lift transition-all duration-300 group" style="animation-delay: 0.6s">
+<div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-3xl font-bold group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.6s">4</div>
+<h4 class="text-lg font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="process.step4.title">Get Your Results</h4>
+<p class="text-text-light" data-i18n="process.step4.description">Receive your completed titles and registrations quickly.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-24 bg-white section-hidden">
+<div class="container mx-auto px-4 text-center">
+<span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="testimonials.tagline">TESTIMONIALS</span>
+<h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up" data-i18n="testimonials.title">What Our Clients Say</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-background-soft p-6 rounded-xl hover-lift transition-all duration-300 group">
+<div class="flex items-center mb-4">
+<div class="text-yellow-400 group-hover:scale-110 transition-transform duration-300">★★★★★</div>
+<span class="ml-2 text-sm text-text-light" data-i18n="testimonials.testimonial1.date">2 days ago</span>
+</div>
+<p class="text-text-dark mb-4 italic group-hover:text-secondary transition-colors" data-i18n="testimonials.testimonial1.text">"Saved me hours at the DMV! The title transfer was completed in half the time."</p>
+<p class="font-bold text-primary">- Michael R.</p>
+</div>
+<div class="bg-background-soft p-6 rounded-xl hover-lift transition-all duration-300 group" style="animation-delay: 0.2s">
+<div class="flex items-center mb-4">
+<div class="text-yellow-400 group-hover:scale-110 transition-transform duration-300">★★★★★</div>
+<span class="ml-2 text-sm text-text-light" data-i18n="testimonials.testimonial2.date">1 week ago</span>
+</div>
+<p class="text-text-dark mb-4 italic group-hover:text-secondary transition-colors" data-i18n="testimonials.testimonial2.text">"Professional and efficient. They handled everything from VIN verification to plates."</p>
+<p class="font-bold text-primary">- Sarah L.</p>
+</div>
+<div class="bg-background-soft p-6 rounded-xl hover-lift transition-all duration-300 group" style="animation-delay: 0.4s">
+<div class="flex items-center mb-4">
+<div class="text-yellow-400 group-hover:scale-110 transition-transform duration-300">★★★★★</div>
+<span class="ml-2 text-sm text-text-light" data-i18n="testimonials.testimonial3.date">3 weeks ago</span>
+</div>
+<p class="text-text-dark mb-4 italic group-hover:text-secondary transition-colors" data-i18n="testimonials.testimonial3.text">"As a first-time car buyer in Florida, their guidance was invaluable."</p>
+<p class="font-bold text-primary">- James T.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-24 section-hidden">
+<div class="container mx-auto px-4 text-center">
+<span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="why.tagline">WHY CHOOSE US</span>
+<h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up" data-i18n="why.title">Advantages of Our Service</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating">person_pin</span>
+<div>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature1.title">Personalized Approach</h4>
+<p class="text-text-light" data-i18n="why.feature1.description">We provide clear, personalized advice to avoid common mistakes that delay your paperwork.</p>
+</div>
+</div>
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.1s">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.2s">hourglass_top</span>
+<div>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature2.title">Time Saving</h4>
+<p class="text-text-light" data-i18n="why.feature2.description">Skip the long lines and confusion. We handle the paperwork and logistics, including scheduling.</p>
+</div>
+</div>
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.2s">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.4s">inventory_2</span>
+<div>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature3.title">All-in-One Service</h4>
+<p class="text-text-light" data-i18n="why.feature3.description">From VIN verification to title transfers, we simplify the entire administrative process.</p>
+</div>
+</div>
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.3s">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.6s">shield</span>
+<div>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature4.title">Total Transparency & Trust</h4>
+<p class="text-text-light" data-i18n="why.feature4.description">We offer absolute transparency in costs and procedures, ensuring your transaction is 100% legal.</p>
+</div>
+</div>
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.4s">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.8s">support_agent</span>
+<div>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature5.title">Administrative Support</h4>
+<p class="text-text-light" data-i18n="why.feature5.description">We connect you with trusted insurance providers, making the entire process seamless.</p>
+</div>
+</div>
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.5s">
+<span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 1s">military_tech</span>
+<div>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature6.title">Guaranteed Results</h4>
+<p class="text-text-light" data-i18n="why.feature6.description">Our reputation is built on results. We have helped hundreds in South Florida. Your success is our commitment.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-24 contact-section section-hidden">
+<div class="container mx-auto px-4">
+<div class="text-center">
+<span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="contact.tagline">CONTACT US</span>
+<h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up" data-i18n="contact.title">Visit or Contact Us</h2>
+</div>
+<div class="flex flex-col lg:flex-row gap-12 items-center">
+<div class="lg:w-1/2 text-text-dark animate-slide-right">
+<div class="space-y-6">
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift group">
+<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating">location_on</span>
+<div>
+<h4 class="font-bold text-secondary text-xl group-hover:text-primary transition-colors">Auto Palm Beach</h4>
+<p class="text-text-light mt-1" data-i18n="contact.address">2393 South Congress Ave STE 200, West Palm Beach, FL 33406</p>
+</div>
+</div>
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift group">
+<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.2s">phone</span>
+<div>
+  <a href="tel:5613039783" class="font-bold text-secondary text-xl group-hover:text-primary transition-colors">(561) 303-9783</a>
+<p class="text-text-light mt-1" data-i18n="contact.phoneDescription">Give us a call - we're happy to help!</p>
+</div>
+</div>
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift group">
+<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.4s">email</span>
+<div>
+<h4 class="font-bold text-secondary text-xl group-hover:text-primary transition-colors">contact@autopalmbeach.com</h4>
+<p class="text-text-light mt-1" data-i18n="contact.emailDescription">Send us an email for quick responses</p>
+</div>
+</div>
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transitionall duration-300 hover-lift group">
+<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.6s">schedule</span>
+<div>
+<h4 class="font-bold text-secondary text-xl group-hover:text-primary transition-colors" data-i18n="contact.hoursTitle">Opening Hours</h4>
+<p class="text-text-light mt-1" data-i18n="contact.hoursWeekdays">Monday - Friday: 9:00 AM - 5:00 PM</p>
+<p class="text-text-light text-sm mt-1" data-i18n="contact.hoursSaturday">Saturday: 10:00 AM - 2:00 PM (By appointment only)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 animate-slide-left">
+<div class="w-full h-96 rounded-2xl overflow-hidden shadow-xl hover-lift transition-all duration-500">
+<iframe 
+    src="https://www.google.com/maps/embed?q=2393%20South%20Congress%20Ave%20STE%20200%2C%20West%20Palm%20Beach%2C%20FL%2033406"
+    width="100%" 
+    height="100%" 
+    style="border:0;" 
+    allowfullscreen 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade"
+    class="hover:scale-105 transition-transform duration-700"
+    title="Auto Palm Beach Location Map">
+</iframe>
+</div>
+<div class="mt-6 text-center">
+<p class="text-text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
+</div>
+<div class="mt-6 text-center">
+<p class="text-text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-24 bg-background-light section-hidden">
+<div class="container mx-auto px-4 max-w-4xl">
+<div class="text-center">
+<span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="faq.tagline">FAQ</span>
+<h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up" data-i18n="faq.title">Frequently Asked Questions</h2>
+</div>
+<div class="space-y-4">
+<!-- FAQ 1 -->
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question1">What services does Auto Palm Beach offer exactly?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
+</button>
+<div class="faq-answer">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
+<p data-i18n="faq.answer1">We are your administrative assistant specialized in vehicle paperwork. We handle the preparation and review of DMV forms, notary public VIN verification, registration and license plate assistance, and DMV appointment scheduling.</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ 2 -->
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question2">Are you a car dealership?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
+</button>
+<div class="faq-answer">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
+<p data-i18n="faq.answer2">No. It's important to clarify that Auto Palm Beach is NOT a licensed motor vehicle dealer. We operate as an administrative service office and an advertising platform. The vehicles belong to private sellers; We help you list your vehicles and provide added exposure through digital promotion on partner platforms.</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ 3 -->
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question3">I bought/sold a car privately. Can you help me with the paperwork?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
+</button>
+<div class="faq-answer">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
+<p data-i18n="faq.answer3">Absolutely! This is our primary service. We assist you with the title transfer, the correct preparation of documentation (such as form HSMV 82040), and the VIN verification if required, ensuring everything is in order to avoid future problems at the DMV.</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ 4 -->
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question4">Can you help me get temporary or permanent license plates?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
+</button>
+<div class="faq-answer">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
+<p data-i18n="faq.answer4">Yes. We provide all the necessary administrative support to apply for your temporary tags or manage permanent registration and plates, guiding you through the specific process and requirements.</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ 5 -->
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question5">What does "VIN Verification by a Notary Public" mean, and when do I need it?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
+</button>
+<div class="faq-answer">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
+<p data-i18n="faq.answer5">This service (form HSMV 82042) is mandatory for vehicles coming from another state or in cases where the Florida DMV requires a physical inspection of the VIN number. Our authorized Notary Public certifies the accuracy of the VIN, a crucial step for titling the car in Florida.</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ 6 -->
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question6">Do you offer document translation services?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
+</button>
+<div class="faq-answer">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
+<p data-i18n="faq.answer6">Yes, as part of our administrative support services, we can assist you in organizing and translating documents needed for your paperwork, making the process easier if language is a barrier.</p>
+</div>
+</div>
+</div>
+
+<!-- FAQ 7 -->
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question7">How can I get in touch to use your services?</span>
+<span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
+</button>
+<div class="faq-answer">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
+<p data-i18n="faq.answer7">You can call us at (561) 303-9783, visit us at our office at 2393 South Congress Ave STE 200, West Palm Beach, FL 33406, or complete the contact form on our website to schedule a consultation.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
 
 <footer class="bg-background-soft text-secondary pt-20 pb-8 section-hidden">
 <div class="container mx-auto px-4">
@@ -952,7 +1261,32 @@ Get Started
 </footer>
 </div>
 
-<!-- SCRIPT DE TRADUCCIONES COMPLETO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Auto Palm Beach",
+  "description": "DMV & Title Services in West Palm Beach, Florida",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2393 South Congress Ave STE 200",
+    "addressLocality": "West Palm Beach",
+    "addressRegion": "FL",
+    "postalCode": "33406"
+  },
+  "telephone": "(561) 303-9783",
+  "email": "contact@autopalmbeach.com",
+  "openingHours": "Mo-Fr 09:00-17:00",
+  "priceRange": "$",
+  "url": "https://autopalmbeach.com",
+  "sameAs": [
+    "https://facebook.com/autopalmbeach",
+    "https://twitter.com/autopalmbeach",
+    "https://linkedin.com/company/autopalmbeach"
+  ]
+}
+</script>
+
 <script>
 // Internacionalización - Textos en inglés y español
 const translations = {
@@ -1294,12 +1628,9 @@ function updateLanguageSelector(lang) {
     mobileLangEs.classList.add('active');
   }
 }
-</script>
 
-<!-- SCRIPT PRINCIPAL -->
-<script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Cargar idioma preferido
+  // Cargar idioma preferido o detectar idioma del navegador
   const savedLang = localStorage.getItem('preferredLanguage');
   const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
   const initialLang = savedLang || browserLang;
@@ -1347,11 +1678,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // Smooth scrolling for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
+      // Si es el enlace de Home "/", no hacer nada especial
       if(this.getAttribute('href') === '/' || this.getAttribute('href') === '#') return;
       
       e.preventDefault();
       const targetId = this.getAttribute('href');
       
+      // Verificar si es un enlace interno (#about, #services, etc.)
       if(targetId.startsWith('#')) {
         const targetElement = document.querySelector(targetId);
         
@@ -1359,7 +1692,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // Close menu if open
           closeMenu();
           
-          // Scroll suave con offset
+          // Scroll suave con offset para el navbar fijo
           const headerHeight = document.querySelector('header').offsetHeight;
           const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
           const offsetPosition = targetPosition - headerHeight - 20;
@@ -1369,15 +1702,17 @@ document.addEventListener('DOMContentLoaded', function() {
             behavior: 'smooth'
           });
           
+          // Actualizar URL sin recargar la página
           history.pushState(null, null, targetId);
         }
       }
     });
   });
 
-  // Home link
+  // Home link - mantener comportamiento actual
   document.querySelectorAll('a[href="/"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
+      // Solo prevenir comportamiento por defecto si es un enlace interno
       if(!this.getAttribute('href').startsWith('http')) {
         e.preventDefault();
         window.location.href = '/';
@@ -1397,7 +1732,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // FAQ functionality
+  // FAQ functionality with smooth animations
   const faqButtons = document.querySelectorAll('.faq-button');
   
   faqButtons.forEach(button => {
@@ -1431,27 +1766,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Intersection Observer para animaciones scroll (solo después de page-loaded)
-  if (document.documentElement.classList.contains('page-loaded')) {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('section-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.section-hidden').forEach((section) => {
-      observer.observe(section);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('section-visible');
+        observer.unobserve(entry.target);
+      }
     });
-  }
+  }, observerOptions);
 
+  // Observe all sections with animations
+  document.querySelectorAll('.section-hidden').forEach((section) => {
+    observer.observe(section);
+  });
+
+  // Hover effects enhancement
+  document.querySelectorAll('.hover-lift').forEach(element => {
+    element.addEventListener('mouseenter', function() {
+      this.style.transition = 'all 0.3s ease';
+    });
+  });
+
+  // Dynamic text effects - ELIMINADO el código relacionado con typewriter-text
   // Random floating animation delays
   document.querySelectorAll('.floating').forEach((icon, index) => {
     icon.style.animationDelay = `${index * 0.2}s`;
@@ -1493,43 +1835,7 @@ document.addEventListener('DOMContentLoaded', function() {
   mobileLangEs.addEventListener('click', function() {
     updateLanguage('es');
   });
-
-  // Anti-CLS: Fijar dimensiones de imágenes
-  document.querySelectorAll('img').forEach(img => {
-    if (!img.complete) {
-      img.style.backgroundColor = '#f3f4f6';
-      img.style.minHeight = '200px';
-    }
-  });
 });
 </script>
-
-<!-- SCHEMA.ORG -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Auto Palm Beach",
-  "description": "DMV & Title Services in West Palm Beach, Florida",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "2393 South Congress Ave STE 200",
-    "addressLocality": "West Palm Beach",
-    "addressRegion": "FL",
-    "postalCode": "33406"
-  },
-  "telephone": "(561) 303-9783",
-  "email": "contact@autopalmbeach.com",
-  "openingHours": "Mo-Fr 09:00-17:00",
-  "priceRange": "$",
-  "url": "https://autopalmbeach.com",
-  "sameAs": [
-    "https://facebook.com/autopalmbeach",
-    "https://twitter.com/autopalmbeach",
-    "https://linkedin.com/company/autopalmbeach"
-  ]
-}
-</script>
-
 </body>
 </html>
