@@ -29,6 +29,7 @@
     padding: 0;
     overflow-x: hidden;
     font-family: system-ui, -apple-system, sans-serif;
+    background-color: #ffffff;
   }
   
   /* Layout crítico */
@@ -61,7 +62,7 @@
   }
 </style>
 
-<!-- 2. TAILWIND ASÍNCRONO (solo carga, no config) -->
+<!-- 2. TAILWIND CSS -->
 <link rel="stylesheet" href="https://cdn.tailwindcss.com/3.4.0">
 
 <!-- 3. GOOGLE FONTS (optimizadas) -->
@@ -82,9 +83,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 </noscript>
 
-<!-- 4. CONFIGURACIÓN DE TAILWIND (aquí mismo, después de cargar Tailwind) -->
+<!-- 4. CONFIGURACIÓN DE TAILWIND -->
 <script>
-  // Tailwind config debe estar ANTES de que se cargue el CSS
   tailwind.config = {
     theme: {
       extend: {
@@ -164,9 +164,8 @@
   };
 </script>
 
-<!-- 5. CSS PERSONALIZADO (todo lo que necesita Tailwind) -->
+<!-- 5. CSS PERSONALIZADO -->
 <style>
-  /* Mantén TODO tu CSS personalizado aquí */
   .material-icons {
     font-size: inherit;
   }
@@ -401,142 +400,12 @@
     background: #EA580C;
   }
   
-  /* Hero text fix - RESPONSIVE CORREGIDO */
+  /* Hero text fix */
   .hero-title {
     line-height: 1.1;
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
-  }
-  
-  /* Fix for Services section text */
-  .services-title {
-    word-break: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  /* NAVBAR FIX MODIFICADO: Menú responsive desde 1279px hacia abajo */
-  @media (max-width: 1279px) {
-    /* Ocultar menú de escritorio */
-    .desktop-menu {
-      display: none !important;
-    }
-    
-    /* Mostrar botón hamburguesa */
-    .mobile-menu-button {
-      display: flex !important;
-    }
-    
-    /* Ocultar botón Get Started en navbar para móvil */
-    .desktop-get-started {
-      display: none !important;
-    }
-    
-    /* Hero section adjustments */
-    .mobile-hero-text {
-      font-size: 2.5rem;
-      line-height: 1.2;
-      text-align: center;
-      white-space: normal;
-      display: block;
-      width: 100%;
-    }
-    .mobile-hero-subtitle {
-      font-size: 1.8rem;
-      text-align: center;
-      display: block;
-      width: 100%;
-    }
-    .hero-content {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .hero-buttons {
-      justify-content: center;
-    }
-    
-    /* Language selector para móvil */
-    .desktop-language-selector {
-      display: none !important;
-    }
-    
-    .mobile-language-selector {
-      display: flex !important;
-      margin-bottom: 20px;
-      justify-content: center;
-    }
-  }
-  
-  /* Mostrar menú desktop solo a partir de 1280px */
-  @media (min-width: 1280px) {
-    .desktop-menu {
-      display: flex !important;
-    }
-    
-    .mobile-menu-button {
-      display: none !important;
-    }
-    
-    .desktop-get-started {
-      display: inline-block !important;
-    }
-    
-    .desktop-language-selector {
-      display: block !important;
-    }
-    
-    .mobile-language-selector {
-      display: none !important;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .mobile-hero-text {
-      font-size: 2.2rem;
-    }
-    .mobile-hero-subtitle {
-      font-size: 1.6rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .mobile-hero-text {
-      font-size: 1.8rem;
-    }
-    .mobile-hero-subtitle {
-      font-size: 1.4rem;
-    }
-  }
-  
-  /* Ajuste especial para el texto del hero en iPad Pro y pantallas medianas */
-  @media (min-width: 768px) and (max-width: 1279px) {
-    .hero-title .typewriter-text {
-      font-size: 3.5rem;
-      line-height: 1.1;
-      white-space: normal;
-    }
-    
-    .hero-content {
-      text-align: center;
-    }
-    
-    .hero-buttons {
-      justify-content: center;
-    }
-  }
-  
-  /* Tablet responsive fix (para otros elementos) */
-  @media (min-width: 641px) and (max-width: 768px) {
-    .hero-title {
-      font-size: 3rem !important;
-    }
-    
-    .typewriter-text {
-      white-space: normal;
-      display: block;
-    }
   }
   
   /* CTA banner fix */
@@ -549,20 +418,6 @@
   /* Contact section margin */
   .contact-section {
     margin-top: 4rem;
-  }
-  
-  /* Hero image optimization */
-  .hero-image {
-    max-height: 600px;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  /* About us image optimization */
-  .about-image {
-    max-height: 600px;
-    object-fit: cover;
-    object-position: center;
   }
   
   /* Sticky header styles */
@@ -589,7 +444,7 @@
 </div>
 
 <!-- LANGUAGE SELECTOR PARA ESCRITORIO -->
-<div class="desktop-language-selector hidden">
+<div class="desktop-language-selector hidden lg:block">
   <div class="language-selector">
     <button class="language-button" id="languageButton">
       <div class="language-flag" id="currentFlag">
@@ -654,96 +509,6 @@
 </div>
 </header>
 
-<!-- El resto de tu HTML permanece igual desde aquí... -->
-
-<!-- Off-canvas overlay -->
-<div id="offCanvasOverlay" class="off-canvas-overlay"></div>
-
-<!-- Off-canvas menu -->
-<div id="offCanvasMenu" class="off-canvas-menu">
-<!-- ... contenido del menú ... -->
-</div>
-<main>
-<!-- Hero Section - NOTA: la imagen está optimizada -->
-<section id="home" class="relative pt-16 pb-24 overflow-hidden">
-<div class="absolute inset-0 bg-gradient-to-r from-orange-50 to-transparent z-0"></div>
-<div class="container mx-auto px-4 relative z-10">
-<div class="flex flex-col lg:flex-row items-center gap-12">
-<div class="lg:w-1/2 text-left animate-slide-right hero-content">
-<span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="hero.tagline">DMV & VIN Verification</span>
-<h1 class="text-5xl lg:text-6xl font-extrabold font-display mb-6 leading-tight text-secondary hero-title">
-<span class="block mb-4 mobile-hero-text" data-i18n="hero.title">
-  Expert DMV & Title Services
-</span>
-<span class="text-gradient block mobile-hero-subtitle" data-i18n="hero.subtitle"> in West Palm Beach</span>
-</h1>
-<p class="text-lg text-text-light max-w-lg mb-10 animate-slide-up" style="animation-delay: 0.3s" data-i18n="hero.description">Skip the long lines and confusing paperwork. We are your local vehicle paperwork solution in South Florida.</p>
-<div class="flex items-center space-x-4 hero-buttons">
-<a class="bg-primary text-white font-bold py-4 px-8 rounded-lg text-lg hover:bg-primary-darker transition-colors hover-lift hover-glow animate-scale-in" href="https://wa.me/15613039783" style="animation-delay: 0.6s" data-i18n="hero.cta">Get a Free Quote</a>
-<a class="text-secondary font-bold hover:text-primary transition-colors flex items-center gap-2 hover-lift animate-scale-in" href="#about" style="animation-delay: 0.8s">
-<span data-i18n="hero.learnMore">Learn More</span> 
-<span class="material-symbols-outlined animate-bounce-slow">arrow_forward</span>
-</a>
-</div>
-</div>
-<div class="lg:w-1/2 animate-slide-left">
-<div class="relative w-full max-w-lg mx-auto">
-<div class="absolute -inset-4 bg-gradient-to-r from-primary to-primary-darker rounded-3xl opacity-20 blur-xl"></div>
-<!-- IMAGEN HERO OPTIMIZADA -->
-<img alt="Professional woman seller standing beside an orange car" 
-     class="rounded-2xl w-full h-full hero-image object-cover relative z-10"
-     loading="eager" 
-     decoding="async"
-     fetchpriority="high"
-     width="800"
-     height="600"
-     src="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp">
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- El resto de tu HTML sigue igual... -->
-
-</main>
-
-<!-- Los scripts JavaScript permanecen igual al final del body -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Auto Palm Beach",
-  "description": "DMV & Title Services in West Palm Beach, Florida",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "2393 South Congress Ave STE 200",
-    "addressLocality": "West Palm Beach",
-    "addressRegion": "FL",
-    "postalCode": "33406"
-  },
-  "telephone": "(561) 303-9783",
-  "email": "contact@autopalmbeach.com",
-  "openingHours": "Mo-Fr 09:00-17:00",
-  "priceRange": "$",
-  "url": "https://autopalmbeach.com",
-  "sameAs": [
-    "https://facebook.com/autopalmbeach",
-    "https://twitter.com/autopalmbeach",
-    "https://linkedin.com/company/autopalmbeach"
-  ]
-}
-</script>
-
-<script>
-// Tu código JavaScript completo aquí...
-// (Copiar todo el código JavaScript que tenías originalmente)
-</script>
-</body>
-</html>
-
-
-
 <!-- Off-canvas overlay -->
 <div id="offCanvasOverlay" class="off-canvas-overlay"></div>
 
@@ -760,7 +525,7 @@
 </div>
 <div class="off-canvas-content">
 <!-- LANGUAGE SELECTOR PARA MÓVIL -->
-<div class="mobile-language-selector mb-6" style="display: none;">
+<div class="mobile-language-selector mb-6">
   <div class="flex justify-center space-x-4">
     <button class="language-option active flex items-center gap-2 px-4 py-2 rounded-lg" data-lang="en" id="mobileLangEn">
       <div class="language-flag">
@@ -827,7 +592,6 @@ Get Started
 </div>
 </div>
 </div>
-</div>
 
 <main>
 <!-- Hero Section -->
@@ -855,6 +619,7 @@ Get Started
 <div class="lg:w-1/2 animate-slide-left">
 <div class="relative w-full max-w-lg mx-auto">
 <div class="absolute -inset-4 bg-gradient-to-r from-primary to-primary-darker rounded-3xl opacity-20 blur-xl"></div>
+<!-- IMAGEN HERO OPTIMIZADA -->
 <img alt="Professional woman seller standing beside an orange car" 
      class="rounded-2xl w-full h-full hero-image object-cover relative z-10"
      loading="eager" 
@@ -862,10 +627,7 @@ Get Started
      fetchpriority="high"
      width="800"
      height="600"
-     src="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"
-     srcset="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp 800w,
-             https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp 400w"
-     sizes="(max-width: 768px) 100vw, 50vw">
+     src="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp">
 </div>
 </div>
 </div>
@@ -1008,7 +770,7 @@ Get Started
 </div>
 
 <!-- Servicio 6 -->
-<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transitionall duration-500 hover-lift group">
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
 <img alt="Car being photographed for online listing" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/fYMJkH8x/Car-being-photographed-for-online-listing.webp"/>
 </div>
@@ -1031,7 +793,7 @@ Get Started
 <h2 class="text-3xl font-bold font-display mb-6" data-i18n="cta.title">Get Started Today</h2>
 <p class="mb-8 max-w-2xl mx-auto text-lg" data-i18n="cta.description">Get started with a free service evaluation. No obligations, just solutions.</p>
 <div class="flex flex-col sm:flex-row justify-center gap-4">
-<a href="tel:5616291310" class="bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-all duration-300 hover-lift">
+<a href="tel:5613039783" class="bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-all duration-300 hover-lift">
 <span class="material-symbols-outlined align-middle mr-2">call</span>
 <span data-i18n="cta.call">Call Now: (561) 303-9783</span>
 </a>
@@ -1141,7 +903,7 @@ WhatsApp
 <p class="text-text-light" data-i18n="why.feature4.description">We offer absolute transparency in costs and procedures, ensuring your transaction is 100% legal.</p>
 </div>
 </div>
-<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.4s">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transitionall duration-300 group" style="animation-delay: 0.4s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.8s">support_agent</span>
 <div>
 <h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature5.title">Administrative Support</h4>
@@ -1190,7 +952,7 @@ WhatsApp
 <p class="text-text-light mt-1" data-i18n="contact.emailDescription">Send us an email for quick responses</p>
 </div>
 </div>
-<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transitionall duration-300 hover-lift group">
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift group">
 <span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.6s">schedule</span>
 <div>
 <h4 class="font-bold text-secondary text-xl group-hover:text-primary transition-colors" data-i18n="contact.hoursTitle">Opening Hours</h4>
@@ -1213,9 +975,6 @@ WhatsApp
     class="hover:scale-105 transition-transform duration-700"
     title="Auto Palm Beach Location Map">
 </iframe>
-</div>
-<div class="mt-6 text-center">
-<p class="text-text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
 </div>
 <div class="mt-6 text-center">
 <p class="text-text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
@@ -1325,7 +1084,6 @@ WhatsApp
 </div>
 </div>
 </section>
-</div>
 </main>
 
 <footer class="bg-background-soft text-secondary pt-20 pb-8 section-hidden">
@@ -1917,7 +1675,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Dynamic text effects - ELIMINADO el código relacionado con typewriter-text
   // Random floating animation delays
   document.querySelectorAll('.floating').forEach((icon, index) => {
     icon.style.animationDelay = `${index * 0.2}s`;
@@ -1931,14 +1688,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const mobileLangEs = document.getElementById('mobileLangEs');
 
   // Toggle dropdown
-  languageButton.addEventListener('click', function(e) {
-    e.stopPropagation();
-    languageDropdown.classList.toggle('active');
-  });
+  if (languageButton) {
+    languageButton.addEventListener('click', function(e) {
+      e.stopPropagation();
+      languageDropdown.classList.toggle('active');
+    });
+  }
 
   // Close dropdown when clicking outside
   document.addEventListener('click', function() {
-    languageDropdown.classList.remove('active');
+    if (languageDropdown) {
+      languageDropdown.classList.remove('active');
+    }
   });
 
   // Language option selection (desktop)
@@ -1947,21 +1708,25 @@ document.addEventListener('DOMContentLoaded', function() {
       e.stopPropagation();
       const lang = this.getAttribute('data-lang');
       updateLanguage(lang);
-      languageDropdown.classList.remove('active');
+      if (languageDropdown) {
+        languageDropdown.classList.remove('active');
+      }
     });
   });
 
   // Language option selection (mobile)
-  mobileLangEn.addEventListener('click', function() {
-    updateLanguage('en');
-  });
+  if (mobileLangEn) {
+    mobileLangEn.addEventListener('click', function() {
+      updateLanguage('en');
+    });
+  }
 
-  mobileLangEs.addEventListener('click', function() {
-    updateLanguage('es');
-  });
+  if (mobileLangEs) {
+    mobileLangEs.addEventListener('click', function() {
+      updateLanguage('es');
+    });
+  }
 });
 </script>
-<!-- 4. Tu configuración de Tailwind (mantenla aquí) -->
-
 </body>
 </html>
