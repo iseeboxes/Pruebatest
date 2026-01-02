@@ -4,10 +4,51 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>DMV & Title Services in West Palm Beach</title>
+<link rel="preload" as="image" 
+      href="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"
+      imagesrcset="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"
+      fetchpriority="high">
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
+<link rel="preconnect" href="https://i.ibb.co">
+<link rel="preconnect" href="https://lh3.googleusercontent.com">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
 <!-- 1. PRIMERO: Tailwind CSS normal (sin async) -->
-<script src="https://cdn.tailwindcss.com/3.4.0"></script>
+<style>
+  /* Solo lo ABSOLUTAMENTE necesario para la vista inicial */
+  :root { --primary-color: #F97316; --secondary-color: #111827; }
+  body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+  .hero-image { max-height: 600px; width: 100%; height: auto; object-fit: cover; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+  
+  /* Layout básico para evitar CLS */
+  img { max-width: 100%; height: auto; }
+  .flex { display: flex; }
+  .hidden { display: none; }
+  .relative { position: relative; }
+  .absolute { position: absolute; }
+  .w-full { width: 100%; }
+  .h-full { height: 100%; }
+</style>
+
+<!-- Tailwind asíncrono -->
+<script>
+  // Cargar Tailwind CSS de forma asíncrona
+  function loadTailwind() {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdn.tailwindcss.com/3.4.0';
+    document.head.appendChild(link);
+  }
+  
+  // Esperar a que el contenido crítico se renderice
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadTailwind);
+  } else {
+    setTimeout(loadTailwind, 1000); // Retrasar 1 segundo
+  }
+</script>
 
 <!-- 2. CSS crítico MÍNIMO inline -->
 <style>
@@ -54,86 +95,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 </noscript>
 
-<!-- 4. Tu configuración de Tailwind (mantenla aquí) -->
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: "var(--primary-color)",
-            "primary-darker": "#EA580C",
-            secondary: "var(--secondary-color)",
-            "background-light": "#ffffff",
-            "background-soft": "var(--background-soft)",
-            "text-dark": "#1F2937",
-            "text-light": "#6B7280"
-          },
-          fontFamily: {
-            sans: ["Roboto", "system-ui", "sans-serif"],
-            display: ["Poppins", "system-ui", "sans-serif"],
-          },
-          borderRadius: {
-            DEFAULT: "0.5rem",
-            lg: "1rem",
-            xl: "1.5rem",
-            "2xl": "2rem",
-          },
-          animation: {
-            'fade-in': 'fadeIn 0.8s ease-out',
-            'slide-up': 'slideUp 0.6s ease-out',
-            'slide-right': 'slideRight 0.6s ease-out',
-            'slide-left': 'slideLeft 0.6s ease-out',
-            'scale-in': 'scaleIn 0.5s ease-out',
-            'float': 'float 3s ease-in-out infinite',
-            'pulse-slow': 'pulse 4s ease-in-out infinite',
-            'bounce-slow': 'bounce 2s infinite',
-            'shake': 'shake 0.5s ease-in-out',
-            'fade-down': 'fadeDown 0.3s ease-out',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%': { transform: 'translateY(30px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' },
-            },
-            slideRight: {
-              '0%': { transform: 'translateX(-30px)', opacity: '0' },
-              '100%': { transform: 'translateX(0)', opacity: '1' },
-            },
-            slideLeft: {
-              '0%': { transform: 'translateX(30px)', opacity: '0' },
-              '100%': { transform: 'translateX(0)', opacity: '1' },
-            },
-            scaleIn: {
-              '0%': { transform: 'scale(0.9)', opacity: '0' },
-              '100%': { transform: 'scale(1)', opacity: '1' },
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-10px)' },
-            },
-            shake: {
-              '0%, 100%': { transform: 'translateX(0)' },
-              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
-              '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
-            },
-            fadeDown: {
-              '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
-              '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
-            },
-          },
-          transitionDuration: {
-            '300': '300ms',
-            '500': '500ms',
-            '700': '700ms',
-          },
-        },
-      },
-    };
-  </script>
+
 
 <!-- 5. AÑADE AQUÍ TODO TU CSS PERSONALIZADO QUE FALTA -->
 <style>
@@ -738,10 +700,16 @@ Get Started
 <div class="relative w-full max-w-lg mx-auto">
 <div class="absolute -inset-4 bg-gradient-to-r from-primary to-primary-darker rounded-3xl opacity-20 blur-xl"></div>
 <img alt="Professional woman seller standing beside an orange car" 
-     class="rounded-2xl w-full h-full hero-image object-cover relative z-10 hover-scale transition-transform duration-500" 
-     loading="lazy" 
-     decoding="async" 
-     src="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"/>
+     class="rounded-2xl w-full h-full hero-image object-cover relative z-10"
+     loading="eager" 
+     decoding="async"
+     fetchpriority="high"
+     width="800"
+     height="600"
+     src="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"
+     srcset="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp 800w,
+             https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp 400w"
+     sizes="(max-width: 768px) 100vw, 50vw">
 </div>
 </div>
 </div>
@@ -1837,5 +1805,85 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+<!-- 4. Tu configuración de Tailwind (mantenla aquí) -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary-color)",
+            "primary-darker": "#EA580C",
+            secondary: "var(--secondary-color)",
+            "background-light": "#ffffff",
+            "background-soft": "var(--background-soft)",
+            "text-dark": "#1F2937",
+            "text-light": "#6B7280"
+          },
+          fontFamily: {
+            sans: ["Roboto", "system-ui", "sans-serif"],
+            display: ["Poppins", "system-ui", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            "2xl": "2rem",
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'slide-right': 'slideRight 0.6s ease-out',
+            'slide-left': 'slideLeft 0.6s ease-out',
+            'scale-in': 'scaleIn 0.5s ease-out',
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s ease-in-out infinite',
+            'bounce-slow': 'bounce 2s infinite',
+            'shake': 'shake 0.5s ease-in-out',
+            'fade-down': 'fadeDown 0.3s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            slideRight: {
+              '0%': { transform: 'translateX(-30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            slideLeft: {
+              '0%': { transform: 'translateX(30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.9)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shake: {
+              '0%, 100%': { transform: 'translateX(0)' },
+              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+              '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+            },
+            fadeDown: {
+              '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
+              '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
+            },
+          },
+          transitionDuration: {
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+          },
+        },
+      },
+    };
+  </script>
 </body>
 </html>
