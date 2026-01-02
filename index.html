@@ -4,55 +4,20 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>DMV & Title Services in West Palm Beach</title>
+
+<!-- PRELOADS Y PRE-CONNECTS (Primero que nada) -->
 <link rel="preload" as="image" 
       href="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"
-      imagesrcset="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"
       fetchpriority="high">
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 <link rel="preconnect" href="https://i.ibb.co">
 <link rel="preconnect" href="https://lh3.googleusercontent.com">
-<link rel="dns-prefetch" href="https://fonts.googleapis.com">
-<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- 1. PRIMERO: Tailwind CSS normal (sin async) -->
+<!-- 1. CSS CRÍTICO MÍNIMO (solo lo esencial) -->
 <style>
-  /* Solo lo ABSOLUTAMENTE necesario para la vista inicial */
-  :root { --primary-color: #F97316; --secondary-color: #111827; }
-  body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-  .hero-image { max-height: 600px; width: 100%; height: auto; object-fit: cover; }
-  .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
-  
-  /* Layout básico para evitar CLS */
-  img { max-width: 100%; height: auto; }
-  .flex { display: flex; }
-  .hidden { display: none; }
-  .relative { position: relative; }
-  .absolute { position: absolute; }
-  .w-full { width: 100%; }
-  .h-full { height: 100%; }
-</style>
-
-<!-- Tailwind asíncrono -->
-<script>
-  // Cargar Tailwind CSS de forma asíncrona
-  function loadTailwind() {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdn.tailwindcss.com/3.4.0';
-    document.head.appendChild(link);
-  }
-  
-  // Esperar a que el contenido crítico se renderice
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadTailwind);
-  } else {
-    setTimeout(loadTailwind, 1000); // Retrasar 1 segundo
-  }
-</script>
-
-<!-- 2. CSS crítico MÍNIMO inline -->
-<style>
-  /* Solo lo ABSOLUTAMENTE necesario para que la página no se vea rota */
+  /* ABSOLUTAMENTE ESENCIAL para que la página no se vea rota */
   :root {
     --primary-color: #F97316;
     --secondary-color: #111827;
@@ -66,448 +31,551 @@
     font-family: system-ui, -apple-system, sans-serif;
   }
   
-  /* Mientras cargan las fuentes personalizadas, usamos system fonts */
-  .font-sans {
-    font-family: system-ui, -apple-system, sans-serif;
+  /* Layout crítico */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
   }
   
-  .font-display {
-    font-family: system-ui, -apple-system, sans-serif;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Para que el menú móvil funcione */
+  .hidden {
+    display: none !important;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  /* Hero image estilos críticos */
+  .hero-image {
+    max-height: 600px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 </style>
 
-<!-- 3. Google Fonts normales (PERO CON display=swap) -->
-<!-- Preload para la fuente principal -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<!-- 2. TAILWIND ASÍNCRONO (solo carga, no config) -->
+<link rel="stylesheet" href="https://cdn.tailwindcss.com/3.4.0">
 
-<!-- Carga las fuentes de forma no bloqueante -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
+<!-- 3. GOOGLE FONTS (optimizadas) -->
+<link rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800&display=swap"
+      media="print" onload="this.media='all'">
+<link rel="stylesheet" 
+      href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" 
+      media="print" onload="this.media='all'">
+<link rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" 
+      media="print" onload="this.media='all'">
 
 <!-- Fallback para navegadores sin JavaScript -->
 <noscript>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 </noscript>
 
+<!-- 4. CONFIGURACIÓN DE TAILWIND (aquí mismo, después de cargar Tailwind) -->
+<script>
+  // Tailwind config debe estar ANTES de que se cargue el CSS
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: "var(--primary-color)",
+          "primary-darker": "#EA580C",
+          secondary: "var(--secondary-color)",
+          "background-light": "#ffffff",
+          "background-soft": "var(--background-soft)",
+          "text-dark": "#1F2937",
+          "text-light": "#6B7280"
+        },
+        fontFamily: {
+          sans: ["Roboto", "system-ui", "sans-serif"],
+          display: ["Poppins", "system-ui", "sans-serif"],
+        },
+        borderRadius: {
+          DEFAULT: "0.5rem",
+          lg: "1rem",
+          xl: "1.5rem",
+          "2xl": "2rem",
+        },
+        animation: {
+          'fade-in': 'fadeIn 0.8s ease-out',
+          'slide-up': 'slideUp 0.6s ease-out',
+          'slide-right': 'slideRight 0.6s ease-out',
+          'slide-left': 'slideLeft 0.6s ease-out',
+          'scale-in': 'scaleIn 0.5s ease-out',
+          'float': 'float 3s ease-in-out infinite',
+          'pulse-slow': 'pulse 4s ease-in-out infinite',
+          'bounce-slow': 'bounce 2s infinite',
+          'shake': 'shake 0.5s ease-in-out',
+          'fade-down': 'fadeDown 0.3s ease-out',
+        },
+        keyframes: {
+          fadeIn: {
+            '0%': { opacity: '0' },
+            '100%': { opacity: '1' },
+          },
+          slideUp: {
+            '0%': { transform: 'translateY(30px)', opacity: '0' },
+            '100%': { transform: 'translateY(0)', opacity: '1' },
+          },
+          slideRight: {
+            '0%': { transform: 'translateX(-30px)', opacity: '0' },
+            '100%': { transform: 'translateX(0)', opacity: '1' },
+          },
+          slideLeft: {
+            '0%': { transform: 'translateX(30px)', opacity: '0' },
+            '100%': { transform: 'translateX(0)', opacity: '1' },
+          },
+          scaleIn: {
+            '0%': { transform: 'scale(0.9)', opacity: '0' },
+            '100%': { transform: 'scale(1)', opacity: '1' },
+          },
+          float: {
+            '0%, 100%': { transform: 'translateY(0)' },
+            '50%': { transform: 'translateY(-10px)' },
+          },
+          shake: {
+            '0%, 100%': { transform: 'translateX(0)' },
+            '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+            '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+          },
+          fadeDown: {
+            '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
+            '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
+          },
+        },
+        transitionDuration: {
+          '300': '300ms',
+          '500': '500ms',
+          '700': '700ms',
+        },
+      },
+    },
+  };
+</script>
 
-
-<!-- 5. AÑADE AQUÍ TODO TU CSS PERSONALIZADO QUE FALTA -->
+<!-- 5. CSS PERSONALIZADO (todo lo que necesita Tailwind) -->
 <style>
-    .material-icons {
-      font-size: inherit;
+  /* Mantén TODO tu CSS personalizado aquí */
+  .material-icons {
+    font-size: inherit;
+  }
+  
+  /* Off-canvas menu styles */
+  .off-canvas-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .off-canvas-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .off-canvas-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 85%;
+    max-width: 320px;
+    height: 100vh;
+    background-color: white;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+  
+  .off-canvas-menu.active {
+    right: 0;
+  }
+  
+  .off-canvas-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .off-canvas-content {
+    padding: 1.5rem;
+  }
+  
+  .close-menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+    transition: color 0.2s;
+  }
+  
+  .close-menu-btn:hover {
+    color: #111827;
+  }
+  
+  /* Language selector styles */
+  .language-selector {
+    position: relative;
+    margin-right: 15px;
+  }
+  
+  .language-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: 6px;
+    color: #F97316;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  
+  .language-button:hover {
+    background: rgba(249, 115, 22, 0.15);
+    border-color: rgba(249, 115, 22, 0.3);
+  }
+  
+  .language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 5px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+  }
+  
+  .language-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .language-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  
+  .language-option:last-child {
+    border-bottom: none;
+  }
+  
+  .language-option:hover {
+    background-color: #fef7f2;
+  }
+  
+  .language-option.active {
+    background-color: #fef7f2;
+    color: #F97316;
+    font-weight: 600;
+  }
+  
+  .language-flag {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  /* Animations and effects */
+  .section-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .section-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+  }
+  
+  .hover-shake:hover {
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  .pulse-animation {
+    animation: pulse 2s infinite;
+  }
+  
+  .floating {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .text-gradient {
+    background: linear-gradient(45deg, #F97316, #EA580C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* FAQ answer animations */
+  .faq-answer {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  }
+  
+  .faq-answer.open {
+    max-height: 500px;
+    opacity: 1;
+    padding-top: 1rem;
+  }
+  
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #F97316;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #EA580C;
+  }
+  
+  /* Hero text fix - RESPONSIVE CORREGIDO */
+  .hero-title {
+    line-height: 1.1;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Fix for Services section text */
+  .services-title {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* NAVBAR FIX MODIFICADO: Menú responsive desde 1279px hacia abajo */
+  @media (max-width: 1279px) {
+    /* Ocultar menú de escritorio */
+    .desktop-menu {
+      display: none !important;
     }
     
-    /* Off-canvas menu styles */
-    .off-canvas-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
+    /* Mostrar botón hamburguesa */
+    .mobile-menu-button {
+      display: flex !important;
     }
     
-    .off-canvas-overlay.active {
-      opacity: 1;
-      visibility: visible;
+    /* Ocultar botón Get Started en navbar para móvil */
+    .desktop-get-started {
+      display: none !important;
     }
     
-    .off-canvas-menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 85%;
-      max-width: 320px;
-      height: 100vh;
-      background-color: white;
-      z-index: 1000;
-      transition: right 0.3s ease;
-      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-      overflow-y: auto;
+    /* Hero section adjustments */
+    .mobile-hero-text {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      text-align: center;
+      white-space: normal;
+      display: block;
+      width: 100%;
     }
-    
-    .off-canvas-menu.active {
-      right: 0;
+    .mobile-hero-subtitle {
+      font-size: 1.8rem;
+      text-align: center;
+      display: block;
+      width: 100%;
     }
-    
-    .off-canvas-header {
-      padding: 1.5rem;
-      border-bottom: 1px solid #e5e7eb;
+    .hero-content {
+      text-align: center;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
     }
-    
-    .off-canvas-content {
-      padding: 1.5rem;
+    .hero-buttons {
+      justify-content: center;
     }
     
-    .close-menu-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #6b7280;
-      transition: color 0.2s;
+    /* Language selector para móvil */
+    .desktop-language-selector {
+      display: none !important;
     }
     
-    .close-menu-btn:hover {
-      color: #111827;
+    .mobile-language-selector {
+      display: flex !important;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+  }
+  
+  /* Mostrar menú desktop solo a partir de 1280px */
+  @media (min-width: 1280px) {
+    .desktop-menu {
+      display: flex !important;
     }
     
-    /* Language selector styles */
-    .language-selector {
-      position: relative;
-      margin-right: 15px;
+    .mobile-menu-button {
+      display: none !important;
     }
     
-    .language-button {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 12px;
-      background: rgba(249, 115, 22, 0.1);
-      border: 1px solid rgba(249, 115, 22, 0.2);
-      border-radius: 6px;
-      color: #F97316;
-      font-weight: 500;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      white-space: nowrap;
+    .desktop-get-started {
+      display: inline-block !important;
     }
     
-    .language-button:hover {
-      background: rgba(249, 115, 22, 0.15);
-      border-color: rgba(249, 115, 22, 0.3);
+    .desktop-language-selector {
+      display: block !important;
     }
     
-    .language-dropdown {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      margin-top: 5px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      min-width: 120px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.3s ease;
-      z-index: 100;
+    .mobile-language-selector {
+      display: none !important;
     }
-    
-    .language-dropdown.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
+  }
+  
+  @media (max-width: 640px) {
+    .mobile-hero-text {
+      font-size: 2.2rem;
     }
-    
-    .language-option {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid #f3f4f6;
+    .mobile-hero-subtitle {
+      font-size: 1.6rem;
     }
-    
-    .language-option:last-child {
-      border-bottom: none;
+  }
+  
+  @media (max-width: 480px) {
+    .mobile-hero-text {
+      font-size: 1.8rem;
     }
-    
-    .language-option:hover {
-      background-color: #fef7f2;
+    .mobile-hero-subtitle {
+      font-size: 1.4rem;
     }
-    
-    .language-option.active {
-      background-color: #fef7f2;
-      color: #F97316;
-      font-weight: 600;
-    }
-    
-    .language-flag {
-      width: 20px;
-      height: 15px;
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    
-    /* Animations and effects */
-    .section-hidden {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    
-    .section-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .hover-lift {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .hover-lift:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    }
-    
-    .hover-scale {
-      transition: transform 0.3s ease;
-    }
-    
-    .hover-scale:hover {
-      transform: scale(1.05);
-    }
-    
-    .hover-glow:hover {
-      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
-    }
-    
-    .hover-shake:hover {
-      animation: shake 0.5s ease-in-out;
-    }
-    
-    .pulse-animation {
-      animation: pulse 2s infinite;
-    }
-    
-    .floating {
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    .text-gradient {
-      background: linear-gradient(45deg, #F97316, #EA580C);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    /* FAQ answer animations */
-    .faq-answer {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-    }
-    
-    .faq-answer.open {
-      max-height: 500px;
-      opacity: 1;
-      padding-top: 1rem;
-    }
-    
-    /* Prevent body scroll when menu is open */
-    body.menu-open {
-      overflow: hidden;
-    }
-    
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: #F97316;
-      border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-      background: #EA580C;
-    }
-    
-    /* Hero text fix - RESPONSIVE CORREGIDO */
-    .hero-title {
+  }
+  
+  /* Ajuste especial para el texto del hero en iPad Pro y pantallas medianas */
+  @media (min-width: 768px) and (max-width: 1279px) {
+    .hero-title .typewriter-text {
+      font-size: 3.5rem;
       line-height: 1.1;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      hyphens: auto;
+      white-space: normal;
     }
     
-    /* Fix for Services section text */
-    .services-title {
-      word-break: break-word;
-      overflow-wrap: break-word;
+    .hero-content {
+      text-align: center;
     }
     
-    /* NAVBAR FIX MODIFICADO: Menú responsive desde 1279px hacia abajo */
-    @media (max-width: 1279px) {
-      /* Ocultar menú de escritorio */
-      .desktop-menu {
-        display: none !important;
-      }
-      
-      /* Mostrar botón hamburguesa */
-      .mobile-menu-button {
-        display: flex !important;
-      }
-      
-      /* Ocultar botón Get Started en navbar para móvil */
-      .desktop-get-started {
-        display: none !important;
-      }
-      
-      /* Hero section adjustments */
-      .mobile-hero-text {
-        font-size: 2.5rem;
-        line-height: 1.2;
-        text-align: center;
-        white-space: normal;
-        display: block;
-        width: 100%;
-      }
-      .mobile-hero-subtitle {
-        font-size: 1.8rem;
-        text-align: center;
-        display: block;
-        width: 100%;
-      }
-      .hero-content {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .hero-buttons {
-        justify-content: center;
-      }
-      
-      /* Language selector para móvil */
-      .desktop-language-selector {
-        display: none !important;
-      }
-      
-      .mobile-language-selector {
-        display: flex !important;
-        margin-bottom: 20px;
-        justify-content: center;
-      }
+    .hero-buttons {
+      justify-content: center;
+    }
+  }
+  
+  /* Tablet responsive fix (para otros elementos) */
+  @media (min-width: 641px) and (max-width: 768px) {
+    .hero-title {
+      font-size: 3rem !important;
     }
     
-    /* Mostrar menú desktop solo a partir de 1280px */
-    @media (min-width: 1280px) {
-      .desktop-menu {
-        display: flex !important;
-      }
-      
-      .mobile-menu-button {
-        display: none !important;
-      }
-      
-      .desktop-get-started {
-        display: inline-block !important;
-      }
-      
-      .desktop-language-selector {
-        display: block !important;
-      }
-      
-      .mobile-language-selector {
-        display: none !important;
-      }
+    .typewriter-text {
+      white-space: normal;
+      display: block;
     }
-    
-    @media (max-width: 640px) {
-      .mobile-hero-text {
-        font-size: 2.2rem;
-      }
-      .mobile-hero-subtitle {
-        font-size: 1.6rem;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .mobile-hero-text {
-        font-size: 1.8rem;
-      }
-      .mobile-hero-subtitle {
-        font-size: 1.4rem;
-      }
-    }
-    
-    /* Ajuste especial para el texto del hero en iPad Pro y pantallas medianas */
-    @media (min-width: 768px) and (max-width: 1279px) {
-      .hero-title .typewriter-text {
-        font-size: 3.5rem;
-        line-height: 1.1;
-        white-space: normal;
-      }
-      
-      .hero-content {
-        text-align: center;
-      }
-      
-      .hero-buttons {
-        justify-content: center;
-      }
-    }
-    
-    /* Tablet responsive fix (para otros elementos) */
-    @media (min-width: 641px) and (max-width: 768px) {
-      .hero-title {
-        font-size: 3rem !important;
-      }
-      
-      .typewriter-text {
-        white-space: normal;
-        display: block;
-      }
-    }
-    
-    /* CTA banner fix */
-    .cta-section {
-      position: relative;
-      z-index: 10;
-      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
-    }
-    
-    /* Contact section margin */
-    .contact-section {
-      margin-top: 4rem;
-    }
-    
-    /* Hero image optimization */
-    .hero-image {
-      max-height: 600px;
-      object-fit: cover;
-      object-position: center;
-    }
-    
-    /* About us image optimization */
-    .about-image {
-      max-height: 600px;
-      object-fit: cover;
-      object-position: center;
-    }
-    
-    /* Sticky header styles */
-    .sticky-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: white !important;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      z-index: 100;
-    }
-  </style>
+  }
+  
+  /* CTA banner fix */
+  .cta-section {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  }
+  
+  /* Contact section margin */
+  .contact-section {
+    margin-top: 4rem;
+  }
+  
+  /* Hero image optimization */
+  .hero-image {
+    max-height: 600px;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* About us image optimization */
+  .about-image {
+    max-height: 600px;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* Sticky header styles */
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+</style>
 </head>
 
 <body class="bg-background-light text-text-dark font-sans overflow-x-hidden">
@@ -521,7 +589,7 @@
 </div>
 
 <!-- LANGUAGE SELECTOR PARA ESCRITORIO -->
-<div class="desktop-language-selector" style="display: none;">
+<div class="desktop-language-selector hidden">
   <div class="language-selector">
     <button class="language-button" id="languageButton">
       <div class="language-flag" id="currentFlag">
@@ -538,7 +606,7 @@
       <span id="currentLanguage">EN</span>
       <span class="material-symbols-outlined text-sm">expand_more</span>
     </button>
-    <div class="language-dropdown" id="languageDropdown">
+    <div class="language-dropdown hidden" id="languageDropdown">
       <div class="language-option active" data-lang="en">
         <div class="language-flag">
           <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
@@ -567,7 +635,7 @@
   </div>
 </div>
 
-<nav class="desktop-menu items-center space-x-6 text-secondary font-medium">
+<nav class="desktop-menu items-center space-x-6 text-secondary font-medium hidden lg:flex">
 <a class="hover:text-primary transition-colors hover-lift px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#home" data-i18n="nav.home">Home</a>
 <a class="hover:text-primary transition-colors hover-lift px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#about" data-i18n="nav.about">About Us</a>
 <a class="hover:text-primary transition-colors hover-lift px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#services" data-i18n="nav.services">Services</a>
@@ -577,14 +645,102 @@
 </nav>
 
 <div class="flex items-center space-x-4">
-  <button id="mobileMenuButton" class="mobile-menu-button text-secondary hover-scale">
+  <button id="mobileMenuButton" class="mobile-menu-button text-secondary hover-scale lg:hidden">
     <span class="material-symbols-outlined text-3xl hover-shake">menu</span>
   </button>
-  <a class="desktop-get-started bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-darker transition-colors hover-lift hover-glow whitespace-nowrap" href="https://wa.me/15613039783" data-i18n="nav.getStarted">Get Started</a>
+  <a class="desktop-get-started bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-darker transition-colors hover-lift hover-glow whitespace-nowrap hidden lg:inline-block" href="https://wa.me/15613039783" data-i18n="nav.getStarted">Get Started</a>
 </div>
 </div>
 </div>
 </header>
+
+<!-- El resto de tu HTML permanece igual desde aquí... -->
+
+<!-- Off-canvas overlay -->
+<div id="offCanvasOverlay" class="off-canvas-overlay"></div>
+
+<!-- Off-canvas menu -->
+<div id="offCanvasMenu" class="off-canvas-menu">
+<!-- ... contenido del menú ... -->
+</div>
+<main>
+<!-- Hero Section - NOTA: la imagen está optimizada -->
+<section id="home" class="relative pt-16 pb-24 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-orange-50 to-transparent z-0"></div>
+<div class="container mx-auto px-4 relative z-10">
+<div class="flex flex-col lg:flex-row items-center gap-12">
+<div class="lg:w-1/2 text-left animate-slide-right hero-content">
+<span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="hero.tagline">DMV & VIN Verification</span>
+<h1 class="text-5xl lg:text-6xl font-extrabold font-display mb-6 leading-tight text-secondary hero-title">
+<span class="block mb-4 mobile-hero-text" data-i18n="hero.title">
+  Expert DMV & Title Services
+</span>
+<span class="text-gradient block mobile-hero-subtitle" data-i18n="hero.subtitle"> in West Palm Beach</span>
+</h1>
+<p class="text-lg text-text-light max-w-lg mb-10 animate-slide-up" style="animation-delay: 0.3s" data-i18n="hero.description">Skip the long lines and confusing paperwork. We are your local vehicle paperwork solution in South Florida.</p>
+<div class="flex items-center space-x-4 hero-buttons">
+<a class="bg-primary text-white font-bold py-4 px-8 rounded-lg text-lg hover:bg-primary-darker transition-colors hover-lift hover-glow animate-scale-in" href="https://wa.me/15613039783" style="animation-delay: 0.6s" data-i18n="hero.cta">Get a Free Quote</a>
+<a class="text-secondary font-bold hover:text-primary transition-colors flex items-center gap-2 hover-lift animate-scale-in" href="#about" style="animation-delay: 0.8s">
+<span data-i18n="hero.learnMore">Learn More</span> 
+<span class="material-symbols-outlined animate-bounce-slow">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="lg:w-1/2 animate-slide-left">
+<div class="relative w-full max-w-lg mx-auto">
+<div class="absolute -inset-4 bg-gradient-to-r from-primary to-primary-darker rounded-3xl opacity-20 blur-xl"></div>
+<!-- IMAGEN HERO OPTIMIZADA -->
+<img alt="Professional woman seller standing beside an orange car" 
+     class="rounded-2xl w-full h-full hero-image object-cover relative z-10"
+     loading="eager" 
+     decoding="async"
+     fetchpriority="high"
+     width="800"
+     height="600"
+     src="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp">
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- El resto de tu HTML sigue igual... -->
+
+</main>
+
+<!-- Los scripts JavaScript permanecen igual al final del body -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Auto Palm Beach",
+  "description": "DMV & Title Services in West Palm Beach, Florida",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2393 South Congress Ave STE 200",
+    "addressLocality": "West Palm Beach",
+    "addressRegion": "FL",
+    "postalCode": "33406"
+  },
+  "telephone": "(561) 303-9783",
+  "email": "contact@autopalmbeach.com",
+  "openingHours": "Mo-Fr 09:00-17:00",
+  "priceRange": "$",
+  "url": "https://autopalmbeach.com",
+  "sameAs": [
+    "https://facebook.com/autopalmbeach",
+    "https://twitter.com/autopalmbeach",
+    "https://linkedin.com/company/autopalmbeach"
+  ]
+}
+</script>
+
+<script>
+// Tu código JavaScript completo aquí...
+// (Copiar todo el código JavaScript que tenías originalmente)
+</script>
+</body>
+</html>
 
 
 
@@ -1806,84 +1962,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <!-- 4. Tu configuración de Tailwind (mantenla aquí) -->
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: "var(--primary-color)",
-            "primary-darker": "#EA580C",
-            secondary: "var(--secondary-color)",
-            "background-light": "#ffffff",
-            "background-soft": "var(--background-soft)",
-            "text-dark": "#1F2937",
-            "text-light": "#6B7280"
-          },
-          fontFamily: {
-            sans: ["Roboto", "system-ui", "sans-serif"],
-            display: ["Poppins", "system-ui", "sans-serif"],
-          },
-          borderRadius: {
-            DEFAULT: "0.5rem",
-            lg: "1rem",
-            xl: "1.5rem",
-            "2xl": "2rem",
-          },
-          animation: {
-            'fade-in': 'fadeIn 0.8s ease-out',
-            'slide-up': 'slideUp 0.6s ease-out',
-            'slide-right': 'slideRight 0.6s ease-out',
-            'slide-left': 'slideLeft 0.6s ease-out',
-            'scale-in': 'scaleIn 0.5s ease-out',
-            'float': 'float 3s ease-in-out infinite',
-            'pulse-slow': 'pulse 4s ease-in-out infinite',
-            'bounce-slow': 'bounce 2s infinite',
-            'shake': 'shake 0.5s ease-in-out',
-            'fade-down': 'fadeDown 0.3s ease-out',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%': { transform: 'translateY(30px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' },
-            },
-            slideRight: {
-              '0%': { transform: 'translateX(-30px)', opacity: '0' },
-              '100%': { transform: 'translateX(0)', opacity: '1' },
-            },
-            slideLeft: {
-              '0%': { transform: 'translateX(30px)', opacity: '0' },
-              '100%': { transform: 'translateX(0)', opacity: '1' },
-            },
-            scaleIn: {
-              '0%': { transform: 'scale(0.9)', opacity: '0' },
-              '100%': { transform: 'scale(1)', opacity: '1' },
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-10px)' },
-            },
-            shake: {
-              '0%, 100%': { transform: 'translateX(0)' },
-              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
-              '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
-            },
-            fadeDown: {
-              '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
-              '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
-            },
-          },
-          transitionDuration: {
-            '300': '300ms',
-            '500': '500ms',
-            '700': '700ms',
-          },
-        },
-      },
-    };
-  </script>
+
 </body>
 </html>
