@@ -34,6 +34,7 @@
     --background-soft: #FEF7F2;
     --text-dark: #1F2937;
     --text-light: #6B7280;
+    --gray-50: #f9fafb;
     --gray-100: #f3f4f6;
     --gray-200: #e5e7eb;
     --gray-300: #d1d5db;
@@ -108,6 +109,10 @@
     align-items: center;
   }
   
+  .items-start {
+    align-items: flex-start;
+  }
+  
   .justify-between {
     justify-content: space-between;
   }
@@ -126,6 +131,14 @@
   
   .hidden {
     display: none !important;
+  }
+  
+  .block {
+    display: block;
+  }
+  
+  .inline-block {
+    display: inline-block;
   }
   
   .relative {
@@ -147,6 +160,7 @@
     left: 0;
   }
   
+  .z-0 { z-index: 0; }
   .z-10 { z-index: 10; }
   .z-50 { z-index: 50; }
   .z-100 { z-index: 100; }
@@ -184,6 +198,8 @@
     h3 { font-size: 1.75rem; }
   }
   
+  .text-sm { font-size: 0.875rem; }
+  .text-base { font-size: 1rem; }
   .text-lg { font-size: 1.125rem; }
   .text-xl { font-size: 1.25rem; }
   .text-2xl { font-size: 1.5rem; }
@@ -218,6 +234,7 @@
   .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
   .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
   
+  .pt-2 { padding-top: 0.5rem; }
   .pt-4 { padding-top: 1rem; }
   .pt-6 { padding-top: 1.5rem; }
   .pt-8 { padding-top: 2rem; }
@@ -259,6 +276,7 @@
   .bg-primary { background-color: var(--primary-color); }
   .bg-secondary { background-color: var(--secondary-color); }
   .bg-transparent { background-color: transparent; }
+  .bg-gray-50 { background-color: var(--gray-50); }
   .bg-gray-100 { background-color: var(--gray-100); }
   .bg-orange-50 { background-color: rgba(249, 115, 22, 0.05); }
   
@@ -273,6 +291,7 @@
   /* BORDERS */
   .border { border: 1px solid var(--gray-200); }
   .border-2 { border-width: 2px; }
+  .border-gray-50 { border-color: var(--gray-50); }
   .border-gray-100 { border-color: var(--gray-100); }
   .border-gray-200 { border-color: var(--gray-200); }
   .border-gray-300 { border-color: var(--gray-300); }
@@ -354,7 +373,11 @@
     font-size: inherit;
   }
   
-  /* HEADER */
+  /* HEADER Y NAVBAR */
+  .w-full {
+    width: 100%;
+  }
+  
   header {
     background-color: transparent;
     padding: 1rem 0;
@@ -372,6 +395,54 @@
     box-shadow: var(--shadow-md);
     z-index: 100;
     padding: 0.75rem 0;
+  }
+  
+  .desktop-menu {
+    display: none;
+  }
+  
+  @media (min-width: 1024px) {
+    .desktop-menu {
+      display: flex;
+    }
+  }
+  
+  .mobile-menu-button {
+    display: block;
+  }
+  
+  @media (min-width: 1024px) {
+    .mobile-menu-button {
+      display: none;
+    }
+  }
+  
+  /* NAVBAR LINKS */
+  nav a {
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+  
+  nav a:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+  }
+  
+  .desktop-get-started {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-lg);
+    white-space: nowrap;
+  }
+  
+  .desktop-get-started:hover {
+    background-color: var(--primary-darker);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
   }
   
   /* HERO SECTION */
@@ -425,12 +496,19 @@
     filter: blur(20px);
   }
   
+  .hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
   /* BUTTONS */
   .btn {
     display: inline-block;
-    padding: 0.75rem 2rem;
+    padding: 1rem 2rem;
     border-radius: var(--radius-md);
     font-weight: 700;
+    font-size: 1.125rem;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -648,6 +726,18 @@
     padding-bottom: 2rem;
   }
   
+  footer ul {
+    list-style: none;
+  }
+  
+  footer a {
+    color: var(--text-light);
+  }
+  
+  footer a:hover {
+    color: var(--primary-color);
+  }
+  
   /* OFF-CANVAS MENU */
   .off-canvas-overlay {
     position: fixed;
@@ -861,8 +951,29 @@
     animation: float 3s ease-in-out infinite;
   }
   
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  
   .hover-shake:hover {
     animation: shake 0.5s ease-in-out;
+  }
+  
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
   }
   
   /* TEXT GRADIENT */
@@ -871,6 +982,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: transparent;
   }
   
   /* CUSTOM SCROLLBAR */
@@ -916,6 +1028,7 @@
 </head>
 
 <body class="bg-background-light text-text-dark overflow-x-hidden">
+<!-- EL RESTO DEL CÓDIGO HTML SE MANTIENE IGUAL -->
 <!-- HEADER -->
 <div class="w-full bg-background-soft">
 <header class="bg-transparent py-4 transition-all duration-300 z-50 relative">
@@ -1087,7 +1200,7 @@ Get Started
 <span class="text-gradient block" data-i18n="hero.subtitle">in West Palm Beach</span>
 </h1>
 <p class="text-lg text-text-light max-w-lg mb-10 animate-slide-up" style="animation-delay: 0.3s" data-i18n="hero.description">Skip the long lines and confusing paperwork. We are your local vehicle paperwork solution in South Florida.</p>
-<div class="flex items-center space-x-4 hero-buttons">
+<div class="hero-buttons">
 <a class="btn btn-primary animate-scale-in" href="https://wa.me/15613039783" style="animation-delay: 0.6s" data-i18n="hero.cta">Get a Free Quote</a>
 <a class="text-secondary font-bold hover:text-primary flex items-center gap-2 animate-scale-in" href="#about" style="animation-delay: 0.8s">
 <span data-i18n="hero.learnMore">Learn More</span> 
@@ -1121,7 +1234,7 @@ Get Started
 <div class="relative w-full max-w-lg mx-auto">
 <div class="absolute -inset-4 bg-gradient-to-br from-orange-50 to-transparent rounded-3xl opacity-50"></div>
 <img alt="Background image showing professional documents and office setting" 
-     class="rounded-2xl w-full about-image hover-scale transition-transform duration-500" 
+     class="rounded-2xl w-full hover-scale transition-transform duration-500" 
      loading="lazy" 
      decoding="async" 
      src="https://i.ibb.co/LzKgSnVm/bg-hero.webp"/>
@@ -1647,9 +1760,8 @@ WhatsApp
 }
 </script>
 
+<!-- MANTENER EL JAVASCRIPT ORIGINAL -->
 <script>
-// MANTENER TODO EL JAVASCRIPT ORIGINAL SIN CAMBIOS
-// (El JavaScript de tu código original se mantiene igual)
 // Internacionalización - Textos en inglés y español
 const translations = {
   en: {
