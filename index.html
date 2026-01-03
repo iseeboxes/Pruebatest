@@ -6,690 +6,550 @@
 <title>DMV & Title Services in West Palm Beach</title>
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
-<!-- TAILWIND CSS ASÍNCRONO -->
-<script>
-  (function() {
-    var script = document.createElement('script');
-    script.src = 'https://cdn.tailwindcss.com/3.4.0';
-    script.async = true;
-    script.defer = true;
-    
-    script.onload = function() {
-      if (window.tailwind && window.tailwind.config) {
-        window.tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                primary: "#F97316",
-                "primary-darker": "#EA580C",
-                secondary: "#111827",
-                "background-light": "#ffffff",
-                "background-soft": "#FEF7F2",
-                "text-dark": "#1F2937",
-                "text-light": "#6B7280"
-              },
-              fontFamily: {
-                sans: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
-                display: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
-              },
-              borderRadius: {
-                DEFAULT: "0.5rem",
-                lg: "1rem",
-                xl: "1.5rem",
-                "2xl": "2rem",
-              },
-              animation: {
-                'fade-in': 'fadeIn 0.8s ease-out',
-                'slide-up': 'slideUp 0.6s ease-out',
-                'slide-right': 'slideRight 0.6s ease-out',
-                'slide-left': 'slideLeft 0.6s ease-out',
-                'scale-in': 'scaleIn 0.5s ease-out',
-                'float': 'float 3s ease-in-out infinite',
-                'pulse-slow': 'pulse 4s ease-in-out infinite',
-                'bounce-slow': 'bounce 2s infinite',
-                'shake': 'shake 0.5s ease-in-out',
-                'fade-down': 'fadeDown 0.3s ease-out',
-              },
-              keyframes: {
-                fadeIn: {
-                  '0%': { opacity: '0' },
-                  '100%': { opacity: '1' },
-                },
-                slideUp: {
-                  '0%': { transform: 'translateY(30px)', opacity: '0' },
-                  '100%': { transform: 'translateY(0)', opacity: '1' },
-                },
-                slideRight: {
-                  '0%': { transform: 'translateX(-30px)', opacity: '0' },
-                  '100%': { transform: 'translateX(0)', opacity: '1' },
-                },
-                slideLeft: {
-                  '0%': { transform: 'translateX(30px)', opacity: '0' },
-                  '100%': { transform: 'translateX(0)', opacity: '1' },
-                },
-                scaleIn: {
-                  '0%': { transform: 'scale(0.9)', opacity: '0' },
-                  '100%': { transform: 'scale(1)', opacity: '1' },
-                },
-                float: {
-                  '0%, 100%': { transform: 'translateY(0)' },
-                  '50%': { transform: 'translateY(-10px)' },
-                },
-                shake: {
-                  '0%, 100%': { transform: 'translateX(0)' },
-                  '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
-                  '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
-                },
-                fadeDown: {
-                  '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
-                  '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
-                },
-              },
-              transitionDuration: {
-                '300': '300ms',
-                '500': '500ms',
-                '700': '700ms',
-              },
-            },
-          },
-        };
-      }
-    };
-    
-    document.head.appendChild(script);
-  })();
-</script>
+<!-- 1. PRIMERO: Tailwind CSS normal (sin async) -->
+<script src="https://cdn.tailwindcss.com/3.4.0"></script>
 
-<!-- CSS CRÍTICO ANTI-CLS -->
+<!-- 2. CSS crítico MÍNIMO inline -->
 <style>
-  /* RESET CON DIMENSIONES FIJAS */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
+  /* Solo lo ABSOLUTAMENTE necesario para que la página no se vea rota */
   :root {
     --primary-color: #F97316;
     --secondary-color: #111827;
     --background-soft: #FEF7F2;
   }
   
-  /* BODY CON FUENTES DEL SISTEMA */
   body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #1F2937;
-    background-color: #ffffff;
-    line-height: 1.5;
-    min-height: 100vh;
-    width: 100%;
+    font-family: system-ui, -apple-system, sans-serif;
   }
   
-  /* CONTAINER BÁSICO */
-  .container {
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  /* Mientras cargan las fuentes personalizadas, usamos system fonts */
+  .font-sans {
+    font-family: system-ui, -apple-system, sans-serif;
   }
   
-  /* IMÁGENES CON DIMENSIONES FIJAS */
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* HEADER FIJADO */
-  header {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-    transition: all 0.3s ease;
-  }
-  
-  /* DIMENSIONES FIJAS PARA ELEMENTOS CRÍTICOS */
-  .hero-title {
-    min-height: 140px;
-  }
-  
-  .mobile-hero-text {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    min-height: 60px;
-    font-weight: 800;
-  }
-  
-  .mobile-hero-subtitle {
-    font-size: 2rem;
-    line-height: 1.2;
-    min-height: 50px;
-    font-weight: 700;
-  }
-  
-  @media (min-width: 1024px) {
-    .mobile-hero-text {
-      font-size: 3.75rem;
-      min-height: 90px;
-    }
-    .mobile-hero-subtitle {
-      font-size: 2.5rem;
-      min-height: 60px;
-    }
-  }
-  
-  .hero-description {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    min-height: 90px;
-    max-width: 600px;
-  }
-  
-  .hero-buttons {
-    min-height: 60px;
-  }
-  
-  /* ANIMACIONES CONTROLADAS */
-  .section-hidden {
-    opacity: 1;
-    transform: none;
-  }
-  
-  .page-loaded .section-hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  
-  .page-loaded .section-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  /* TRANSICIÓN DE FUENTES */
-  .google-fonts-loaded .font-sans {
-    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
-  }
-  
-  .google-fonts-loaded .font-display,
-  .google-fonts-loaded h1,
-  .google-fonts-loaded h2,
-  .google-fonts-loaded h3,
-  .google-fonts-loaded h4 {
-    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  .font-display {
+    font-family: system-ui, -apple-system, sans-serif;
   }
 </style>
 
-<!-- CSS PERSONALIZADO ORIGINAL (OPTIMIZADO) -->
+<!-- 3. Google Fonts normales (PERO CON display=swap) -->
+<!-- Preload para la fuente principal -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+
+<!-- Carga las fuentes de forma no bloqueante -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
+
+<!-- Fallback para navegadores sin JavaScript -->
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+</noscript>
+
+<!-- 4. Tu configuración de Tailwind (mantenla aquí) -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary-color)",
+            "primary-darker": "#EA580C",
+            secondary: "var(--secondary-color)",
+            "background-light": "#ffffff",
+            "background-soft": "var(--background-soft)",
+            "text-dark": "#1F2937",
+            "text-light": "#6B7280"
+          },
+          fontFamily: {
+            sans: ["Roboto", "system-ui", "sans-serif"],
+            display: ["Poppins", "system-ui", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            "2xl": "2rem",
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'slide-right': 'slideRight 0.6s ease-out',
+            'slide-left': 'slideLeft 0.6s ease-out',
+            'scale-in': 'scaleIn 0.5s ease-out',
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s ease-in-out infinite',
+            'bounce-slow': 'bounce 2s infinite',
+            'shake': 'shake 0.5s ease-in-out',
+            'fade-down': 'fadeDown 0.3s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            slideRight: {
+              '0%': { transform: 'translateX(-30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            slideLeft: {
+              '0%': { transform: 'translateX(30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.9)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shake: {
+              '0%, 100%': { transform: 'translateX(0)' },
+              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+              '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+            },
+            fadeDown: {
+              '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
+              '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
+            },
+          },
+          transitionDuration: {
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+          },
+        },
+      },
+    };
+  </script>
+
+<!-- 5. AÑADE AQUÍ TODO TU CSS PERSONALIZADO QUE FALTA -->
 <style>
-  /* ====== PREVENIR CLS ====== */
-  
-  .hero-title,
-  .mobile-hero-text,
-  .mobile-hero-subtitle {
-    min-height: 1.2em;
-    display: block;
-  }
-  
-  .hero-content,
-  .hero-buttons {
-    min-height: 80px;
-  }
-  
-  img[loading="lazy"] {
-    background-color: #f3f4f6;
-    min-height: 200px;
-  }
-  
-  .material-icons,
-  .material-symbols-outlined {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1em;
-    height: 1em;
-    font-size: inherit;
-    vertical-align: middle;
-  }
-  
-  button,
-  a[class*="bg-"],
-  .btn-primary {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  header {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 100;
-    transition: all 0.3s ease;
-  }
-  
-  .font-sans,
-  .font-display,
-  h1, h2, h3, h4, h5, h6 {
-    transition: font-family 0.3s ease, font-size 0.3s ease;
-  }
-  
-  .text-placeholder {
-    visibility: hidden;
-  }
-  
-  .fonts-loaded .text-placeholder {
-    visibility: visible;
-  }
-  
-  /* ====== ESTILOS ORIGINALES ====== */
-  
-  .material-icons {
-    font-size: inherit;
-  }
-  
-  /* Off-canvas menu styles */
-  .off-canvas-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-  }
-  
-  .off-canvas-overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .off-canvas-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 85%;
-    max-width: 320px;
-    height: 100vh;
-    background-color: white;
-    z-index: 1000;
-    transition: right 0.3s ease;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-  }
-  
-  .off-canvas-menu.active {
-    right: 0;
-  }
-  
-  .off-canvas-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid #e5e7eb;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .off-canvas-content {
-    padding: 1.5rem;
-  }
-  
-  .close-menu-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #6b7280;
-    transition: color 0.2s;
-  }
-  
-  .close-menu-btn:hover {
-    color: #111827;
-  }
-  
-  /* Language selector styles */
-  .language-selector {
-    position: relative;
-    margin-right: 15px;
-  }
-  
-  .language-button {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 12px;
-    background: rgba(249, 115, 22, 0.1);
-    border: 1px solid rgba(249, 115, 22, 0.2);
-    border-radius: 6px;
-    color: #F97316;
-    font-weight: 500;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-  }
-  
-  .language-button:hover {
-    background: rgba(249, 115, 22, 0.15);
-    border-color: rgba(249, 115, 22, 0.3);
-  }
-  
-  .language-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 5px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    min-width: 120px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 100;
-  }
-  
-  .language-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  .language-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border-bottom: 1px solid #f3f4f6;
-  }
-  
-  .language-option:last-child {
-    border-bottom: none;
-  }
-  
-  .language-option:hover {
-    background-color: #fef7f2;
-  }
-  
-  .language-option.active {
-    background-color: #fef7f2;
-    color: #F97316;
-    font-weight: 600;
-  }
-  
-  .language-flag {
-    width: 20px;
-    height: 15px;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  
-  /* Animations and effects */
-  .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .hover-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hover-scale {
-    transition: transform 0.3s ease;
-  }
-  
-  .hover-scale:hover {
-    transform: scale(1.05);
-  }
-  
-  .hover-glow:hover {
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
-  }
-  
-  .hover-shake:hover {
-    animation: shake 0.5s ease-in-out;
-  }
-  
-  .pulse-animation {
-    animation: pulse 2s infinite;
-  }
-  
-  .floating {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  .text-gradient {
-    background: linear-gradient(45deg, #F97316, #EA580C);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  /* FAQ answer animations */
-  .faq-answer {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-  }
-  
-  .faq-answer.open {
-    max-height: 500px;
-    opacity: 1;
-    padding-top: 1rem;
-  }
-  
-  /* Prevent body scroll when menu is open */
-  body.menu-open {
-    overflow: hidden;
-  }
-  
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  ::webkit-scrollbar-thumb {
-    background: #F97316;
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #EA580C;
-  }
-  
-  /* Hero text fix */
-  .hero-title {
-    line-height: 1.1;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  /* Fix for Services section text */
-  .services-title {
-    word-break: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  /* NAVBAR FIX MODIFICADO */
-  @media (max-width: 1279px) {
-    .desktop-menu {
-      display: none !important;
+    .material-icons {
+      font-size: inherit;
     }
     
-    .mobile-menu-button {
-      display: flex !important;
+    /* Off-canvas menu styles */
+    .off-canvas-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
     }
     
-    .desktop-get-started {
-      display: none !important;
+    .off-canvas-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
     
-    .hero-content {
-      text-align: center;
+    .off-canvas-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 85%;
+      max-width: 320px;
+      height: 100vh;
+      background-color: white;
+      z-index: 1000;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+    
+    .off-canvas-menu.active {
+      right: 0;
+    }
+    
+    .off-canvas-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
     }
-    .hero-buttons {
-      justify-content: center;
+    
+    .off-canvas-content {
+      padding: 1.5rem;
     }
     
-    .desktop-language-selector {
-      display: none !important;
+    .close-menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #6b7280;
+      transition: color 0.2s;
     }
     
-    .mobile-language-selector {
-      display: flex !important;
-      margin-bottom: 20px;
-      justify-content: center;
-    }
-  }
-  
-  /* Mostrar menú desktop solo a partir de 1280px */
-  @media (min-width: 1280px) {
-    .desktop-menu {
-      display: flex !important;
+    .close-menu-btn:hover {
+      color: #111827;
     }
     
-    .mobile-menu-button {
-      display: none !important;
+    /* Language selector styles */
+    .language-selector {
+      position: relative;
+      margin-right: 15px;
     }
     
-    .desktop-get-started {
-      display: inline-block !important;
+    .language-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      border-radius: 6px;
+      color: #F97316;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
     }
     
-    .desktop-language-selector {
-      display: block !important;
+    .language-button:hover {
+      background: rgba(249, 115, 22, 0.15);
+      border-color: rgba(249, 115, 22, 0.3);
     }
     
-    .mobile-language-selector {
-      display: none !important;
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .mobile-hero-text {
-      font-size: 2.2rem;
-    }
-    .mobile-hero-subtitle {
-      font-size: 1.6rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .mobile-hero-text {
-      font-size: 1.8rem;
-    }
-    .mobile-hero-subtitle {
-      font-size: 1.4rem;
-    }
-  }
-  
-  /* Tablet responsive fix */
-  @media (min-width: 768px) and (max-width: 1279px) {
-    .hero-content {
-      text-align: center;
+    .language-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 5px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-width: 120px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 100;
     }
     
-    .hero-buttons {
-      justify-content: center;
+    .language-dropdown.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
-  }
-  
-  /* CTA banner fix */
-  .cta-section {
-    position: relative;
-    z-index: 10;
-    background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
-  }
-  
-  /* Contact section margin */
-  .contact-section {
-    margin-top: 4rem;
-  }
-  
-  /* Hero image optimization */
-  .hero-image {
-    max-height: 600px;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  /* About us image optimization */
-  .about-image {
-    max-height: 600px;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  /* Sticky header styles */
-  .sticky-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: white !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-  }
-</style>
-
-<!-- SCRIPT PARA CARGAR FUENTES SIN CLS -->
-<script>
-  // Cargar fuentes de Google SOLO cuando la página esté completamente estable
-  window.addEventListener('load', function() {
-    // 1. Marcar que la página está cargada
-    document.documentElement.classList.add('page-loaded');
     
-    // 2. Esperar 1 segundo para asegurar estabilidad
-    setTimeout(function() {
-      // 3. Cargar fuentes de Google en segundo plano
-      var fontLinks = [
-        'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap',
-        'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap',
-        'https://fonts.googleapis.com/icon?family=Material+Icons&display=swap',
-        'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap'
-      ];
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .language-option:last-child {
+      border-bottom: none;
+    }
+    
+    .language-option:hover {
+      background-color: #fef7f2;
+    }
+    
+    .language-option.active {
+      background-color: #fef7f2;
+      color: #F97316;
+      font-weight: 600;
+    }
+    
+    .language-flag {
+      width: 20px;
+      height: 15px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    /* Animations and effects */
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+    }
+    
+    .hover-shake:hover {
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .text-gradient {
+      background: linear-gradient(45deg, #F97316, #EA580C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* FAQ answer animations */
+    .faq-answer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+    }
+    
+    .faq-answer.open {
+      max-height: 500px;
+      opacity: 1;
+      padding-top: 1rem;
+    }
+    
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+      overflow: hidden;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #F97316;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #EA580C;
+    }
+    
+    /* Hero text fix - RESPONSIVE CORREGIDO */
+    .hero-title {
+      line-height: 1.1;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    /* Fix for Services section text */
+    .services-title {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    /* NAVBAR FIX MODIFICADO: Menú responsive desde 1279px hacia abajo */
+    @media (max-width: 1279px) {
+      /* Ocultar menú de escritorio */
+      .desktop-menu {
+        display: none !important;
+      }
       
-      fontLinks.forEach(function(fontUrl) {
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = fontUrl;
-        link.media = 'print';
-        link.onload = function() {
-          this.media = 'all';
-          requestAnimationFrame(function() {
-            document.documentElement.classList.add('google-fonts-loaded');
-          });
-        };
-        document.head.appendChild(link);
-      });
-    }, 1000);
-  });
-</script>
+      /* Mostrar botón hamburguesa */
+      .mobile-menu-button {
+        display: flex !important;
+      }
+      
+      /* Ocultar botón Get Started en navbar para móvil */
+      .desktop-get-started {
+        display: none !important;
+      }
+      
+      /* Hero section adjustments */
+      .mobile-hero-text {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        text-align: center;
+        white-space: normal;
+        display: block;
+        width: 100%;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.8rem;
+        text-align: center;
+        display: block;
+        width: 100%;
+      }
+      .hero-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      
+      /* Language selector para móvil */
+      .desktop-language-selector {
+        display: none !important;
+      }
+      
+      .mobile-language-selector {
+        display: flex !important;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+    }
+    
+    /* Mostrar menú desktop solo a partir de 1280px */
+    @media (min-width: 1280px) {
+      .desktop-menu {
+        display: flex !important;
+      }
+      
+      .mobile-menu-button {
+        display: none !important;
+      }
+      
+      .desktop-get-started {
+        display: inline-block !important;
+      }
+      
+      .desktop-language-selector {
+        display: block !important;
+      }
+      
+      .mobile-language-selector {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .mobile-hero-text {
+        font-size: 2.2rem;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.6rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .mobile-hero-text {
+        font-size: 1.8rem;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.4rem;
+      }
+    }
+    
+    /* Ajuste especial para el texto del hero en iPad Pro y pantallas medianas */
+    @media (min-width: 768px) and (max-width: 1279px) {
+      .hero-title .typewriter-text {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        white-space: normal;
+      }
+      
+      .hero-content {
+        text-align: center;
+      }
+      
+      .hero-buttons {
+        justify-content: center;
+      }
+    }
+    
+    /* Tablet responsive fix (para otros elementos) */
+    @media (min-width: 641px) and (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem !important;
+      }
+      
+      .typewriter-text {
+        white-space: normal;
+        display: block;
+      }
+    }
+    
+    /* CTA banner fix */
+    .cta-section {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    }
+    
+    /* Contact section margin */
+    .contact-section {
+      margin-top: 4rem;
+    }
+    
+    /* Hero image optimization */
+    .hero-image {
+      max-height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    /* About us image optimization */
+    .about-image {
+      max-height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    /* Sticky header styles */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: white !important;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+  </style>
 </head>
 
-<body class="bg-background-light text-text-dark">
-<div class="font-sans w-full bg-background-soft">
+<body class="bg-background-light text-text-dark font-sans overflow-x-hidden">
+<div class="w-full bg-background-soft">
 <header class="bg-transparent py-4 transition-all duration-300 z-50 relative">
 <div class="container mx-auto px-4">
 <div class="flex justify-between items-center">
@@ -1233,6 +1093,9 @@ WhatsApp
 <div class="mt-6 text-center">
 <p class="text-text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
 </div>
+<div class="mt-6 text-center">
+<p class="text-text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
+</div>
 </div>
 </div>
 </section>
@@ -1311,7 +1174,7 @@ WhatsApp
 </div>
 
 <!-- FAQ 6 -->
-<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transitionall duration-300 hover-lift">
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
 <button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
 <span class="group-hover:text-primary transition-colors" data-i18n="faq.question6">Do you offer document translation services?</span>
 <span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
@@ -1398,7 +1261,32 @@ WhatsApp
 </footer>
 </div>
 
-<!-- SCRIPT DE TRADUCCIONES COMPLETO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Auto Palm Beach",
+  "description": "DMV & Title Services in West Palm Beach, Florida",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2393 South Congress Ave STE 200",
+    "addressLocality": "West Palm Beach",
+    "addressRegion": "FL",
+    "postalCode": "33406"
+  },
+  "telephone": "(561) 303-9783",
+  "email": "contact@autopalmbeach.com",
+  "openingHours": "Mo-Fr 09:00-17:00",
+  "priceRange": "$",
+  "url": "https://autopalmbeach.com",
+  "sameAs": [
+    "https://facebook.com/autopalmbeach",
+    "https://twitter.com/autopalmbeach",
+    "https://linkedin.com/company/autopalmbeach"
+  ]
+}
+</script>
+
 <script>
 // Internacionalización - Textos en inglés y español
 const translations = {
@@ -1740,12 +1628,9 @@ function updateLanguageSelector(lang) {
     mobileLangEs.classList.add('active');
   }
 }
-</script>
 
-<!-- SCRIPT PRINCIPAL -->
-<script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Cargar idioma preferido
+  // Cargar idioma preferido o detectar idioma del navegador
   const savedLang = localStorage.getItem('preferredLanguage');
   const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
   const initialLang = savedLang || browserLang;
@@ -1793,11 +1678,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // Smooth scrolling for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
+      // Si es el enlace de Home "/", no hacer nada especial
       if(this.getAttribute('href') === '/' || this.getAttribute('href') === '#') return;
       
       e.preventDefault();
       const targetId = this.getAttribute('href');
       
+      // Verificar si es un enlace interno (#about, #services, etc.)
       if(targetId.startsWith('#')) {
         const targetElement = document.querySelector(targetId);
         
@@ -1805,7 +1692,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // Close menu if open
           closeMenu();
           
-          // Scroll suave con offset
+          // Scroll suave con offset para el navbar fijo
           const headerHeight = document.querySelector('header').offsetHeight;
           const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
           const offsetPosition = targetPosition - headerHeight - 20;
@@ -1815,15 +1702,17 @@ document.addEventListener('DOMContentLoaded', function() {
             behavior: 'smooth'
           });
           
+          // Actualizar URL sin recargar la página
           history.pushState(null, null, targetId);
         }
       }
     });
   });
 
-  // Home link
+  // Home link - mantener comportamiento actual
   document.querySelectorAll('a[href="/"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
+      // Solo prevenir comportamiento por defecto si es un enlace interno
       if(!this.getAttribute('href').startsWith('http')) {
         e.preventDefault();
         window.location.href = '/';
@@ -1843,7 +1732,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // FAQ functionality
+  // FAQ functionality with smooth animations
   const faqButtons = document.querySelectorAll('.faq-button');
   
   faqButtons.forEach(button => {
@@ -1877,27 +1766,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Intersection Observer para animaciones scroll (solo después de page-loaded)
-  if (document.documentElement.classList.contains('page-loaded')) {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('section-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.section-hidden').forEach((section) => {
-      observer.observe(section);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('section-visible');
+        observer.unobserve(entry.target);
+      }
     });
-  }
+  }, observerOptions);
 
+  // Observe all sections with animations
+  document.querySelectorAll('.section-hidden').forEach((section) => {
+    observer.observe(section);
+  });
+
+  // Hover effects enhancement
+  document.querySelectorAll('.hover-lift').forEach(element => {
+    element.addEventListener('mouseenter', function() {
+      this.style.transition = 'all 0.3s ease';
+    });
+  });
+
+  // Dynamic text effects - ELIMINADO el código relacionado con typewriter-text
   // Random floating animation delays
   document.querySelectorAll('.floating').forEach((icon, index) => {
     icon.style.animationDelay = `${index * 0.2}s`;
@@ -1939,43 +1835,7 @@ document.addEventListener('DOMContentLoaded', function() {
   mobileLangEs.addEventListener('click', function() {
     updateLanguage('es');
   });
-
-  // Anti-CLS: Fijar dimensiones de imágenes
-  document.querySelectorAll('img').forEach(img => {
-    if (!img.complete) {
-      img.style.backgroundColor = '#f3f4f6';
-      img.style.minHeight = '200px';
-    }
-  });
 });
 </script>
-
-<!-- SCHEMA.ORG -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Auto Palm Beach",
-  "description": "DMV & Title Services in West Palm Beach, Florida",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "2393 South Congress Ave STE 200",
-    "addressLocality": "West Palm Beach",
-    "addressRegion": "FL",
-    "postalCode": "33406"
-  },
-  "telephone": "(561) 303-9783",
-  "email": "contact@autopalmbeach.com",
-  "openingHours": "Mo-Fr 09:00-17:00",
-  "priceRange": "$",
-  "url": "https://autopalmbeach.com",
-  "sameAs": [
-    "https://facebook.com/autopalmbeach",
-    "https://twitter.com/autopalmbeach",
-    "https://linkedin.com/company/autopalmbeach"
-  ]
-}
-</script>
-
 </body>
 </html>
