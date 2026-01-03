@@ -7,7 +7,7 @@
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
 <!-- 1. PRIMERO: Tailwind CSS normal (sin async) -->
-<script src="https://cdn.tailwindcss.com/3.4.0"></script>
+<script src="https://cdn.tailwindcss.com/3.4.0" defer></script>
 
 <!-- 2. CSS crítico MÍNIMO inline -->
 <style>
@@ -55,6 +55,7 @@
 <!-- Preload para la fuente principal -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<link rel="preload" as="image" href="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp" imagesrcset="" fetchpriority="high">
 
 <!-- Carga las fuentes de forma no bloqueante -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'">
@@ -756,7 +757,8 @@ Get Started
 <img 
   alt="Professional woman seller standing beside an orange car" 
   class="rounded-2xl w-full h-full hero-image object-cover relative z-10 hover-scale transition-transform duration-500" 
-  loading="lazy" 
+  loading="eager" 
+  fetchpriority="high" 
   decoding="async" 
   width="800" 
   height="600" 
@@ -777,8 +779,10 @@ Get Started
 <div class="absolute -inset-4 bg-gradient-to-br from-orange-100 to-transparent rounded-3xl opacity-50"></div>
 <img alt="Background image showing professional documents and office setting" 
      class="rounded-2xl w-full about-image object-cover relative z-10 hover-scale transition-transform duration-500" 
-     loading="lazy" 
+     loading="eager" 
      decoding="async" 
+     width="800" 
+     height="600"
      src="https://i.ibb.co/LzKgSnVm/bg-hero.webp"/>
 </div>
 </div>
