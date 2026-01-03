@@ -17,6 +17,18 @@
     --secondary-color: #111827;
     --background-soft: #FEF7F2;
   }
+
+  #home {
+  min-height: 100vh;
+}
+
+.hero-image {
+  aspect-ratio: 4/3;
+}
+
+.about-image {
+  aspect-ratio: 4/3;
+}
   .about-section-wrapper {
   transform: translateY(-1rem);
   margin-bottom: -1rem;
@@ -741,11 +753,14 @@ Get Started
 <div class="lg:w-1/2 animate-slide-left">
 <div class="relative w-full max-w-lg mx-auto">
 <div class="absolute -inset-4 bg-gradient-to-r from-primary to-primary-darker rounded-3xl opacity-20 blur-xl"></div>
-<img alt="Professional woman seller standing beside an orange car" 
-     class="rounded-2xl w-full h-full hero-image object-cover relative z-10 hover-scale transition-transform duration-500" 
-     loading="lazy" 
-     decoding="async" 
-     src="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"/>
+<img 
+  alt="Professional woman seller standing beside an orange car" 
+  class="rounded-2xl w-full h-full hero-image object-cover relative z-10 hover-scale transition-transform duration-500" 
+  loading="lazy" 
+  decoding="async" 
+  width="800" 
+  height="600" 
+  src="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"/>
 </div>
 </div>
 </div>
