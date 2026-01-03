@@ -6,14 +6,47 @@
 <title>DMV & Title Services in West Palm Beach</title>
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
-<!-- Google Fonts -->
+<!-- 1. PRIMERO: Tailwind CSS normal (sin async) -->
+<script src="https://cdn.tailwindcss.com/3.4.0"></script>
+
+<!-- 2. CSS crítico MÍNIMO inline -->
+<style>
+  /* Solo lo ABSOLUTAMENTE necesario para que la página no se vea rota */
+  :root {
+    --primary-color: #F97316;
+    --secondary-color: #111827;
+    --background-soft: #FEF7F2;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Mientras cargan las fuentes personalizadas, usamos system fonts */
+  .font-sans {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  
+  .font-display {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+</style>
+
+<!-- 3. Google Fonts normales (PERO CON display=swap) -->
+<!-- Preload para la fuente principal -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+
+<!-- Carga las fuentes de forma no bloqueante -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" media="print" onload="this.media='all'">
 
+<!-- Fallback para navegadores sin JavaScript -->
 <noscript>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,1029 +54,512 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 </noscript>
 
-<!-- Vanilla CSS - TODOS los estilos -->
+<!-- 4. Tu configuración de Tailwind (mantenla aquí) -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary-color)",
+            "primary-darker": "#EA580C",
+            secondary: "var(--secondary-color)",
+            "background-light": "#ffffff",
+            "background-soft": "var(--background-soft)",
+            "text-dark": "#1F2937",
+            "text-light": "#6B7280"
+          },
+          fontFamily: {
+            sans: ["Roboto", "system-ui", "sans-serif"],
+            display: ["Poppins", "system-ui", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            "2xl": "2rem",
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.8s ease-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'slide-right': 'slideRight 0.6s ease-out',
+            'slide-left': 'slideLeft 0.6s ease-out',
+            'scale-in': 'scaleIn 0.5s ease-out',
+            'float': 'float 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s ease-in-out infinite',
+            'bounce-slow': 'bounce 2s infinite',
+            'shake': 'shake 0.5s ease-in-out',
+            'fade-down': 'fadeDown 0.3s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            slideRight: {
+              '0%': { transform: 'translateX(-30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            slideLeft: {
+              '0%': { transform: 'translateX(30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.9)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shake: {
+              '0%, 100%': { transform: 'translateX(0)' },
+              '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+              '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+            },
+            fadeDown: {
+              '0%': { opacity: '0', maxHeight: '0', transform: 'translateY(-10px)' },
+              '100%': { opacity: '1', maxHeight: '500px', transform: 'translateY(0)' },
+            },
+          },
+          transitionDuration: {
+            '300': '300ms',
+            '500': '500ms',
+            '700': '700ms',
+          },
+        },
+      },
+    };
+  </script>
+
+<!-- 5. AÑADE AQUÍ TODO TU CSS PERSONALIZADO QUE FALTA -->
 <style>
-/* ===== VARIABLES Y RESET ===== */
-:root {
-  --primary-color: #F97316;
-  --primary-darker: #EA580C;
-  --secondary-color: #111827;
-  --background-light: #ffffff;
-  --background-soft: #FEF7F2;
-  --text-dark: #1F2937;
-  --text-light: #6B7280;
-  --border-radius: 0.5rem;
-  --border-radius-lg: 1rem;
-  --border-radius-xl: 1.5rem;
-  --border-radius-2xl: 2rem;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
-  --transition-slow: all 0.5s ease;
-  --font-sans: 'Roboto', system-ui, -apple-system, sans-serif;
-  --font-display: 'Poppins', system-ui, -apple-system, sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-sans);
-  color: var(--text-dark);
-  background-color: var(--background-light);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  transition: var(--transition);
-}
-
-button {
-  font-family: inherit;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-ul, ol {
-  list-style: none;
-}
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* ===== UTILITY CLASSES ===== */
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-
-.font-sans { font-family: var(--font-sans); }
-.font-display { font-family: var(--font-display); }
-
-.text-primary { color: var(--primary-color); }
-.text-secondary { color: var(--secondary-color); }
-.text-light { color: var(--text-light); }
-.text-white { color: white; }
-
-.bg-primary { background-color: var(--primary-color); }
-.bg-secondary { background-color: var(--secondary-color); }
-.bg-light { background-color: var(--background-light); }
-.bg-soft { background-color: var(--background-soft); }
-.bg-white { background-color: white; }
-
-.font-bold { font-weight: 700; }
-.font-semibold { font-weight: 600; }
-.font-medium { font-weight: 500; }
-.font-normal { font-weight: 400; }
-
-.text-xs { font-size: 0.75rem; }
-.text-sm { font-size: 0.875rem; }
-.text-base { font-size: 1rem; }
-.text-lg { font-size: 1.125rem; }
-.text-xl { font-size: 1.25rem; }
-.text-2xl { font-size: 1.5rem; }
-.text-3xl { font-size: 1.875rem; }
-.text-4xl { font-size: 2.25rem; }
-.text-5xl { font-size: 3rem; }
-.text-6xl { font-size: 3.75rem; }
-
-.rounded { border-radius: var(--border-radius); }
-.rounded-lg { border-radius: var(--border-radius-lg); }
-.rounded-xl { border-radius: var(--border-radius-xl); }
-.rounded-2xl { border-radius: var(--border-radius-2xl); }
-.rounded-full { border-radius: 9999px; }
-
-.shadow-sm { box-shadow: var(--shadow-sm); }
-.shadow-md { box-shadow: var(--shadow-md); }
-.shadow-lg { box-shadow: var(--shadow-lg); }
-.shadow-xl { box-shadow: var(--shadow-xl); }
-
-.border { border: 1px solid #e5e7eb; }
-.border-gray-200 { border-color: #e5e7eb; }
-.border-gray-100 { border-color: #f3f4f6; }
-.border-gray-300 { border-color: #d1d5db; }
-
-.w-full { width: 100%; }
-.h-full { height: 100%; }
-.w-10 { width: 2.5rem; }
-.h-10 { height: 2.5rem; }
-.w-16 { width: 4rem; }
-.h-16 { height: 4rem; }
-
-.mx-auto { margin-left: auto; margin-right: auto; }
-.my-12 { margin-top: 3rem; margin-bottom: 3rem; }
-.mb-1 { margin-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-3 { margin-bottom: 0.75rem; }
-.mb-4 { margin-bottom: 1rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.mb-8 { margin-bottom: 2rem; }
-.mb-10 { margin-bottom: 2.5rem; }
-.mb-12 { margin-bottom: 3rem; }
-.mt-1 { margin-top: 0.25rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mt-4 { margin-top: 1rem; }
-.mt-6 { margin-top: 1.5rem; }
-.mt-8 { margin-top: 2rem; }
-.mr-2 { margin-right: 0.5rem; }
-.mr-4 { margin-right: 1rem; }
-.ml-2 { margin-left: 0.5rem; }
-
-.p-2 { padding: 0.5rem; }
-.p-4 { padding: 1rem; }
-.p-6 { padding: 1.5rem; }
-.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
-.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
-.py-4 { padding-top: 1rem; padding-bottom: 1rem; }
-.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
-.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
-.py-24 { padding-top: 6rem; padding-bottom: 6rem; }
-.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
-.px-4 { padding-left: 1rem; padding-right: 1rem; }
-.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-.px-8 { padding-left: 2rem; padding-right: 2rem; }
-.pt-4 { padding-top: 1rem; }
-.pt-6 { padding-top: 1.5rem; }
-.pt-16 { padding-top: 4rem; }
-.pt-20 { padding-top: 5rem; }
-.pb-8 { padding-bottom: 2rem; }
-.pb-24 { padding-bottom: 6rem; }
-
-.relative { position: relative; }
-.absolute { position: absolute; }
-.fixed { position: fixed; }
-.sticky { position: sticky; }
-.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
-.top-0 { top: 0; }
-.right-0 { right: 0; }
-.bottom-0 { bottom: 0; }
-.left-0 { left: 0; }
-.z-10 { z-index: 10; }
-.z-50 { z-index: 50; }
-.z-100 { z-index: 100; }
-
-.flex { display: flex; }
-.inline-flex { display: inline-flex; }
-.grid { display: grid; }
-.block { display: block; }
-.inline-block { display: inline-block; }
-.hidden { display: none; }
-
-.items-center { align-items: center; }
-.items-start { align-items: flex-start; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.justify-start { justify-content: flex-start; }
-.justify-end { justify-content: flex-end; }
-.flex-col { flex-direction: column; }
-.flex-row { flex-direction: row; }
-.flex-wrap { flex-wrap: wrap; }
-.flex-1 { flex: 1 1 0%; }
-
-.gap-2 { gap: 0.5rem; }
-.gap-4 { gap: 1rem; }
-.gap-6 { gap: 1.5rem; }
-.gap-8 { gap: 2rem; }
-.gap-12 { gap: 3rem; }
-.gap-16 { gap: 4rem; }
-
-.space-x-2 > * + * { margin-left: 0.5rem; }
-.space-x-3 > * + * { margin-left: 0.75rem; }
-.space-x-4 > * + * { margin-left: 1rem; }
-.space-x-6 > * + * { margin-left: 1.5rem; }
-.space-y-2 > * + * { margin-top: 0.5rem; }
-.space-y-4 > * + * { margin-top: 1rem; }
-.space-y-6 > * + * { margin-top: 1.5rem; }
-
-.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-.overflow-hidden { overflow: hidden; }
-.overflow-x-hidden { overflow-x: hidden; }
-.overflow-y-auto { overflow-y: auto; }
-
-.object-cover { object-fit: cover; }
-.object-center { object-position: center; }
-
-.whitespace-nowrap { white-space: nowrap; }
-
-.opacity-0 { opacity: 0; }
-.opacity-20 { opacity: 0.2; }
-.opacity-50 { opacity: 0.5; }
-
-.max-w-lg { max-width: 32rem; }
-.max-w-2xl { max-width: 42rem; }
-.max-w-4xl { max-width: 56rem; }
-
-.italic { font-style: italic; }
-
-.group:hover .group-hover\:scale-110 { transform: scale(1.1); }
-.group:hover .group-hover\:text-primary { color: var(--primary-color); }
-.group:hover .group-hover\:bg-gray-50 { background-color: #f9fafb; }
-
-.leading-tight { line-height: 1.25; }
-
-.hover\:bg-primary-darker:hover { background-color: var(--primary-darker); }
-.hover\:text-primary:hover { color: var(--primary-color); }
-.hover\:text-primary-darker:hover { color: var(--primary-darker); }
-.hover\:bg-gray-100:hover { background-color: #f3f4f6; }
-.hover\:bg-white:hover { background-color: white; }
-.hover\:border-primary:hover { border-color: var(--primary-color); }
-
-.transition-colors { transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; }
-.transition-transform { transition: transform 0.3s ease; }
-.transition-all { transition: var(--transition); }
-.duration-300 { transition-duration: 0.3s; }
-.duration-500 { transition-duration: 0.5s; }
-
-.transform { transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
-.-translate-y-4 { transform: translateY(-1rem); }
-
-/* ===== COMPONENTES PERSONALIZADOS ===== */
-
-/* Header */
-.header {
-  background-color: transparent;
-  padding: 1rem 0;
-  transition: var(--transition);
-  z-index: 50;
-  position: relative;
-}
-
-.header.sticky-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: white !important;
-  box-shadow: var(--shadow-md);
-  padding: 0.75rem 0;
-}
-
-/* Hero Section */
-.hero-section {
-  position: relative;
-  padding-top: 4rem;
-  padding-bottom: 6rem;
-  overflow: hidden;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(254, 247, 242, 0.5), transparent);
-  z-index: 0;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 10;
-}
-
-.hero-title {
-  font-size: 3rem;
-  font-family: var(--font-display);
-  font-weight: 800;
-  color: var(--secondary-color);
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-}
-
-@media (min-width: 1024px) {
-  .hero-title {
-    font-size: 3.75rem;
-  }
-}
-
-.text-gradient {
-  background: linear-gradient(45deg, var(--primary-color), var(--primary-darker));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Section base styles */
-.section {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-}
-
-.section-hidden {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.section-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Services grid */
-.services-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-@media (min-width: 768px) {
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .services-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.service-card {
-  background-color: var(--background-light);
-  border-radius: var(--border-radius-xl);
-  border: 1px solid #e5e7eb;
-  overflow: hidden;
-  transition: var(--transition-slow);
-}
-
-.service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
-}
-
-.service-card img {
-  width: 100%;
-  height: 12rem;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.service-card:hover img {
-  transform: scale(1.1);
-}
-
-/* Process steps */
-.process-steps {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 4rem;
-}
-
-@media (min-width: 768px) {
-  .process-steps {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .process-steps {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.process-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.5rem;
-  background-color: white;
-  border-radius: var(--border-radius-xl);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
-}
-
-.process-step:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-.step-number {
-  background-color: var(--primary-color);
-  color: white;
-  border-radius: 9999px;
-  width: 4rem;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.process-step:hover .step-number {
-  transform: scale(1.1);
-}
-
-/* Testimonials */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-@media (min-width: 768px) {
-  .testimonials-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.testimonial-card {
-  background-color: var(--background-soft);
-  padding: 1.5rem;
-  border-radius: var(--border-radius-xl);
-  transition: var(--transition);
-}
-
-.testimonial-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
-}
-
-/* Features grid */
-.features-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-@media (min-width: 768px) {
-  .features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .features-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.feature-card {
-  display: flex;
-  align-items: flex-start;
-  padding: 1.5rem;
-  background-color: var(--background-light);
-  border-radius: var(--border-radius-xl);
-  border: 1px solid #e5e7eb;
-  transition: var(--transition);
-}
-
-.feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-/* FAQ */
-.faq-container {
-  max-width: 56rem;
-  margin: 0 auto;
-}
-
-.faq-item {
-  background-color: var(--background-light);
-  padding: 1rem;
-  border-radius: var(--border-radius-lg);
-  border: 1px solid #e5e7eb;
-  transition: var(--transition);
-  margin-bottom: 1rem;
-}
-
-.faq-item:hover {
-  transform: translateY(-4px);
-  border-color: var(--primary-color);
-  box-shadow: var(--shadow-md);
-}
-
-.faq-button {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: left;
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--secondary-color);
-}
-
-.faq-button:hover {
-  color: var(--primary-color);
-}
-
-.faq-answer {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-}
-
-.faq-answer.open {
-  max-height: 500px;
-  opacity: 1;
-  padding-top: 1rem;
-}
-
-/* Footer */
-.footer {
-  background-color: var(--background-soft);
-  color: var(--secondary-color);
-  padding-top: 5rem;
-  padding-bottom: 2rem;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-@media (min-width: 768px) {
-  .footer-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* CTA Section */
-.cta-section {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-darker) 100%);
-  padding: 4rem 0;
-  color: white;
-  position: relative;
-  z-index: 10;
-}
-
-/* Contact Section */
-.contact-section {
-  margin-top: 4rem;
-}
-
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.contact-item {
-  display: flex;
-  align-items: flex-start;
-  padding: 1rem;
-  border-radius: var(--border-radius-xl);
-  transition: var(--transition);
-}
-
-.contact-item:hover {
-  background-color: var(--background-soft);
-  transform: translateY(-4px);
-}
-
-.map-container {
-  width: 100%;
-  height: 24rem;
-  border-radius: var(--border-radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-  transition: var(--transition-slow);
-}
-
-.map-container:hover {
-  transform: scale(1.02);
-}
-
-.map-container iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  padding: 1rem 2rem;
-  font-weight: 700;
-  border-radius: var(--border-radius-lg);
-  text-align: center;
-  transition: var(--transition);
-  cursor: pointer;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-darker);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
-}
-
-.btn-outline {
-  background-color: transparent;
-  border: 2px solid white;
-  color: white;
-}
-
-.btn-outline:hover {
-  background-color: white;
-  color: var(--primary-color);
-  transform: translateY(-4px);
-}
-
-.btn-secondary {
-  background-color: white;
-  color: var(--primary-color);
-}
-
-.btn-secondary:hover {
-  background-color: #f3f4f6;
-  transform: translateY(-4px);
-}
-
-/* Material icons */
-.material-icons, .material-symbols-outlined {
-  font-size: inherit;
-}
-
-/* Floating animation */
-.floating {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Animations */
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.6s ease-out;
-}
-
-.animate-slide-right {
-  animation: slideRight 0.6s ease-out;
-}
-
-.animate-slide-left {
-  animation: slideLeft 0.6s ease-out;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.5s ease-out;
-}
-
-.animate-bounce-slow {
-  animation: bounce 2s infinite;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes slideRight {
-  from { transform: translateX(-30px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slideLeft {
-  from { transform: translateX(30px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Language Selector */
-.language-selector {
-  position: relative;
-  margin-right: 15px;
-}
-
-.language-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: rgba(249, 115, 22, 0.1);
-  border: 1px solid rgba(249, 115, 22, 0.2);
-  border-radius: 6px;
-  color: var(--primary-color);
-  font-weight: 500;
-  font-size: 14px;
-  cursor: pointer;
-  transition: var(--transition);
-  white-space: nowrap;
-}
-
-.language-button:hover {
-  background: rgba(249, 115, 22, 0.15);
-  border-color: rgba(249, 115, 22, 0.3);
-}
-
-.language-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: 5px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  min-width: 120px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: var(--transition);
-  z-index: 100;
-}
-
-.language-dropdown.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.language-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  cursor: pointer;
-  transition: var(--transition);
-  border-bottom: 1px solid #f3f4f6;
-}
-
-.language-option:last-child {
-  border-bottom: none;
-}
-
-.language-option:hover {
-  background-color: var(--background-soft);
-}
-
-.language-option.active {
-  background-color: var(--background-soft);
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.language-flag {
-  width: 20px;
-  height: 15px;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-/* Off-canvas menu */
-.off-canvas-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transition: var(--transition);
-}
-
-.off-canvas-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.off-canvas-menu {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 85%;
-  max-width: 320px;
-  height: 100vh;
-  background-color: white;
-  z-index: 1000;
-  transition: right 0.3s ease;
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-}
-
-.off-canvas-menu.active {
-  right: 0;
-}
-
-.off-canvas-header {
-  padding: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.off-canvas-content {
-  padding: 1.5rem;
-}
-
-.close-menu-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-light);
-  transition: color 0.2s;
-}
-
-.close-menu-btn:hover {
-  color: var(--secondary-color);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-darker);
-}
-
-/* Responsive Design */
-@media (max-width: 1279px) {
-  .desktop-menu {
-    display: none !important;
-  }
-  
-  .mobile-menu-button {
-    display: flex !important;
-  }
-  
-  .desktop-get-started {
-    display: none !important;
-  }
-  
-  .desktop-language-selector {
-    display: none !important;
-  }
-  
-  .mobile-language-selector {
-    display: flex !important;
-    margin-bottom: 20px;
-    justify-content: center;
-  }
-  
-  .hero-title {
-    font-size: 2.5rem;
-    line-height: 1.2;
-    text-align: center;
-  }
-  
-  .hero-content {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-@media (min-width: 1280px) {
-  .desktop-menu {
-    display: flex !important;
-  }
-  
-  .mobile-menu-button {
-    display: none !important;
-  }
-  
-  .desktop-get-started {
-    display: inline-block !important;
-  }
-  
-  .desktop-language-selector {
-    display: block !important;
-  }
-  
-  .mobile-language-selector {
-    display: none !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.2rem;
-  }
-  
-  .process-steps,
-  .testimonials-grid,
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .contact-section {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 1.8rem;
-  }
-  
-  .btn {
-    padding: 0.75rem 1.5rem;
-  }
-  
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Layout improvements */
-.layout-flex {
-  display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 1024px) {
-  .layout-flex-lg-row {
-    flex-direction: row;
-  }
-}
-
-.layout-gap-12 {
-  gap: 3rem;
-}
-
-.layout-align-center {
-  align-items: center;
-}
-</style>
+    .material-icons {
+      font-size: inherit;
+    }
+    
+    /* Off-canvas menu styles */
+    .off-canvas-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .off-canvas-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .off-canvas-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 85%;
+      max-width: 320px;
+      height: 100vh;
+      background-color: white;
+      z-index: 1000;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+    
+    .off-canvas-menu.active {
+      right: 0;
+    }
+    
+    .off-canvas-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .off-canvas-content {
+      padding: 1.5rem;
+    }
+    
+    .close-menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #6b7280;
+      transition: color 0.2s;
+    }
+    
+    .close-menu-btn:hover {
+      color: #111827;
+    }
+    
+    /* Language selector styles */
+    .language-selector {
+      position: relative;
+      margin-right: 15px;
+    }
+    
+    .language-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      border-radius: 6px;
+      color: #F97316;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    
+    .language-button:hover {
+      background: rgba(249, 115, 22, 0.15);
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+    
+    .language-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 5px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-width: 120px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    
+    .language-dropdown.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .language-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .language-option:last-child {
+      border-bottom: none;
+    }
+    
+    .language-option:hover {
+      background-color: #fef7f2;
+    }
+    
+    .language-option.active {
+      background-color: #fef7f2;
+      color: #F97316;
+      font-weight: 600;
+    }
+    
+    .language-flag {
+      width: 20px;
+      height: 15px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    
+    /* Animations and effects */
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+    }
+    
+    .hover-shake:hover {
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .text-gradient {
+      background: linear-gradient(45deg, #F97316, #EA580C);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* FAQ answer animations */
+    .faq-answer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+    }
+    
+    .faq-answer.open {
+      max-height: 500px;
+      opacity: 1;
+      padding-top: 1rem;
+    }
+    
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+      overflow: hidden;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #F97316;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #EA580C;
+    }
+    
+    /* Hero text fix - RESPONSIVE CORREGIDO */
+    .hero-title {
+      line-height: 1.1;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    
+    /* Fix for Services section text */
+    .services-title {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    /* NAVBAR FIX MODIFICADO: Menú responsive desde 1279px hacia abajo */
+    @media (max-width: 1279px) {
+      /* Ocultar menú de escritorio */
+      .desktop-menu {
+        display: none !important;
+      }
+      
+      /* Mostrar botón hamburguesa */
+      .mobile-menu-button {
+        display: flex !important;
+      }
+      
+      /* Ocultar botón Get Started en navbar para móvil */
+      .desktop-get-started {
+        display: none !important;
+      }
+      
+      /* Hero section adjustments */
+      .mobile-hero-text {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        text-align: center;
+        white-space: normal;
+        display: block;
+        width: 100%;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.8rem;
+        text-align: center;
+        display: block;
+        width: 100%;
+      }
+      .hero-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      
+      /* Language selector para móvil */
+      .desktop-language-selector {
+        display: none !important;
+      }
+      
+      .mobile-language-selector {
+        display: flex !important;
+        margin-bottom: 20px;
+        justify-content: center;
+      }
+    }
+    
+    /* Mostrar menú desktop solo a partir de 1280px */
+    @media (min-width: 1280px) {
+      .desktop-menu {
+        display: flex !important;
+      }
+      
+      .mobile-menu-button {
+        display: none !important;
+      }
+      
+      .desktop-get-started {
+        display: inline-block !important;
+      }
+      
+      .desktop-language-selector {
+        display: block !important;
+      }
+      
+      .mobile-language-selector {
+        display: none !important;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .mobile-hero-text {
+        font-size: 2.2rem;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.6rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .mobile-hero-text {
+        font-size: 1.8rem;
+      }
+      .mobile-hero-subtitle {
+        font-size: 1.4rem;
+      }
+    }
+    
+    /* Ajuste especial para el texto del hero en iPad Pro y pantallas medianas */
+    @media (min-width: 768px) and (max-width: 1279px) {
+      .hero-title .typewriter-text {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        white-space: normal;
+      }
+      
+      .hero-content {
+        text-align: center;
+      }
+      
+      .hero-buttons {
+        justify-content: center;
+      }
+    }
+    
+    /* Tablet responsive fix (para otros elementos) */
+    @media (min-width: 641px) and (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem !important;
+      }
+      
+      .typewriter-text {
+        white-space: normal;
+        display: block;
+      }
+    }
+    
+    /* CTA banner fix */
+    .cta-section {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    }
+    
+    /* Contact section margin */
+    .contact-section {
+      margin-top: 4rem;
+    }
+    
+    /* Hero image optimization */
+    .hero-image {
+      max-height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    /* About us image optimization */
+    .about-image {
+      max-height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+    
+    /* Sticky header styles */
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: white !important;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+  </style>
 </head>
 
-<body>
-<div class="bg-soft">
-<header class="header">
-<div class="container">
+<body class="bg-background-light text-text-dark font-sans overflow-x-hidden">
+<div class="w-full bg-background-soft">
+<header class="bg-transparent py-4 transition-all duration-300 z-50 relative">
+<div class="container mx-auto px-4">
 <div class="flex justify-between items-center">
-<div class="flex items-center space-x-3 hover-scale">
+<div class="flex items-center space-x-3 hover-scale transition-transform duration-300">
 <img alt="Auto Palm beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png"/>
 <span class="text-2xl font-bold text-secondary">Auto Palm Beach</span>
 </div>
 
 <!-- LANGUAGE SELECTOR PARA ESCRITORIO -->
-<div class="desktop-language-selector">
+<div class="desktop-language-selector" style="display: none;">
   <div class="language-selector">
     <button class="language-button" id="languageButton">
       <div class="language-flag" id="currentFlag">
@@ -1090,23 +606,25 @@ ul, ol {
 </div>
 
 <nav class="desktop-menu items-center space-x-6 text-secondary font-medium">
-<a class="hover:text-primary transition-colors px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#home" data-i18n="nav.home">Home</a>
-<a class="hover:text-primary transition-colors px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#about" data-i18n="nav.about">About Us</a>
-<a class="hover:text-primary transition-colors px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#services" data-i18n="nav.services">Services</a>
-<a class="hover:text-primary transition-colors px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#process" data-i18n="nav.process">How it Works</a>
-<a class="hover:text-primary transition-colors px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#testimonials" data-i18n="nav.testimonials">Testimonials</a>
-<a class="hover:text-primary transition-colors px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#contact" data-i18n="nav.contact">Contact</a>
+<a class="hover:text-primary transition-colors hover-lift px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#home" data-i18n="nav.home">Home</a>
+<a class="hover:text-primary transition-colors hover-lift px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#about" data-i18n="nav.about">About Us</a>
+<a class="hover:text-primary transition-colors hover-lift px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#services" data-i18n="nav.services">Services</a>
+<a class="hover:text-primary transition-colors hover-lift px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#process" data-i18n="nav.process">How it Works</a>
+<a class="hover:text-primary transition-colors hover-lift px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#testimonials" data-i18n="nav.testimonials">Testimonials</a>
+<a class="hover:text-primary transition-colors hover-lift px-2 py-1 rounded-lg text-base whitespace-nowrap" href="#contact" data-i18n="nav.contact">Contact</a>
 </nav>
 
 <div class="flex items-center space-x-4">
-  <button id="mobileMenuButton" class="mobile-menu-button text-secondary">
-    <span class="material-symbols-outlined text-3xl">menu</span>
+  <button id="mobileMenuButton" class="mobile-menu-button text-secondary hover-scale">
+    <span class="material-symbols-outlined text-3xl hover-shake">menu</span>
   </button>
-  <a class="desktop-get-started btn btn-primary" href="https://wa.me/15613039783" data-i18n="nav.getStarted">Get Started</a>
+  <a class="desktop-get-started bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-darker transition-colors hover-lift hover-glow whitespace-nowrap" href="https://wa.me/15613039783" data-i18n="nav.getStarted">Get Started</a>
 </div>
 </div>
 </div>
 </header>
+
+
 
 <!-- Off-canvas overlay -->
 <div id="offCanvasOverlay" class="off-canvas-overlay"></div>
@@ -1124,7 +642,7 @@ ul, ol {
 </div>
 <div class="off-canvas-content">
 <!-- LANGUAGE SELECTOR PARA MÓVIL -->
-<div class="mobile-language-selector mb-6">
+<div class="mobile-language-selector mb-6" style="display: none;">
   <div class="flex justify-center space-x-4">
     <button class="language-option active flex items-center gap-2 px-4 py-2 rounded-lg" data-lang="en" id="mobileLangEn">
       <div class="language-flag">
@@ -1180,10 +698,10 @@ ul, ol {
 </a>
 </nav>
 <div class="mt-8 pt-6 border-t border-gray-200">
-<a class="btn btn-primary w-full text-center" href="https://wa.me/15613039783" data-i18n="nav.getStarted">
+<a class="bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-darker transition-colors w-full text-center block hover-lift" href="https://wa.me/15613039783" data-i18n="nav.getStarted">
 Get Started
 </a>
-<div class="mt-4 text-sm text-light">
+<div class="mt-4 text-sm text-gray-600">
 <p class="font-medium mb-1" data-i18n="footer.contactInfo">Contact Info</p>
 <p>(561) 303-9783</p>
 <p class="mt-1">contact@autopalmbeach.com</p>
@@ -1195,31 +713,32 @@ Get Started
 
 <main>
 <!-- Hero Section -->
-<section id="home" class="hero-section">
-<div class="container">
-<div class="layout-flex layout-flex-lg-row layout-gap-12 layout-align-center">
-<div class="flex-1 hero-content animate-slide-right">
+<section id="home" class="relative pt-16 pb-24 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-orange-50 to-transparent z-0"></div>
+<div class="container mx-auto px-4 relative z-10">
+<div class="flex flex-col lg:flex-row items-center gap-12">
+<div class="lg:w-1/2 text-left animate-slide-right hero-content">
 <span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="hero.tagline">DMV & VIN Verification</span>
-<h1 class="hero-title">
-<span class="block mb-4" data-i18n="hero.title">
+<h1 class="text-5xl lg:text-6xl font-extrabold font-display mb-6 leading-tight text-secondary hero-title">
+<span class="block mb-4 mobile-hero-text" data-i18n="hero.title">
   Expert DMV & Title Services
 </span>
-<span class="text-gradient block" data-i18n="hero.subtitle"> in West Palm Beach</span>
+<span class="text-gradient block mobile-hero-subtitle" data-i18n="hero.subtitle"> in West Palm Beach</span>
 </h1>
-<p class="text-lg text-light max-w-lg mb-10 animate-slide-up" style="animation-delay: 0.3s" data-i18n="hero.description">Skip the long lines and confusing paperwork. We are your local vehicle paperwork solution in South Florida.</p>
-<div class="flex items-center space-x-4">
-<a class="btn btn-primary animate-scale-in" href="https://wa.me/15613039783" style="animation-delay: 0.6s" data-i18n="hero.cta">Get a Free Quote</a>
-<a class="text-secondary font-bold hover:text-primary flex items-center gap-2 animate-scale-in" href="#about" style="animation-delay: 0.8s">
+<p class="text-lg text-text-light max-w-lg mb-10 animate-slide-up" style="animation-delay: 0.3s" data-i18n="hero.description">Skip the long lines and confusing paperwork. We are your local vehicle paperwork solution in South Florida.</p>
+<div class="flex items-center space-x-4 hero-buttons">
+<a class="bg-primary text-white font-bold py-4 px-8 rounded-lg text-lg hover:bg-primary-darker transition-colors hover-lift hover-glow animate-scale-in" href="https://wa.me/15613039783" style="animation-delay: 0.6s" data-i18n="hero.cta">Get a Free Quote</a>
+<a class="text-secondary font-bold hover:text-primary transition-colors flex items-center gap-2 hover-lift animate-scale-in" href="#about" style="animation-delay: 0.8s">
 <span data-i18n="hero.learnMore">Learn More</span> 
 <span class="material-symbols-outlined animate-bounce-slow">arrow_forward</span>
 </a>
 </div>
 </div>
-<div class="flex-1 animate-slide-left">
+<div class="lg:w-1/2 animate-slide-left">
 <div class="relative w-full max-w-lg mx-auto">
 <div class="absolute -inset-4 bg-gradient-to-r from-primary to-primary-darker rounded-3xl opacity-20 blur-xl"></div>
 <img alt="Professional woman seller standing beside an orange car" 
-     class="rounded-2xl w-full h-full object-cover relative z-10" 
+     class="rounded-2xl w-full h-full hero-image object-cover relative z-10 hover-scale transition-transform duration-500" 
      loading="lazy" 
      decoding="async" 
      src="https://i.ibb.co/jksWphyt/woman-seller-standing-beside-orange-car.webp"/>
@@ -1231,50 +750,50 @@ Get Started
 
 <!-- About Section -->
 <div class="bg-white rounded-t-[50px] transform -translate-y-4">
-<section id="about" class="section section-hidden">
-<div class="container">
-<div class="layout-flex layout-flex-lg-row layout-gap-16 layout-align-center">
-<div class="flex-1">
+<section id="about" class="py-24 section-hidden">
+<div class="container mx-auto px-4">
+<div class="flex flex-col lg:flex-row items-center gap-16">
+<div class="lg:w-1/2">
 <div class="relative w-full max-w-lg mx-auto">
 <div class="absolute -inset-4 bg-gradient-to-br from-orange-100 to-transparent rounded-3xl opacity-50"></div>
 <img alt="Background image showing professional documents and office setting" 
-     class="rounded-2xl w-full object-cover relative z-10" 
+     class="rounded-2xl w-full about-image object-cover relative z-10 hover-scale transition-transform duration-500" 
      loading="lazy" 
      decoding="async" 
      src="https://i.ibb.co/LzKgSnVm/bg-hero.webp"/>
 </div>
 </div>
-<div class="flex-1 text-text-dark">
+<div class="lg:w-1/2 text-text-dark">
 <span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="about.tagline">ABOUT US</span>
 <h2 class="text-4xl font-bold font-display mb-6 text-secondary animate-slide-up" data-i18n="about.title">Your Trusted Partner in Vehicle Paperwork</h2>
-<p class="mb-8 text-light animate-slide-up" style="animation-delay: 0.2s" data-i18n="about.description">At Auto Palm Beach, we have helped hundreds of people in South Florida navigate the complex DMV system, making the paperwork simple, secure, and stress-free. We are your specialized administrative office in West Palm Beach.</p>
+<p class="mb-8 text-text-light animate-slide-up" style="animation-delay: 0.2s" data-i18n="about.description">At Auto Palm Beach, we have helped hundreds of people in South Florida navigate the complex DMV system, making the paperwork simple, secure, and stress-free. We are your specialized administrative office in West Palm Beach.</p>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-<div class="feature-card">
+<div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating">visibility</span>
 <div>
 <h4 class="font-bold text-lg text-secondary" data-i18n="about.feature1.title">Transparency</h4>
-<p class="text-light" data-i18n="about.feature1.description">We guarantee 100% legal and clear transactions.</p>
+<p class="text-text-light" data-i18n="about.feature1.description">We guarantee 100% legal and clear transactions.</p>
 </div>
 </div>
-<div class="feature-card">
+<div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.2s">military_tech</span>
 <div>
 <h4 class="font-bold text-lg text-secondary" data-i18n="about.feature2.title">Experience</h4>
-<p class="text-light" data-i18n="about.feature2.description">We have in-depth knowledge of DMV procedures.</p>
+<p class="text-text-light" data-i18n="about.feature2.description">We have in-depth knowledge of DMV procedures.</p>
 </div>
 </div>
-<div class="feature-card">
+<div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.4s">manage_accounts</span>
 <div>
 <h4 class="font-bold text-lg text-secondary" data-i18n="about.feature3.title">Effective Management</h4>
-<p class="text-light" data-i18n="about.feature3.description">We help you avoid long lines and paperwork errors.</p>
+<p class="text-text-light" data-i18n="about.feature3.description">We help you avoid long lines and paperwork errors.</p>
 </div>
 </div>
-<div class="feature-card">
+<div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.6s">groups</span>
 <div>
 <h4 class="font-bold text-lg text-secondary" data-i18n="about.feature4.title">Client Focus</h4>
-<p class="text-light" data-i18n="about.feature4.description">Your peace of mind is the center of our service.</p>
+<p class="text-text-light" data-i18n="about.feature4.description">Your peace of mind is the center of our service.</p>
 </div>
 </div>
 </div>
@@ -1284,96 +803,96 @@ Get Started
 </section>
 
 <!-- Services Section -->
-<section id="services" class="section bg-light section-hidden">
-<div class="container text-center">
+<section id="services" class="py-24 bg-background-light section-hidden">
+<div class="container mx-auto px-4 text-center">
 <span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="services.tagline">OUR SERVICES</span>
-<h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up" data-i18n="services.title">Explore Our Services</h2>
-<div class="services-grid">
+<h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up services-title" data-i18n="services.title">Explore Our Services</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
 <!-- Servicio 1 -->
-<div class="service-card group">
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="Two people signing official documents with pens" class="w-full h-48 object-cover" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7kVeFNWpIeNT4L4X-Ekc330lCTL_caF5l6XhiMUFShDbhFM7xi360IeFZ4R3tzIq_oImHmNyu17wdI8mf9QJIobAtzyELnQW4tmUWp8h5l3Uko_IrMUaTSChiF-JAFBcj061RcPPz--wXc-i8Wms9RxFWd5j7Um-_wrhMCl1jwHuApLlD-FwyaJdVE7WSmelxPrsyyK_HoKptyH92JkN8pm5eFxzf2wnOzBj-tnONN_mmpGwifrWQ_l6niWRiLoWG8z6qHb4xT8s"/>
+<img alt="Two people signing official documents with pens" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7kVeFNWpIeNT4L4X-Ekc330lCTL_caF5l6XhiMUFShDbhFM7xi360IeFZ4R3tzIq_oImHmNyu17wdI8mf9QJIobAtzyELnQW4tmUWp8h5l3Uko_IrMUaTSChiF-JAFBcj061RcPPz--wXc-i8Wms9RxFWd5j7Um-_wrhMCl1jwHuApLlD-FwyaJdVE7WSmelxPrsyyK_HoKptyH92JkN8pm5eFxzf2wnOzBj-tnONN_mmpGwifrWQ_l6niWRiLoWG8z6qHb4xT8s"/>
 </div>
 <div class="p-6">
-<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary" data-i18n="services.service1.title">Title Transfers & DMV Docs</h4>
-<p class="text-light mb-4" data-i18n="services.service1.description">Simplifying title transfers and DMV documentation for a fast, stress-free process.</p>
-<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2" href="https://wa.me/15613039783">
-<span data-i18n="services.cta">Get Started</span> 
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service1.title">Title Transfers & DMV Docs</h4>
+<p class="text-text-light mb-4" data-i18n="services.service1.description">Simplifying title transfers and DMV documentation for a fast, stress-free process.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
 <span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
 </a>
 </div>
 </div>
 
 <!-- Servicio 2 -->
-<div class="service-card group">
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="A person using a notary stamp on a document" class="w-full h-48 object-cover" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwVKqbLqqmDDL8-8QsOT74iXrx7B9kLvKNIW61F15UlISBTkR6Qjb8Vjhre2sV9ItQT53LxXPPD7mandJ3tMpQNZm1V4m2X6PREPMI_Kf9NjkN2Dmtg2qQstV7RULQgZHyWIApxJ_QPGBIZNPv8vdzTqYUPa4lnZ_rEHU57S2SkDqeFgYE7KwQn6IP5_LGJ-UwSXbTBo531BEfXdPi5R6SVzAgb-n57qQtOw3YH2o2QkYqztIv9UKL5O2e8dOp7W-ecovaR8UHT6w"/>
+<img alt="A person using a notary stamp on a document" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwVKqbLqqmDDL8-8QsOT74iXrx7B9kLvKNIW61F15UlISBTkR6Qjb8Vjhre2sV9ItQT53LxXPPD7mandJ3tMpQNZm1V4m2X6PREPMI_Kf9NjkN2Dmtg2qQstV7RULQgZHyWIApxJ_QPGBIZNPv8vdzTqYUPa4lnZ_rEHU57S2SkDqeFgYE7KwQn6IP5_LGJ-UwSXbTBo531BEfXdPi5R6SVzAgb-n57qQtOw3YH2o2QkYqztIv9UKL5O2e8dOp7W-ecovaR8UHT6w"/>
 </div>
 <div class="p-6">
-<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary" data-i18n="services.service2.title">Notary Public VIN Verification</h4>
-<p class="text-light mb-4" data-i18n="services.service2.description">We offer Florida notary public VIN verification to certify your vehicle's legal identity.</p>
-<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2" href="https://wa.me/15613039783">
-<span data-i18n="services.cta">Get Started</span> 
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service2.title">Notary Public VIN Verification</h4>
+<p class="text-text-light mb-4" data-i18n="services.service2.description">We offer Florida notary public VIN verification to certify your vehicle's legal identity.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
 <span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
 </a>
 </div>
 </div>
 
 <!-- Servicio 3 -->
-<div class="service-card group">
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="A Florida license plate on a wooden surface" class="w-full h-48 object-cover" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcQC2Ul3kIuE8sN54g1jsb9Y-n8dw00JAOtCliE5b9tT-bDL48cdmqg5NFwQzL2tGdYVNtovxXs-GCbrKgagFJoGejTVJ2bEFYk36TqAPAZ90gQStViRGQ1_-tjAqlBD9lkjzXJz2aeIjz8iwLBBM-c_b4Gk29KzYdENwdmBK-ce2WUByza0w9vnOfnUQgIad3fq9E0Yh3-vcSLTQZqm89e3xiR-_OioXgGMFvjUtFqiP3NM-twWdC3OToLEayKA-FlckzSWqPoYc"/>
+<img alt="A Florida license plate on a wooden surface" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcQC2Ul3kIuE8sN54g1jsb9Y-n8dw00JAOtCliE5b9tT-bDL48cdmqg5NFwQzL2tGdYVNtovxXs-GCbrKgagFJoGejTVJ2bEFYk36TqAPAZ90gQStViRGQ1_-tjAqlBD9lkjzXJz2aeIjz8iwLBBM-c_b4Gk29KzYdENwdmBK-ce2WUByza0w9vnOfnUQgIad3fq9E0Yh3-vcSLTQZqm89e3xiR-_OioXgGMFvjUtFqiP3NM-twWdC3OToLEayKA-FlckzSWqPoYc"/>
 </div>
 <div class="p-6">
-<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary" data-i18n="services.service3.title">Registration & Plates</h4>
-<p class="text-light mb-4" data-i18n="services.service3.description">We handle your vehicle's initial registration and plates, saving you time and DMV visits.</p>
-<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2" href="https://wa.me/15613039783">
-<span data-i18n="services.cta">Get Started</span> 
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service3.title">Registration & Plates</h4>
+<p class="text-text-light mb-4" data-i18n="services.service3.description">We handle your vehicle's initial registration and plates, saving you time and DMV visits.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
 <span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
 </a>
 </div>
 </div>
 
 <!-- Servicio 4 -->
-<div class="service-card group">
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="Professional dmv accompaniment west palm beach florida" class="w-full h-48 object-cover" loading="lazy" decoding="async" src="https://i.ibb.co/LXLs9dt4//img/professional-dmv-accompaniment-west-palm-beach-florida.webp"/>
+<img alt="Professional dmv accompaniment west palm beach florida" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/LXLs9dt4//img/professional-dmv-accompaniment-west-palm-beach-florida.webp"/>
 </div>
 <div class="p-6">
-<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary" data-i18n="services.service4.title">Administrative Support Services</h4>
-<p class="text-light mb-4" data-i18n="services.service4.description">Document organization and translation. Administrative accompaniment to the DMV or Tax Collector. Connection with external financing and insurance providers.</p>
-<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2" href="https://wa.me/15613039783">
-<span data-i18n="services.cta">Get Started</span> 
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service4.title">Administrative Support Services</h4>
+<p class="text-text-light mb-4" data-i18n="services.service4.description">Document organization and translation. Administrative accompaniment to the DMV or Tax Collector. Connection with external financing and insurance providers.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
 <span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
 </a>
 </div>
 </div>
 
 <!-- Servicio 5 -->
-<div class="service-card group">
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="Calendar with appointment scheduling for DMV" class="w-full h-48 object-cover" loading="lazy" decoding="async" src="https://i.ibb.co/p6ZtSMqr/dmv-appointment-scheduling-confirmation-west-palm-beach-florida.webp"/>
+<img alt="Calendar with appointment scheduling for DMV" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/p6ZtSMqr/dmv-appointment-scheduling-confirmation-west-palm-beach-florida.webp"/>
 </div>
 <div class="p-6">
-<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary" data-i18n="services.service5.title">DMV Appointment Scheduling</h4>
-<p class="text-light mb-4" data-i18n="services.service5.description">Coordination of official appointments for license, registration, and plate paperwork. Confirmation of date, time, and specific requirements for each procedure.</p>
-<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2" href="https://wa.me/15613039783">
-<span data-i18n="services.cta">Get Started</span> 
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service5.title">DMV Appointment Scheduling</h4>
+<p class="text-text-light mb-4" data-i18n="services.service5.description">Coordination of official appointments for license, registration, and plate paperwork. Confirmation of date, time, and specific requirements for each procedure.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
 <span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
 </a>
 </div>
 </div>
 
 <!-- Servicio 6 -->
-<div class="service-card group">
+<div class="bg-background-light rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transitionall duration-500 hover-lift group">
 <div class="overflow-hidden">
-<img alt="Car being photographed for online listing" class="w-full h-48 object-cover" loading="lazy" decoding="async" src="https://i.ibb.co/fYMJkH8x/Car-being-photographed-for-online-listing.webp"/>
+<img alt="Car being photographed for online listing" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" src="https://i.ibb.co/fYMJkH8x/Car-being-photographed-for-online-listing.webp"/>
 </div>
 <div class="p-6">
-<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary" data-i18n="services.service6.title">Vehicle Listing & Online Promotion</h4>
-<p class="text-light mb-4" data-i18n="services.service6.description">We help you list your cars, motors, and auto parts. Digital promotion on partner platforms and social media.</p>
-<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2" href="https://wa.me/15613039783">
-<span data-i18n="services.cta">Get Started</span> 
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="services.service6.title">Vehicle Listing & Online Promotion</h4>
+<p class="text-text-light mb-4" data-i18n="services.service6.description">We help you list your cars, motors, and auto parts. Digital promotion on partner platforms and social media.</p>
+<a class="font-bold text-primary hover:text-primary-darker flex items-center gap-2 group/link" href="https://wa.me/15613039783">
+<span class="group-hover/link:underline" data-i18n="services.cta">Get Started</span> 
 <span class="material-symbols-outlined transition-transform group-hover/link:translate-x-2">arrow_forward</span>
 </a>
 </div>
@@ -1383,16 +902,16 @@ Get Started
 </section>
 
 <!-- CTA Section -->
-<section class="cta-section">
-<div class="container text-center">
+<section class="cta-section py-16 text-white">
+<div class="container mx-auto px-4 text-center">
 <h2 class="text-3xl font-bold font-display mb-6" data-i18n="cta.title">Get Started Today</h2>
 <p class="mb-8 max-w-2xl mx-auto text-lg" data-i18n="cta.description">Get started with a free service evaluation. No obligations, just solutions.</p>
 <div class="flex flex-col sm:flex-row justify-center gap-4">
-<a href="tel:5613039783" class="btn btn-secondary">
+<a href="tel:5616291310" class="bg-white text-primary font-bold py-3 px-8 rounded-lg hover:bg-gray-100 transition-all duration-300 hover-lift">
 <span class="material-symbols-outlined align-middle mr-2">call</span>
 <span data-i18n="cta.call">Call Now: (561) 303-9783</span>
 </a>
-<a href="https://wa.me/15613039783" class="btn btn-outline">
+<a href="https://wa.me/15613039783" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-lg hover:bg-white hover:text-primary transition-all duration-300 hover-lift">
 WhatsApp
 </a>
 </div>
@@ -1400,64 +919,64 @@ WhatsApp
 </section>
 
 <!-- Process Section -->
-<section id="process" class="section bg-soft rounded-[50px] my-12 section-hidden">
-<div class="container text-center">
+<section id="process" class="py-24 bg-background-soft rounded-[50px] my-12 section-hidden">
+<div class="container mx-auto px-4 text-center">
 <span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="process.tagline">HOW IT WORKS</span>
 <h2 class="text-4xl font-bold font-display mb-4 text-secondary animate-slide-up" data-i18n="process.title">Our Simple Process</h2>
-<p class="mb-16 text-light max-w-2xl mx-auto animate-slide-up" style="animation-delay: 0.2s" data-i18n="process.description">We've streamlined the DMV process into four easy steps, saving you time and stress.</p>
-<div class="process-steps">
-<div class="process-step">
-<div class="step-number floating">1</div>
-<h4 class="text-lg font-bold mb-2 text-secondary" data-i18n="process.step1.title">Contact Us</h4>
-<p class="text-light" data-i18n="process.step1.description">Reach out by phone, email, or our contact form to get started.</p>
+<p class="mb-16 text-text-light max-w-2xl mx-auto animate-slide-up" style="animation-delay: 0.2s" data-i18n="process.description">We've streamlined the DMV process into four easy steps, saving you time and stress.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover-lift transition-all duration-300 group">
+<div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-3xl font-bold group-hover:scale-110 transition-transform duration-300 floating">1</div>
+<h4 class="text-lg font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="process.step1.title">Contact Us</h4>
+<p class="text-text-light" data-i18n="process.step1.description">Reach out by phone, email, or our contact form to get started.</p>
 </div>
-<div class="process-step">
-<div class="step-number floating" style="animation-delay: 0.2s">2</div>
-<h4 class="text-lg font-bold mb-2 text-secondary" data-i18n="process.step2.title">Provide Documents</h4>
-<p class="text-light" data-i18n="process.step2.description">Easily and securely submit the necessary documents.</p>
+<div class="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover-lift transition-all duration-300 group" style="animation-delay: 0.2s">
+<div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-3xl font-bold group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.2s">2</div>
+<h4 class="text-lg font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="process.step2.title">Provide Documents</h4>
+<p class="text-text-light" data-i18n="process.step2.description">Easily and securely submit the necessary documents.</p>
 </div>
-<div class="process-step">
-<div class="step-number floating" style="animation-delay: 0.4s">3</div>
-<h4 class="text-lg font-bold mb-2 text-secondary" data-i18n="process.step3.title">We Handle Paperwork</h4>
-<p class="text-light" data-i18n="process.step3.description">Our expert team takes over the complex DMV process.</p>
+<div class="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover-lift transition-all duration-300 group" style="animation-delay: 0.4s">
+<div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-3xl font-bold group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.4s">3</div>
+<h4 class="text-lg font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="process.step3.title">We Handle Paperwork</h4>
+<p class="text-text-light" data-i18n="process.step3.description">Our expert team takes over the complex DMV process.</p>
 </div>
-<div class="process-step">
-<div class="step-number floating" style="animation-delay: 0.6s">4</div>
-<h4 class="text-lg font-bold mb-2 text-secondary" data-i18n="process.step4.title">Get Your Results</h4>
-<p class="text-light" data-i18n="process.step4.description">Receive your completed titles and registrations quickly.</p>
+<div class="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover-lift transition-all duration-300 group" style="animation-delay: 0.6s">
+<div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mb-4 text-3xl font-bold group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.6s">4</div>
+<h4 class="text-lg font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="process.step4.title">Get Your Results</h4>
+<p class="text-text-light" data-i18n="process.step4.description">Receive your completed titles and registrations quickly.</p>
 </div>
 </div>
 </div>
 </section>
 
 <!-- Testimonials Section -->
-<section id="testimonials" class="section bg-white section-hidden">
-<div class="container text-center">
+<section id="testimonials" class="py-24 bg-white section-hidden">
+<div class="container mx-auto px-4 text-center">
 <span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="testimonials.tagline">TESTIMONIALS</span>
 <h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up" data-i18n="testimonials.title">What Our Clients Say</h2>
-<div class="testimonials-grid">
-<div class="testimonial-card">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-background-soft p-6 rounded-xl hover-lift transition-all duration-300 group">
 <div class="flex items-center mb-4">
-<div class="text-yellow-400">★★★★★</div>
-<span class="ml-2 text-sm text-light" data-i18n="testimonials.testimonial1.date">2 days ago</span>
+<div class="text-yellow-400 group-hover:scale-110 transition-transform duration-300">★★★★★</div>
+<span class="ml-2 text-sm text-text-light" data-i18n="testimonials.testimonial1.date">2 days ago</span>
 </div>
-<p class="text-text-dark mb-4 italic" data-i18n="testimonials.testimonial1.text">"Saved me hours at the DMV! The title transfer was completed in half the time."</p>
+<p class="text-text-dark mb-4 italic group-hover:text-secondary transition-colors" data-i18n="testimonials.testimonial1.text">"Saved me hours at the DMV! The title transfer was completed in half the time."</p>
 <p class="font-bold text-primary">- Michael R.</p>
 </div>
-<div class="testimonial-card">
+<div class="bg-background-soft p-6 rounded-xl hover-lift transition-all duration-300 group" style="animation-delay: 0.2s">
 <div class="flex items-center mb-4">
-<div class="text-yellow-400">★★★★★</div>
-<span class="ml-2 text-sm text-light" data-i18n="testimonials.testimonial2.date">1 week ago</span>
+<div class="text-yellow-400 group-hover:scale-110 transition-transform duration-300">★★★★★</div>
+<span class="ml-2 text-sm text-text-light" data-i18n="testimonials.testimonial2.date">1 week ago</span>
 </div>
-<p class="text-text-dark mb-4 italic" data-i18n="testimonials.testimonial2.text">"Professional and efficient. They handled everything from VIN verification to plates."</p>
+<p class="text-text-dark mb-4 italic group-hover:text-secondary transition-colors" data-i18n="testimonials.testimonial2.text">"Professional and efficient. They handled everything from VIN verification to plates."</p>
 <p class="font-bold text-primary">- Sarah L.</p>
 </div>
-<div class="testimonial-card">
+<div class="bg-background-soft p-6 rounded-xl hover-lift transition-all duration-300 group" style="animation-delay: 0.4s">
 <div class="flex items-center mb-4">
-<div class="text-yellow-400">★★★★★</div>
-<span class="ml-2 text-sm text-light" data-i18n="testimonials.testimonial3.date">3 weeks ago</span>
+<div class="text-yellow-400 group-hover:scale-110 transition-transform duration-300">★★★★★</div>
+<span class="ml-2 text-sm text-text-light" data-i18n="testimonials.testimonial3.date">3 weeks ago</span>
 </div>
-<p class="text-text-dark mb-4 italic" data-i18n="testimonials.testimonial3.text">"As a first-time car buyer in Florida, their guidance was invaluable."</p>
+<p class="text-text-dark mb-4 italic group-hover:text-secondary transition-colors" data-i18n="testimonials.testimonial3.text">"As a first-time car buyer in Florida, their guidance was invaluable."</p>
 <p class="font-bold text-primary">- James T.</p>
 </div>
 </div>
@@ -1465,51 +984,51 @@ WhatsApp
 </section>
 
 <!-- Why Choose Us Section -->
-<section class="section section-hidden">
-<div class="container text-center">
+<section class="py-24 section-hidden">
+<div class="container mx-auto px-4 text-center">
 <span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="why.tagline">WHY CHOOSE US</span>
 <h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up" data-i18n="why.title">Advantages of Our Service</h2>
-<div class="features-grid">
-<div class="feature-card">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating">person_pin</span>
 <div>
-<h4 class="text-xl font-bold mb-2 text-secondary" data-i18n="why.feature1.title">Personalized Approach</h4>
-<p class="text-light" data-i18n="why.feature1.description">We provide clear, personalized advice to avoid common mistakes that delay your paperwork.</p>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature1.title">Personalized Approach</h4>
+<p class="text-text-light" data-i18n="why.feature1.description">We provide clear, personalized advice to avoid common mistakes that delay your paperwork.</p>
 </div>
 </div>
-<div class="feature-card">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.1s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.2s">hourglass_top</span>
 <div>
-<h4 class="text-xl font-bold mb-2 text-secondary" data-i18n="why.feature2.title">Time Saving</h4>
-<p class="text-light" data-i18n="why.feature2.description">Skip the long lines and confusion. We handle the paperwork and logistics, including scheduling.</p>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature2.title">Time Saving</h4>
+<p class="text-text-light" data-i18n="why.feature2.description">Skip the long lines and confusion. We handle the paperwork and logistics, including scheduling.</p>
 </div>
 </div>
-<div class="feature-card">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.2s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.4s">inventory_2</span>
 <div>
-<h4 class="text-xl font-bold mb-2 text-secondary" data-i18n="why.feature3.title">All-in-One Service</h4>
-<p class="text-light" data-i18n="why.feature3.description">From VIN verification to title transfers, we simplify the entire administrative process.</p>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature3.title">All-in-One Service</h4>
+<p class="text-text-light" data-i18n="why.feature3.description">From VIN verification to title transfers, we simplify the entire administrative process.</p>
 </div>
 </div>
-<div class="feature-card">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.3s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.6s">shield</span>
 <div>
-<h4 class="text-xl font-bold mb-2 text-secondary" data-i18n="why.feature4.title">Total Transparency & Trust</h4>
-<p class="text-light" data-i18n="why.feature4.description">We offer absolute transparency in costs and procedures, ensuring your transaction is 100% legal.</p>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature4.title">Total Transparency & Trust</h4>
+<p class="text-text-light" data-i18n="why.feature4.description">We offer absolute transparency in costs and procedures, ensuring your transaction is 100% legal.</p>
 </div>
 </div>
-<div class="feature-card">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.4s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 0.8s">support_agent</span>
 <div>
-<h4 class="text-xl font-bold mb-2 text-secondary" data-i18n="why.feature5.title">Administrative Support</h4>
-<p class="text-light" data-i18n="why.feature5.description">We connect you with trusted insurance providers, making the entire process seamless.</p>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature5.title">Administrative Support</h4>
+<p class="text-text-light" data-i18n="why.feature5.description">We connect you with trusted insurance providers, making the entire process seamless.</p>
 </div>
 </div>
-<div class="feature-card">
+<div class="bg-background-light p-6 rounded-2xl flex items-start space-x-4 border border-gray-200 hover-lift transition-all duration-300 group" style="animation-delay: 0.5s">
 <span class="material-symbols-outlined text-primary text-4xl mt-1 floating" style="animation-delay: 1s">military_tech</span>
 <div>
-<h4 class="text-xl font-bold mb-2 text-secondary" data-i18n="why.feature6.title">Guaranteed Results</h4>
-<p class="text-light" data-i18n="why.feature6.description">Our reputation is built on results. We have helped hundreds in South Florida. Your success is our commitment.</p>
+<h4 class="text-xl font-bold mb-2 text-secondary group-hover:text-primary transition-colors" data-i18n="why.feature6.title">Guaranteed Results</h4>
+<p class="text-text-light" data-i18n="why.feature6.description">Our reputation is built on results. We have helped hundreds in South Florida. Your success is our commitment.</p>
 </div>
 </div>
 </div>
@@ -1517,48 +1036,48 @@ WhatsApp
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="section contact-section section-hidden">
-<div class="container">
+<section id="contact" class="py-24 contact-section section-hidden">
+<div class="container mx-auto px-4">
 <div class="text-center">
 <span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="contact.tagline">CONTACT US</span>
 <h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up" data-i18n="contact.title">Visit or Contact Us</h2>
 </div>
-<div class="layout-flex layout-flex-lg-row layout-gap-12 layout-align-center">
-<div class="flex-1 text-text-dark animate-slide-right">
-<div class="contact-info">
-<div class="contact-item">
-<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl floating">location_on</span>
+<div class="flex flex-col lg:flex-row gap-12 items-center">
+<div class="lg:w-1/2 text-text-dark animate-slide-right">
+<div class="space-y-6">
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift group">
+<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating">location_on</span>
 <div>
-<h4 class="font-bold text-secondary text-xl">Auto Palm Beach</h4>
-<p class="text-light mt-1" data-i18n="contact.address">2393 South Congress Ave STE 200, West Palm Beach, FL 33406</p>
+<h4 class="font-bold text-secondary text-xl group-hover:text-primary transition-colors">Auto Palm Beach</h4>
+<p class="text-text-light mt-1" data-i18n="contact.address">2393 South Congress Ave STE 200, West Palm Beach, FL 33406</p>
 </div>
 </div>
-<div class="contact-item">
-<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl floating" style="animation-delay: 0.2s">phone</span>
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift group">
+<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.2s">phone</span>
 <div>
-  <a href="tel:5613039783" class="font-bold text-secondary text-xl">(561) 303-9783</a>
-<p class="text-light mt-1" data-i18n="contact.phoneDescription">Give us a call - we're happy to help!</p>
+  <a href="tel:5613039783" class="font-bold text-secondary text-xl group-hover:text-primary transition-colors">(561) 303-9783</a>
+<p class="text-text-light mt-1" data-i18n="contact.phoneDescription">Give us a call - we're happy to help!</p>
 </div>
 </div>
-<div class="contact-item">
-<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl floating" style="animation-delay: 0.4s">email</span>
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transition-all duration-300 hover-lift group">
+<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.4s">email</span>
 <div>
-<h4 class="font-bold text-secondary text-xl">contact@autopalmbeach.com</h4>
-<p class="text-light mt-1" data-i18n="contact.emailDescription">Send us an email for quick responses</p>
+<h4 class="font-bold text-secondary text-xl group-hover:text-primary transition-colors">contact@autopalmbeach.com</h4>
+<p class="text-text-light mt-1" data-i18n="contact.emailDescription">Send us an email for quick responses</p>
 </div>
 </div>
-<div class="contact-item">
-<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl floating" style="animation-delay: 0.6s">schedule</span>
+<div class="flex items-start p-4 rounded-xl hover:bg-background-soft transitionall duration-300 hover-lift group">
+<span class="material-symbols-outlined text-primary mr-4 mt-1 text-4xl group-hover:scale-110 transition-transform duration-300 floating" style="animation-delay: 0.6s">schedule</span>
 <div>
-<h4 class="font-bold text-secondary text-xl" data-i18n="contact.hoursTitle">Opening Hours</h4>
-<p class="text-light mt-1" data-i18n="contact.hoursWeekdays">Monday - Friday: 9:00 AM - 5:00 PM</p>
-<p class="text-light text-sm mt-1" data-i18n="contact.hoursSaturday">Saturday: 10:00 AM - 2:00 PM (By appointment only)</p>
+<h4 class="font-bold text-secondary text-xl group-hover:text-primary transition-colors" data-i18n="contact.hoursTitle">Opening Hours</h4>
+<p class="text-text-light mt-1" data-i18n="contact.hoursWeekdays">Monday - Friday: 9:00 AM - 5:00 PM</p>
+<p class="text-text-light text-sm mt-1" data-i18n="contact.hoursSaturday">Saturday: 10:00 AM - 2:00 PM (By appointment only)</p>
 </div>
 </div>
 </div>
 </div>
-<div class="flex-1 animate-slide-left">
-<div class="map-container">
+<div class="lg:w-1/2 animate-slide-left">
+<div class="w-full h-96 rounded-2xl overflow-hidden shadow-xl hover-lift transition-all duration-500">
 <iframe 
     src="https://www.google.com/maps/embed?q=2393%20South%20Congress%20Ave%20STE%20200%2C%20West%20Palm%20Beach%2C%20FL%2033406"
     width="100%" 
@@ -1567,110 +1086,114 @@ WhatsApp
     allowfullscreen 
     loading="lazy" 
     referrerpolicy="no-referrer-when-downgrade"
+    class="hover:scale-105 transition-transform duration-700"
     title="Auto Palm Beach Location Map">
 </iframe>
 </div>
 <div class="mt-6 text-center">
-<p class="text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
+<p class="text-text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
+</div>
+<div class="mt-6 text-center">
+<p class="text-text-light italic" data-i18n="contact.mapDescription">📍 Conveniently located in West Palm Beach with easy access and parking available.</p>
 </div>
 </div>
 </div>
 </section>
 
 <!-- FAQ Section -->
-<section class="section bg-light section-hidden">
-<div class="container faq-container">
+<section class="py-24 bg-background-light section-hidden">
+<div class="container mx-auto px-4 max-w-4xl">
 <div class="text-center">
 <span class="font-semibold text-primary mb-2 block animate-fade-in" data-i18n="faq.tagline">FAQ</span>
 <h2 class="text-4xl font-bold font-display mb-12 text-secondary animate-slide-up" data-i18n="faq.title">Frequently Asked Questions</h2>
 </div>
 <div class="space-y-4">
 <!-- FAQ 1 -->
-<div class="faq-item">
-<button class="faq-button">
-<span data-i18n="faq.question1">What services does Auto Palm Beach offer exactly?</span>
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question1">What services does Auto Palm Beach offer exactly?</span>
 <span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
 </button>
 <div class="faq-answer">
-<div class="pt-4 text-light border-t border-gray-100 mt-2">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
 <p data-i18n="faq.answer1">We are your administrative assistant specialized in vehicle paperwork. We handle the preparation and review of DMV forms, notary public VIN verification, registration and license plate assistance, and DMV appointment scheduling.</p>
 </div>
 </div>
 </div>
 
 <!-- FAQ 2 -->
-<div class="faq-item">
-<button class="faq-button">
-<span data-i18n="faq.question2">Are you a car dealership?</span>
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question2">Are you a car dealership?</span>
 <span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
 </button>
 <div class="faq-answer">
-<div class="pt-4 text-light border-t border-gray-100 mt-2">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
 <p data-i18n="faq.answer2">No. It's important to clarify that Auto Palm Beach is NOT a licensed motor vehicle dealer. We operate as an administrative service office and an advertising platform. The vehicles belong to private sellers; We help you list your vehicles and provide added exposure through digital promotion on partner platforms.</p>
 </div>
 </div>
 </div>
 
 <!-- FAQ 3 -->
-<div class="faq-item">
-<button class="faq-button">
-<span data-i18n="faq.question3">I bought/sold a car privately. Can you help me with the paperwork?</span>
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question3">I bought/sold a car privately. Can you help me with the paperwork?</span>
 <span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
 </button>
 <div class="faq-answer">
-<div class="pt-4 text-light border-t border-gray-100 mt-2">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
 <p data-i18n="faq.answer3">Absolutely! This is our primary service. We assist you with the title transfer, the correct preparation of documentation (such as form HSMV 82040), and the VIN verification if required, ensuring everything is in order to avoid future problems at the DMV.</p>
 </div>
 </div>
 </div>
 
 <!-- FAQ 4 -->
-<div class="faq-item">
-<button class="faq-button">
-<span data-i18n="faq.question4">Can you help me get temporary or permanent license plates?</span>
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question4">Can you help me get temporary or permanent license plates?</span>
 <span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
 </button>
 <div class="faq-answer">
-<div class="pt-4 text-light border-t border-gray-100 mt-2">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
 <p data-i18n="faq.answer4">Yes. We provide all the necessary administrative support to apply for your temporary tags or manage permanent registration and plates, guiding you through the specific process and requirements.</p>
 </div>
 </div>
 </div>
 
 <!-- FAQ 5 -->
-<div class="faq-item">
-<button class="faq-button">
-<span data-i18n="faq.question5">What does "VIN Verification by a Notary Public" mean, and when do I need it?</span>
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question5">What does "VIN Verification by a Notary Public" mean, and when do I need it?</span>
 <span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
 </button>
 <div class="faq-answer">
-<div class="pt-4 text-light border-t border-gray-100 mt-2">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
 <p data-i18n="faq.answer5">This service (form HSMV 82042) is mandatory for vehicles coming from another state or in cases where the Florida DMV requires a physical inspection of the VIN number. Our authorized Notary Public certifies the accuracy of the VIN, a crucial step for titling the car in Florida.</p>
 </div>
 </div>
 </div>
 
 <!-- FAQ 6 -->
-<div class="faq-item">
-<button class="faq-button">
-<span data-i18n="faq.question6">Do you offer document translation services?</span>
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question6">Do you offer document translation services?</span>
 <span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
 </button>
 <div class="faq-answer">
-<div class="pt-4 text-light border-t border-gray-100 mt-2">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
 <p data-i18n="faq.answer6">Yes, as part of our administrative support services, we can assist you in organizing and translating documents needed for your paperwork, making the process easier if language is a barrier.</p>
 </div>
 </div>
 </div>
 
 <!-- FAQ 7 -->
-<div class="faq-item">
-<button class="faq-button">
-<span data-i18n="faq.question7">How can I get in touch to use your services?</span>
+<div class="bg-background-light p-4 rounded-lg border border-gray-200 hover:border-primary transition-all duration-300 hover-lift">
+<button class="w-full flex justify-between items-center text-left text-lg font-semibold text-secondary group faq-button">
+<span class="group-hover:text-primary transition-colors" data-i18n="faq.question7">How can I get in touch to use your services?</span>
 <span class="material-symbols-outlined text-primary transition-transform duration-300">add_circle</span>
 </button>
 <div class="faq-answer">
-<div class="pt-4 text-light border-t border-gray-100 mt-2">
+<div class="pt-4 text-text-light border-t border-gray-100 mt-2">
 <p data-i18n="faq.answer7">You can call us at (561) 303-9783, visit us at our office at 2393 South Congress Ave STE 200, West Palm Beach, FL 33406, or complete the contact form on our website to schedule a consultation.</p>
 </div>
 </div>
@@ -1681,53 +1204,53 @@ WhatsApp
 </div>
 </main>
 
-<footer class="footer section-hidden">
-<div class="container">
-<div class="footer-grid">
+<footer class="bg-background-soft text-secondary pt-20 pb-8 section-hidden">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
 <div>
-<div class="flex items-center space-x-3 mb-4">
+<div class="flex items-center space-x-3 mb-4 hover-scale transition-transform duration-300">
 <img alt="Auto Palms Beach logo" class="h-10 w-10 floating" src="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png"/>
 <span class="text-2xl font-bold">Auto Palm Beach</span>
 </div>
-<p class="text-sm text-light" data-i18n="footer.description">Specialized administrative office for DMV Paperwork and VIN verification in West Palm Beach, South Florida.</p>
+<p class="text-sm text-text-light" data-i18n="footer.description">Specialized administrative office for DMV Paperwork and VIN verification in West Palm Beach, South Florida.</p>
 </div>
 <div>
 <h5 class="font-bold text-lg mb-4" data-i18n="footer.quickLinks">Quick Links</h5>
 <ul class="space-y-2 text-sm">
-<li><a class="text-light hover:text-primary inline-block" href="#home" data-i18n="nav.home">Home</a></li>
-<li><a class="text-light hover:text-primary inline-block" href="#about" data-i18n="nav.about">About Us</a></li>
-<li><a class="text-light hover:text-primary inline-block" href="#services" data-i18n="nav.services">Services</a></li>
-<li><a class="text-light hover:text-primary inline-block" href="#process" data-i18n="nav.process">How it Works</a></li>
-<li><a class="text-light hover:text-primary inline-block" href="#faq" data-i18n="footer.faq">FAQ</a></li>
+<li><a class="text-text-light hover:text-primary transition-colors hover-lift inline-block" href="#home" data-i18n="nav.home">Home</a></li>
+<li><a class="text-text-light hover:text-primary transition-colors hover-lift inline-block" href="#about" data-i18n="nav.about">About Us</a></li>
+<li><a class="text-text-light hover:text-primary transition-colors hover-lift inline-block" href="#services" data-i18n="nav.services">Services</a></li>
+<li><a class="text-text-light hover:text-primary transition-colors hover-lift inline-block" href="#process" data-i18n="nav.process">How it Works</a></li>
+<li><a class="text-text-light hover:text-primary transition-colors hover-lift inline-block" href="#faq" data-i18n="footer.faq">FAQ</a></li>
 </ul>
 </div>
 <div>
 <h5 class="font-bold text-lg mb-4" data-i18n="footer.contactInfo">Contact Info</h5>
-<div class="space-y-2 text-sm text-light">
-<p data-i18n="contact.address">2393 South Congress Ave STE 200, West Palm Beach, FL 33406</p>
-<p>(561) 303-9783</p>
-<p>contact@autopalmbeach.com</p>
+<div class="space-y-2 text-sm text-text-light">
+<p class="hover:text-primary transition-colors cursor-default" data-i18n="contact.address">2393 South Congress Ave STE 200, West Palm Beach, FL 33406</p>
+<p class="hover:text-primary transition-colors cursor-default">(561) 303-9783</p>
+<p class="hover:text-primary transition-colors cursor-default">contact@autopalmbeach.com</p>
 </div>
 </div>
 <div>
 <h5 class="font-bold text-lg mb-4" data-i18n="footer.legalTitle">Legal Disclosure</h5>
-<p class="text-sm text-light" data-i18n="footer.legalText">Auto Palm Beach is not a licensed motor vehicle dealer. We operate as an Administrative Office. All vehicles are sold as private sales between owners.</p>
+<p class="text-sm text-text-light" data-i18n="footer.legalText">Auto Palm Beach is not a licensed motor vehicle dealer. We operate as an Administrative Office. All vehicles are sold as private sales between owners.</p>
 </div>
 </div>
-<div class="border-t border-gray-300 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-light">
+<div class="border-t border-gray-300 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-text-light">
 <p class="mb-4 sm:mb-0" data-i18n="footer.copyright">©2025 Auto Palm Beach. All rights reserved.</p>
 <div class="flex space-x-4">
-<a class="hover:text-primary" href="#">
+<a class="hover:text-primary transition-colors hover-scale" href="#">
 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
 <path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
 </svg>
 </a>
-<a class="hover:text-primary" href="#">
+<a class="hover:text-primary transition-colors hover-scale" href="#">
 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
 <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
 </svg>
 </a>
-<a class="hover:text-primary" href="#">
+<a class="hover:text-primary transition-colors hover-scale" href="#">
 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
 <path clip-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill-rule="evenodd"></path>
 </svg>
@@ -1765,7 +1288,7 @@ WhatsApp
 </script>
 
 <script>
-// Internacionalización - Textos en inglés y español (mantengo el mismo objeto)
+// Internacionalización - Textos en inglés y español
 const translations = {
   en: {
     // Navbar
@@ -2085,7 +1608,7 @@ function updateLanguageSelector(lang) {
   }
   
   // Actualizar opciones activas en el dropdown
-  document.querySelectorAll('.language-option:not(#mobileLangEn):not(#mobileLangEs)').forEach(option => {
+  document.querySelectorAll('.language-option').forEach(option => {
     if (option.getAttribute('data-lang') === lang) {
       option.classList.add('active');
     } else {
@@ -2155,11 +1678,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // Smooth scrolling for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
+      // Si es el enlace de Home "/", no hacer nada especial
       if(this.getAttribute('href') === '/' || this.getAttribute('href') === '#') return;
       
       e.preventDefault();
       const targetId = this.getAttribute('href');
       
+      // Verificar si es un enlace interno (#about, #services, etc.)
       if(targetId.startsWith('#')) {
         const targetElement = document.querySelector(targetId);
         
@@ -2187,6 +1712,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Home link - mantener comportamiento actual
   document.querySelectorAll('a[href="/"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
+      // Solo prevenir comportamiento por defecto si es un enlace interno
       if(!this.getAttribute('href').startsWith('http')) {
         e.preventDefault();
         window.location.href = '/';
@@ -2198,10 +1724,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const header = document.querySelector('header');
   window.addEventListener('scroll', function() {
     if (window.scrollY > 100) {
-      header.classList.add('sticky-header');
+      header.classList.add('sticky-header', 'py-3', 'shadow-md');
       header.style.backgroundColor = 'white';
     } else {
-      header.classList.remove('sticky-header');
+      header.classList.remove('sticky-header', 'py-3', 'shadow-md');
       header.style.backgroundColor = '';
     }
   });
@@ -2260,6 +1786,14 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(section);
   });
 
+  // Hover effects enhancement
+  document.querySelectorAll('.hover-lift').forEach(element => {
+    element.addEventListener('mouseenter', function() {
+      this.style.transition = 'all 0.3s ease';
+    });
+  });
+
+  // Dynamic text effects - ELIMINADO el código relacionado con typewriter-text
   // Random floating animation delays
   document.querySelectorAll('.floating').forEach((icon, index) => {
     icon.style.animationDelay = `${index * 0.2}s`;
