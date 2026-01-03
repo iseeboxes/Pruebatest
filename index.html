@@ -7,7 +7,7 @@
 <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TBtHZ0bs/auto-palm-beach-logo.png">
 
 <!-- 1. PRIMERO: Tailwind CSS normal (sin async) -->
-<script src="https://cdn.tailwindcss.com/3.4.0"></script>
+<script src="https://cdn.tailwindcss.com/3.4.0" defer></script>
 
 <!-- 2. CSS crítico MÍNIMO inline -->
 <style>
@@ -1862,6 +1862,29 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-
+<!-- AL FINAL DEL BODY, ANTES DE CERRAR </body>: -->
+<script defer>
+  // Esta configuración se ejecutará después de que Tailwind cargue
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: "var(--primary-color)",
+          "primary-darker": "#EA580C",
+          secondary: "var(--secondary-color)",
+          "background-light": "#ffffff",
+          "background-soft": "var(--background-soft)",
+          "text-dark": "#1F2937",
+          "text-light": "#6B7280"
+        },
+        fontFamily: {
+          sans: ["Roboto", "system-ui", "sans-serif"],
+          display: ["Poppins", "system-ui", "sans-serif"],
+        },
+        // ... el resto de tu configuración
+      },
+    },
+  };
+</script>
 </body>
 </html>
