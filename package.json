@@ -1,0 +1,7 @@
+{
+  "name": "autopalmbeach",
+  "private": true,
+  "dependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}
