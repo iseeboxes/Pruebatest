@@ -176,7 +176,7 @@ Get Started
 </div>
 </div>
 </div>
-</div>
+
 
 <main>
 <!-- Hero Section -->
@@ -752,7 +752,97 @@ WhatsApp
 
 <script>
 // ==================== INTERNACIONALIZACIÓN ====================
-const translations = { /* 🔴 NO CAMBIADO: tu objeto completo va aquí exactamente igual */ };
+const translations = {
+  en: {
+    // Navbar
+    "nav.home": "Home",
+    "nav.about": "About Us",
+    "nav.services": "Services",
+    "nav.process": "How it Works",
+    "nav.testimonials": "Testimonials",
+    "nav.contact": "Contact",
+    "nav.getStarted": "Get Started",
+    
+    // Hero
+    "hero.tagline": "DMV & VIN Verification",
+    "hero.title": "Expert DMV & Title Services",
+    "hero.subtitle": "in West Palm Beach",
+    "hero.description": "Skip the long lines and confusing paperwork. We are your local vehicle paperwork solution in South Florida.",
+    "hero.cta": "Get a Free Quote",
+    "hero.learnMore": "Learn More",
+    
+    // About
+    "about.tagline": "ABOUT US",
+    "about.title": "Your Trusted Partner in Vehicle Paperwork",
+    "about.description": "At Auto Palm Beach, we have helped hundreds of people in South Florida navigate the complex DMV system, making the paperwork simple, secure, and stress-free. We are your specialized administrative office in West Palm Beach.",
+    "about.feature1.title": "Transparency",
+    "about.feature1.description": "We guarantee 100% legal and clear transactions.",
+    "about.feature2.title": "Experience",
+    "about.feature2.description": "We have in-depth knowledge of DMV procedures.",
+    "about.feature3.title": "Effective Management",
+    "about.feature3.description": "We help you avoid long lines and paperwork errors.",
+    "about.feature4.title": "Client Focus",
+    "about.feature4.description": "Your peace of mind is the center of our service.",
+    
+    // Services
+    "services.tagline": "OUR SERVICES",
+    "services.title": "Explore Our Services",
+    "services.cta": "Get Started",
+    "services.service1.title": "Title Transfers & DMV Docs",
+    "services.service1.description": "Simplifying title transfers and DMV documentation for a fast, stress-free process.",
+    "services.service2.title": "Notary Public VIN Verification",
+    "services.service2.description": "We offer Florida notary public VIN verification to certify your vehicle's legal identity.",
+    "services.service3.title": "Registration & Plates",
+    "services.service3.description": "We handle your vehicle's initial registration and plates, saving you time and DMV visits.",
+    
+    // ... (agrega todos los demás textos que tienes en tu objeto original)
+  },
+  
+  es: {
+    // Navbar
+    "nav.home": "Inicio",
+    "nav.about": "Nosotros",
+    "nav.services": "Servicios",
+    "nav.process": "Cómo Funciona",
+    "nav.testimonials": "Testimonios",
+    "nav.contact": "Contacto",
+    "nav.getStarted": "Comenzar",
+    
+    // Hero
+    "hero.tagline": "DMV & Verificación VIN",
+    "hero.title": "Servicios Expertos de DMV y Títulos",
+    "hero.subtitle": "en West Palm Beach",
+    "hero.description": "Evite las largas filas y la confusión de trámites. Somos su solución local de papeleo vehicular en el sur de Florida.",
+    "hero.cta": "Obtener Cotización Gratis",
+    "hero.learnMore": "Saber Más",
+    
+    // About
+    "about.tagline": "SOBRE NOSOTROS",
+    "about.title": "Su Socio de Confianza en Trámites Vehiculares",
+    "about.description": "En Auto Palm Beach, hemos ayudado a cientos de personas en el sur de Florida a navegar el complejo sistema del DMV, haciendo que el papeleo sea simple, seguro y sin estrés. Somos su oficina administrativa especializada en West Palm Beach.",
+    "about.feature1.title": "Transparencia",
+    "about.feature1.description": "Garantizamos transacciones 100% legales y claras.",
+    "about.feature2.title": "Experiencia",
+    "about.feature2.description": "Tenemos conocimiento profundo de los procedimientos del DMV.",
+    "about.feature3.title": "Gestión Efectiva",
+    "about.feature3.description": "Le ayudamos a evitar largas filas y errores en el papeleo.",
+    "about.feature4.title": "Enfoque en el Cliente",
+    "about.feature4.description": "Su tranquilidad es el centro de nuestro servicio.",
+    
+    // Services
+    "services.tagline": "NUESTROS SERVICIOS",
+    "services.title": "Explore Nuestros Servicios",
+    "services.cta": "Comenzar",
+    "services.service1.title": "Transferencias de Título y Documentos DMV",
+    "services.service1.description": "Simplificamos transferencias de título y documentación DMV para un proceso rápido y sin estrés.",
+    "services.service2.title": "Verificación VIN por Notario Público",
+    "services.service2.description": "Ofrecemos verificación VIN por notario público de Florida para certificar la identidad legal de su vehículo.",
+    "services.service3.title": "Registro y Placas",
+    "services.service3.description": "Manejamos el registro inicial de su vehículo y placas, ahorrándole tiempo y visitas al DMV."
+    
+    // ... (agrega todos los demás textos en español)
+  }
+};
 
 // ==================== I18N CORE ====================
 let currentLang = 'en';
@@ -761,14 +851,18 @@ function updateLanguage(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
 
+  // Actualizar todos los textos
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (translations[lang]?.[key]) {
+    if (translations[lang] && translations[lang][key]) {
       el.textContent = translations[lang][key];
     }
   });
 
+  // Actualizar selector de idioma
   updateLanguageSelector(lang);
+  
+  // Guardar preferencia
   localStorage.setItem('preferredLanguage', lang);
 }
 
@@ -779,28 +873,33 @@ function updateLanguageSelector(lang) {
   if (currentLanguageText && currentFlag) {
     if (lang === 'en') {
       currentLanguageText.textContent = 'EN';
-      currentFlag.innerHTML = `<!-- SVG EN -->`;
+      currentFlag.innerHTML = `<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#bd3d44" d="M0 0h640v480H0"/>
+        <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"/>
+        <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
+        <marker id="us-a" markerHeight="30" markerWidth="30">
+          <path fill="#fff" d="m14 0 9 27L0 10h28L5 27z"/>
+        </marker>
+        <path fill="none" marker-mid="url(#us-a)" d="m0 0 16 11h61 61 61 61 60L47 37h61 61 60 61L16 63h61 61 61 61 60L47 89h61 61 60 61L16 115h61 61 61 61 60L47 141h61 61 60 61L16 166h61 61 61 61 60L47 192h61 61 60 61L16 218h61 61 61 61 60z"/>
+      </svg>`;
     } else {
       currentLanguageText.textContent = 'ES';
-      currentFlag.innerHTML = `<!-- SVG ES -->`;
+      currentFlag.innerHTML = `<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#fcd116" d="M0 0h640v480H0z"/>
+        <path fill="#0038a8" d="M0 0h640v320H0z"/>
+        <path fill="#ce1126" d="M0 0h640v160H0z"/>
+      </svg>`;
     }
   }
 
+  // Actualizar opciones activas
   document.querySelectorAll('.language-option').forEach(option => {
-    option.classList.toggle('active', option.dataset.lang === lang);
+    option.classList.toggle('active', option.getAttribute('data-lang') === lang);
   });
-
-  const mobileLangEn = document.getElementById('mobileLangEn');
-  const mobileLangEs = document.getElementById('mobileLangEs');
-
-  if (mobileLangEn && mobileLangEs) {
-    mobileLangEn.classList.toggle('active', lang === 'en');
-    mobileLangEs.classList.toggle('active', lang === 'es');
-  }
 }
 
 // ==================== DOM READY ====================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
 
   // Idioma inicial
   const savedLang = localStorage.getItem('preferredLanguage');
@@ -814,107 +913,160 @@ document.addEventListener('DOMContentLoaded', () => {
   const offCanvasOverlay = document.getElementById('offCanvasOverlay');
   const body = document.body;
 
+  function openMenu() {
+    offCanvasMenu.classList.add('active');
+    offCanvasOverlay.classList.add('active');
+    body.classList.add('menu-open');
+  }
+
   function closeMenu() {
-    offCanvasMenu?.classList.remove('active');
-    offCanvasOverlay?.classList.remove('active');
+    offCanvasMenu.classList.remove('active');
+    offCanvasOverlay.classList.remove('active');
     body.classList.remove('menu-open');
   }
 
-  mobileMenuButton?.addEventListener('click', () => {
-    offCanvasMenu?.classList.add('active');
-    offCanvasOverlay?.classList.add('active');
-    body.classList.add('menu-open');
-  });
+  if (mobileMenuButton) {
+    mobileMenuButton.addEventListener('click', openMenu);
+  }
 
-  closeMenuButton?.addEventListener('click', closeMenu);
-  offCanvasOverlay?.addEventListener('click', closeMenu);
+  if (closeMenuButton) {
+    closeMenuButton.addEventListener('click', closeMenu);
+  }
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && offCanvasMenu?.classList.contains('active')) {
+  if (offCanvasOverlay) {
+    offCanvasOverlay.addEventListener('click', closeMenu);
+  }
+
+  // Cerrar con ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
       closeMenu();
     }
   });
 
   // ==================== SMOOTH SCROLL ====================
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', e => {
-      const targetId = anchor.getAttribute('href');
-      if (!targetId || targetId === '#') return;
-
-      const target = document.querySelector(targetId);
-      if (!target) return;
-
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || href === '/') return;
+      
       e.preventDefault();
+      const target = document.querySelector(href);
+      if (!target) return;
+      
       closeMenu();
-
-      const header = document.querySelector('header');
-      const offset = header ? header.offsetHeight + 20 : 20;
-      const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
-
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      history.pushState(null, '', targetId);
+      
+      const headerHeight = document.querySelector('header').offsetHeight;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = targetPosition - headerHeight - 20;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      
+      history.pushState(null, null, href);
     });
   });
 
   // ==================== STICKY HEADER ====================
   const header = document.querySelector('header');
-  if (header) {
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('sticky-header', window.scrollY > 100);
-    });
-  }
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 100) {
+      header.classList.add('sticky-header', 'shadow-md');
+      header.style.backgroundColor = 'white';
+    } else {
+      header.classList.remove('sticky-header', 'shadow-md');
+      header.style.backgroundColor = '';
+    }
+  });
 
   // ==================== FAQ ====================
   document.querySelectorAll('.faq-button').forEach(button => {
-    button.addEventListener('click', () => {
-      const answer = button.nextElementSibling;
-      if (!answer) return;
-
-      const open = answer.classList.toggle('open');
-      document.querySelectorAll('.faq-answer').forEach(a => {
-        if (a !== answer) a.classList.remove('open');
-      });
+    button.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      const icon = this.querySelector('.material-symbols-outlined');
+      
+      if (answer.classList.contains('open')) {
+        answer.classList.remove('open');
+        if (icon) icon.textContent = 'add_circle';
+      } else {
+        // Cerrar otras respuestas
+        document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+          if (otherAnswer !== answer && otherAnswer.classList.contains('open')) {
+            otherAnswer.classList.remove('open');
+            const otherIcon = otherAnswer.previousElementSibling.querySelector('.material-symbols-outlined');
+            if (otherIcon) otherIcon.textContent = 'add_circle';
+          }
+        });
+        
+        // Abrir esta respuesta
+        answer.classList.add('open');
+        if (icon) icon.textContent = 'remove_circle';
+      }
     });
   });
 
-  // ==================== INTERSECTION OBSERVER ====================
-  const observer = new IntersectionObserver(entries => {
+  // ==================== LANGUAGE SELECTOR ====================
+  const languageButton = document.getElementById('languageButton');
+  const languageDropdown = document.getElementById('languageDropdown');
+  
+  if (languageButton) {
+    languageButton.addEventListener('click', function(e) {
+      e.stopPropagation();
+      languageDropdown.classList.toggle('active');
+    });
+  }
+  
+  // Cerrar dropdown al hacer click fuera
+  document.addEventListener('click', function() {
+    if (languageDropdown) {
+      languageDropdown.classList.remove('active');
+    }
+  });
+  
+  // Seleccionar idioma (desktop)
+  document.querySelectorAll('.language-option').forEach(option => {
+    option.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const lang = this.getAttribute('data-lang');
+      updateLanguage(lang);
+      if (languageDropdown) {
+        languageDropdown.classList.remove('active');
+      }
+    });
+  });
+  
+  // Selectores móviles
+  document.getElementById('mobileLangEn')?.addEventListener('click', () => updateLanguage('en'));
+  document.getElementById('mobileLangEs')?.addEventListener('click', () => updateLanguage('es'));
+
+  // ==================== ANIMACIONES AL SCROLL ====================
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('section-visible');
-        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, observerOptions);
 
   document.querySelectorAll('.section-hidden').forEach(section => {
     observer.observe(section);
   });
 
-  // ==================== LANGUAGE DROPDOWN ====================
-  const languageButton = document.getElementById('languageButton');
-  const languageDropdown = document.getElementById('languageDropdown');
-
-  languageButton?.addEventListener('click', e => {
-    e.stopPropagation();
-    languageDropdown?.classList.toggle('active');
+  // ==================== INICIALIZAR ANIMACIONES FLOTANTES ====================
+  document.querySelectorAll('.floating').forEach((element, index) => {
+    element.style.animationDelay = `${index * 0.2}s`;
   });
-
-  document.addEventListener('click', () => {
-    languageDropdown?.classList.remove('active');
-  });
-
-  document.querySelectorAll('.language-option').forEach(option => {
-    option.addEventListener('click', e => {
-      e.stopPropagation();
-      updateLanguage(option.dataset.lang);
-      languageDropdown?.classList.remove('active');
-    });
-  });
-
-  document.getElementById('mobileLangEn')?.addEventListener('click', () => updateLanguage('en'));
-  document.getElementById('mobileLangEs')?.addEventListener('click', () => updateLanguage('es'));
 });
+
+// ==================== FUNCIONES GLOBALES ====================
+window.updateLanguage = updateLanguage;
 </script>
 
 </body>
